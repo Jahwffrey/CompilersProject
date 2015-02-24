@@ -1,0 +1,212 @@
+class0 {
+    boolean	member0
+
+    class0(arg0 : integer, arg1 : boolean, arg2 : boolean) -> none {
+        integer local0
+        integer local1
+        integer local2
+        boolean local3
+        integer local4
+        integer local5
+        
+        print -arg0
+
+    }
+
+
+}
+
+class1 extends class0 {
+    class0	member1
+    class0	member2
+
+    class1(arg0 : integer) -> none {
+        integer i0, i1, i2, i3
+        
+        print 79
+        i0 = 810
+        while 30 <= i0 {
+             i0 = i0 / 3
+        
+            i1 = 8
+            while i1 <= 48 {
+                 i1 = i1 + 5
+            
+                if 20 < arg0 {
+                    if arg0 <= 87 {
+                        print 17
+                        print member1.member0 and member0
+                    }
+                    
+                } else {
+                    print 210
+                }
+                
+            }
+        }
+        if false {
+            print arg0
+        } else {
+            i2 = -99
+            while i2 <= -95 {
+                 i2 = i2 + 2
+            
+                i3 = -65
+                while -78 <= i3 {
+                     i3 = i3 + -1
+                
+                    print arg0
+                }
+            }
+        }
+        
+
+    }
+
+
+}
+
+class2 extends class0 {
+    integer	member1
+    integer	member2
+    class0	member3
+    boolean	member4
+    class1	member5
+    integer	member6
+
+    f0(arg0 : class1, arg1 : boolean, arg2 : class0, arg3 : integer) -> boolean {
+        integer local0
+        integer local1
+        integer local2
+        integer local3
+        
+        local0 = 84
+        if arg1 {
+            if true {
+                print arg1 or false
+            } else {
+                if false {
+                    print local3
+                    if member0 and true {
+                        print false
+                    }
+                    
+                    print 29 * local0
+                }
+                
+                print not (not (arg0.member0))
+            }
+            
+        } else {
+            local0 = 79
+            print member6 + member6 * local0
+        }
+        
+        return member4
+
+    }
+
+    class2(arg0 : boolean) -> none {
+        integer i0, i1, i2, i3
+        
+        print false
+        i0 = 29
+        while i0 <= 61 {
+             i0 = i0 - -2
+        
+            i1 = 27
+            while i1 < 43 {
+                 i1 = i1 * 4
+            
+                print 168 - 177
+                if arg0 {
+                    i2 = -53
+                    while i2 < 459 {
+                         i2 = i2 * 2
+                    
+                        if member5.member0 {
+                            print (member6) + 216
+                            i3 = 28
+                            while i3 < 262172 {
+                                 i3 = i3 * 4
+                            
+                                print member1
+                            }
+                        }
+                        
+                        print true
+                    }
+                }
+                
+            }
+        }
+
+    }
+
+
+}
+
+class3 extends class2 {
+    boolean	member10
+    integer	member11
+    class2	member12
+    integer	member7
+    boolean	member8
+    integer	member9
+
+    class3(arg0 : boolean, arg1 : integer, arg2 : integer, arg3 : boolean) -> none {
+        integer local0
+        integer local1
+        boolean local2
+        integer i0
+        
+        print local0
+        local0 = member2 + 78
+        local1 = 22
+        if true {
+            print (member0)
+            i0 = -26
+            while i0 <= -8 {
+                 i0 = i0 + 1
+            
+                print true
+                if true {
+                    if not (member8) and false {
+                        local2 = false
+                        if arg0 or true {
+                            print arg0
+                            print local0.notAnObject() --! TYPE ERROR THIS LINE !--
+                        } else {
+                            local1 = -113
+                            local0 = member12.member6
+                            local2 = true
+                        }
+                        
+                    }
+                    
+                    local2 = true
+                    local1 = -168
+                }
+                
+            }
+        } else {
+            print true
+        }
+        
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        
+
+    }
+
+
+}
+

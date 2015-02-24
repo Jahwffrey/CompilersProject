@@ -1,0 +1,758 @@
+class0 {
+
+
+    class0(arg0 : boolean, arg1 : boolean, arg2 : boolean) -> none {
+        
+        if arg1 {
+            print -33
+        }
+        
+
+    }
+
+
+}
+
+class1 {
+    integer	member0
+    class0	member1
+
+    f0(arg0 : integer, arg1 : class0, arg2 : integer, arg3 : boolean, arg4 : integer) -> none {
+        integer i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17, i18, i19, i20, i21, i22, i23, i24, i25, i26, i27, i28, i29, i30, i31, i32, i33, i34, i35, i36
+        
+        if arg3 {
+            i0 = -12
+            while i0 <= -3 {
+                 i0 = i0 * 3
+            
+                i1 = 73
+                while i1 <= 19756 {
+                     i1 = i1 * 3
+                
+                    print 210 / 219
+                }
+                print arg0
+            }
+            print (arg3)
+            if arg3 {
+                if (true) {
+                    i2 = -96
+                    while i2 + 6 { --! TYPE ERROR THIS LINE !--
+                         i2 = i2 * 2
+                    
+                        print true
+                        if arg3 {
+                            if false {
+                                print arg3
+                            }
+                            
+                            if 34 <= 192 {
+                                if true {
+                                    if true {
+                                        print 179
+                                    }
+                                    
+                                } else {
+                                    if false {
+                                        i3 = 74752
+                                        while 73 < i3 {
+                                             i3 = i3 / 4
+                                        
+                                            if arg3 {
+                                                print 140
+                                                print (true) and arg3
+                                            } else {
+                                                print 182
+                                            }
+                                            
+                                        }
+                                        i4 = 13
+                                        while i4 < 77 {
+                                             i4 = i4 * 2
+                                        
+                                            if arg0 <= 240 and arg3 {
+                                                i5 = 82
+                                                while i5 < 258 {
+                                                     i5 = i5 - -8
+                                                
+                                                    print (false)
+                                                }
+                                                if arg3 {
+                                                    print (120 + -235)
+                                                    print arg3
+                                                    i6 = 81
+                                                    while i6 < 1048657 {
+                                                         i6 = i6 * 4
+                                                    
+                                                        print not (67 < arg4)
+                                                        print 3
+                                                    }
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        print arg3
+                                    }
+                                    
+                                    print arg4 <= arg4 or arg4 equals member0
+                                    i7 = -45
+                                    while i7 < 979 {
+                                         i7 = i7 * 4
+                                    
+                                        i8 = 37
+                                        while i8 < 82 {
+                                             i8 = i8 + 3
+                                        
+                                            print arg3
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            
+                        } else {
+                            print 15 <= member0
+                            print 19
+                        }
+                        
+                    }
+                    i9 = 14
+                    while -105 <= i9 {
+                         i9 = i9 - 7
+                    
+                        print 70
+                    }
+                } else {
+                    if true {
+                        print true
+                        if arg4 <= member0 {
+                            i10 = -77
+                            while i10 < -50 {
+                                 i10 = i10 * 3
+                            
+                                if (false) {
+                                    print arg2
+                                } else {
+                                    if arg3 {
+                                        if arg2 <= 193 {
+                                            print false
+                                        }
+                                        
+                                    } else {
+                                        i11 = -89
+                                        while i11 < 58960 {
+                                             i11 = i11 * 3
+                                        
+                                            if true {
+                                                if arg3 {
+                                                    i12 = -87
+                                                    while -135 < i12 {
+                                                         i12 = i12 - 2
+                                                    
+                                                        print member0 - -arg4
+                                                    }
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                                
+                                print false
+                            }
+                        } else {
+                            if true {
+                                print arg0
+                            } else {
+                                print (member0)
+                            }
+                            
+                            i13 = 43
+                            while -82 <= i13 {
+                                 i13 = i13 + -5
+                            
+                                print true
+                            }
+                        }
+                        
+                    } else {
+                        print arg4
+                    }
+                    
+                    if false or arg3 {
+                        print 172
+                    } else {
+                        i14 = -10
+                        while i14 <= 246 {
+                             i14 = i14 * 2
+                        
+                            print arg3
+                            print -arg4 - 235
+                        }
+                        i15 = 896
+                        while 28 < i15 {
+                             i15 = i15 / 2
+                        
+                            if true {
+                                if true {
+                                    print 140
+                                    if 16 <= arg2 {
+                                        i16 = -70
+                                        while i16 <= 2117 {
+                                             i16 = i16 * 3
+                                        
+                                            print false
+                                            print -192
+                                        }
+                                        i17 = -29
+                                        while i17 < 3 {
+                                             i17 = i17 * 2
+                                        
+                                            print member0 <= 85
+                                        }
+                                        if true {
+                                            i18 = 3
+                                            while i18 <= 33 {
+                                                 i18 = i18 + 6
+                                            
+                                                i19 = -99
+                                                while -141 <= i19 {
+                                                     i19 = i19 - 3
+                                                
+                                                    print false
+                                                }
+                                            }
+                                        }
+                                        
+                                    } else {
+                                        print arg2
+                                    }
+                                    
+                                }
+                                
+                            } else {
+                                if arg3 {
+                                    if arg3 or true {
+                                        i20 = -91
+                                        while -167 < i20 {
+                                             i20 = i20 + -4
+                                        
+                                            print arg3
+                                            if (false) or arg3 {
+                                                print arg3
+                                            }
+                                            
+                                            print arg0
+                                        }
+                                        print arg3
+                                    }
+                                    
+                                } else {
+                                    print arg4
+                                }
+                                
+                                print 117 equals arg2
+                            }
+                            
+                            print 73
+                        }
+                    }
+                    
+                }
+                
+                if arg3 {
+                    if not (false) {
+                        print member0
+                        if true {
+                            print (arg0) * 165
+                        } else {
+                            i21 = 3483
+                            while 43 < i21 {
+                                 i21 = i21 / 3
+                            
+                                print 148 + arg0
+                                print false
+                            }
+                        }
+                        
+                    }
+                    
+                    if false {
+                        if arg3 {
+                            i22 = -52
+                            while i22 <= 8 {
+                                 i22 = i22 - -6
+                            
+                                print (true) or true
+                            }
+                        }
+                        
+                        print true
+                    }
+                    
+                }
+                
+            } else {
+                print 107
+            }
+            
+        }
+        
+        print 92
+        i23 = -45
+        while -65 <= i23 {
+             i23 = i23 + -2
+        
+            if false {
+                if arg3 {
+                    print arg2
+                    i24 = 7614
+                    while 94 <= i24 {
+                         i24 = i24 / 3
+                    
+                        print 124 * arg4
+                    }
+                } else {
+                    if arg3 or arg3 {
+                        i25 = 29
+                        while -34 < i25 {
+                             i25 = i25 - 9
+                        
+                            if false {
+                                print 6 <= arg0
+                            } else {
+                                i26 = 91
+                                while i26 <= 1048667 {
+                                     i26 = i26 * 4
+                                
+                                    print 48
+                                    print 46
+                                }
+                                if true {
+                                    i27 = 304
+                                    while 76 <= i27 {
+                                         i27 = i27 / 2
+                                    
+                                        if true {
+                                            i28 = -26
+                                            while i28 <= -2 {
+                                                 i28 = i28 - -1
+                                            
+                                                print arg3
+                                                print (arg3)
+                                                print arg2
+                                            }
+                                            i29 = -67
+                                            while -135 <= i29 {
+                                                 i29 = i29 - 4
+                                            
+                                                print 73 <= (arg2)
+                                            }
+                                        } else {
+                                            print arg4
+                                            print arg4
+                                        }
+                                        
+                                        print 20
+                                        print 18
+                                    }
+                                    if 5 / arg0 equals 88 {
+                                        i30 = 15
+                                        while i30 <= 115 {
+                                             i30 = i30 + 4
+                                        
+                                            print -arg0
+                                        }
+                                        print true
+                                    }
+                                    
+                                }
+                                
+                                print arg0 + 121
+                            }
+                            
+                        }
+                        if false {
+                            if arg3 {
+                                print 17 - (arg2)
+                            }
+                            
+                            print true
+                            if arg3 {
+                                if false {
+                                    print arg2
+                                } else {
+                                    print false
+                                }
+                                
+                            } else {
+                                print arg2 / arg4
+                            }
+                            
+                        }
+                        
+                        if 52 <= 147 {
+                            i31 = -11
+                            while i31 < 10 {
+                                 i31 = i31 - -3
+                            
+                                print false
+                            }
+                        } else {
+                            if not (not (arg3)) {
+                                i32 = -48
+                                while -168 < i32 {
+                                     i32 = i32 - 6
+                                
+                                    print arg3
+                                }
+                            }
+                            
+                            if arg3 {
+                                print arg3 and arg4 <= arg2
+                                print arg4
+                            } else {
+                                print arg3
+                                print arg3 or arg3
+                            }
+                            
+                        }
+                        
+                    } else {
+                        i33 = -77
+                        while i33 < -13 {
+                             i33 = i33 * 4
+                        
+                            i34 = -53
+                            while i34 < -8 {
+                                 i34 = i34 + 9
+                            
+                                if (true) {
+                                    print arg4
+                                    if arg3 {
+                                        print arg4
+                                    }
+                                    
+                                    print 178
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                }
+                
+                print 251
+            } else {
+                i35 = 53
+                while i35 < 117 {
+                     i35 = i35 * 4
+                
+                    i36 = 39
+                    while 34 <= i36 {
+                         i36 = i36 - 1
+                    
+                        print member0 <= member0
+                        print true
+                    }
+                }
+            }
+            
+        }
+
+    }
+
+    f1(arg0 : class0) -> none {
+        
+
+    }
+
+    class1(arg0 : integer, arg1 : integer, arg2 : integer) -> none {
+        class0 local0
+        boolean local1
+        integer i0
+        
+        local1 = local1
+        print false
+        print false
+        i0 = -84
+        while i0 <= 0 {
+             i0 = i0 - -4
+        
+            f1(new class0(local1, not (209 <= arg2), local1 or true))
+        }
+
+    }
+
+
+}
+
+class2 {
+    boolean	member0
+    integer	member1
+    class1	member2
+
+    f0(arg0 : integer, arg1 : boolean) -> integer {
+        integer local0
+        integer i0, i1, i2, i3, i4
+        
+        print member1
+        i0 = 65
+        while i0 < 1048641 {
+             i0 = i0 * 4
+        
+            i1 = -26
+            while -170 < i1 {
+                 i1 = i1 - 8
+            
+                member2.f0(109 - 165, member2.member1, member2.member0, true, member1)
+                if not (129 < member2.member0) {
+                    print 245
+                    local0 = 113 / member1
+                    if arg1 {
+                        i2 = -89
+                        while i2 <= -8 {
+                             i2 = i2 * 3
+                        
+                            if false {
+                                member2.f1(member2.member1)
+                                local0 = member2.member0
+                                local0 = member2.member0
+                            }
+                            
+                        }
+                        i3 = -58
+                        while -288 <= i3 {
+                             i3 = i3 - 10
+                        
+                            member2.f1(new class0(true, true, member2.member0 <= member2.member0))
+                            i4 = -83
+                            while i4 <= -2 {
+                                 i4 = i4 * 3
+                            
+                                print false
+                            }
+                            print arg0
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+        print 84 / arg0 equals 186
+        return arg0
+
+    }
+
+    f1() -> none {
+        class1 local0
+        class1 local1
+        integer local2
+        integer local3
+        boolean local4
+        integer i0, i1
+        
+        local1.member0 = 12 - 130
+        i0 = 258
+        while 86 < i0 {
+             i0 = i0 / 3
+        
+            local3 = member1
+        }
+        i1 = -24
+        while i1 < 262120 {
+             i1 = i1 * 4
+        
+            print 7
+            local1.f1(local1.member1)
+            local1.f0(199, new class0(false, member1 < -local3, (local4)), member1, local4, local3 + 98 / local1.member0)
+        }
+        print false
+        local1.f0(local2, new class0(local4, local4, local4), local1.member0, true, local2)
+
+    }
+
+    f2(arg0 : boolean, arg1 : class0, arg2 : integer, arg3 : class0) -> integer {
+        class1 local0
+        
+        print arg2
+        local0.member0 = 48 / 195
+        local0.member0 = 236
+        local0.member0 = 192
+        return 215
+
+    }
+
+    f3(arg0 : boolean, arg1 : integer, arg2 : class0, arg3 : class1) -> boolean {
+        boolean local0
+        integer local1
+        class1 local2
+        class1 local3
+        integer i0
+        
+        if not (false) {
+            local2.member0 = 93
+            local2.member0 = 19
+        } else {
+            print false
+        }
+        
+        local3.f1(new class0(true, arg0, arg0))
+        print member0
+        i0 = 65
+        while i0 <= 145 {
+             i0 = i0 + 8
+        
+            print local1 / arg1 * 174
+        }
+        return member1 <= 101 * 41
+
+    }
+
+    class2(arg0 : boolean, arg1 : boolean, arg2 : integer) -> none {
+        boolean local0
+        integer local1
+        
+        local1 = member2.member0
+        if arg1 {
+            local1 = arg2
+            if not (true) or arg1 or false {
+                print 231
+            } else {
+                print local0
+                f1()
+            }
+            
+            f1()
+        }
+        
+        member2.f0((178), new class0(member0, arg0, false and false), local1, 53 <= 78, member2.member0 + member2.member0)
+
+    }
+
+
+}
+
+class3 {
+    integer	member0
+    integer	member1
+    class1	member2
+
+    f0(arg0 : class0) -> integer {
+        integer local0
+        boolean local1
+        integer local2
+        integer local3
+        
+        if false {
+            if local1 {
+                local0 = local3
+            } else {
+                local1 = local1
+                print local3
+            }
+            
+        }
+        
+        return local0 + member1
+
+    }
+
+    f1() -> integer {
+        boolean local0
+        boolean local1
+        integer local2
+        boolean local3
+        
+        member2.f0(member0 - 35 + 66 + (local2), member2.member1, member0, local1, local2)
+        return -251
+
+    }
+
+    class3(arg0 : boolean) -> none {
+        class0 local0
+        integer i0, i1, i2, i3
+        
+        i0 = 43
+        while 7 < i0 {
+             i0 = i0 - 3
+        
+            print 67
+            i1 = -39
+            while i1 < -23 {
+                 i1 = i1 + 2
+            
+                i2 = -53
+                while i2 < 11 {
+                     i2 = i2 * 2
+                
+                    if arg0 {
+                        print true
+                        print true
+                    } else {
+                        print false
+                        if false {
+                            i3 = -5
+                            while i3 <= 225 {
+                                 i3 = i3 + 10
+                            
+                                if false {
+                                    print (arg0)
+                                }
+                                
+                            }
+                        } else {
+                            print member1
+                            if arg0 {
+                                print (151)
+                            } else {
+                                print member0
+                                print 1 / 56
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    print f1() < member1
+                    print false
+                }
+            }
+        }
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        integer local0
+        boolean local1
+        boolean local2
+        integer i0
+        
+        if local1 {
+            print local0
+        }
+        
+        i0 = -70
+        while i0 <= -6 {
+             i0 = i0 * 4
+        
+            local2 = local1 or local2
+        }
+        print false
+        local1 = local2
+
+    }
+
+
+}
+

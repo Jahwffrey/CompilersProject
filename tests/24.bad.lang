@@ -1,0 +1,65 @@
+class0 {
+    boolean	member0
+    integer	member1
+    integer	member2
+    integer	member3
+    boolean	member4
+
+    f0() -> boolean {
+        integer local0
+        boolean local1
+        integer local2
+        boolean local3
+        integer local4
+        boolean local5
+        
+        print member2
+        local3 = member0
+        return false
+
+    }
+
+    class0(arg0 : integer) -> none {
+        integer local0
+        integer local1
+        boolean local2
+        integer local3
+        integer i0, i1, i2
+        
+        i0 = 192512
+        while 47 < i0 {
+             i0 = i0 / 4
+        
+            print 126 * local3
+            local2 = member3 --! TYPE ERROR THIS LINE !--
+            i1 = 20224
+            while 79 < i1 {
+                 i1 = i1 / 4
+            
+                i2 = 0
+                while -100 < i2 {
+                     i2 = i2 + -4
+                
+                    local0 = 80
+                    print local0
+                }
+            }
+        }
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        
+        print false
+
+    }
+
+
+}
+

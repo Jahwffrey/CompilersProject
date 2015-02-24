@@ -1,0 +1,20 @@
+Main {
+
+
+    main() -> none {
+        boolean local0
+        boolean local1
+        integer i0
+        
+        i0 = 30
+        while i0 <= 42 {
+             i0 = i0 + 6
+        
+            print 207
+        }
+
+    }
+
+
+}
+

@@ -1,0 +1,127 @@
+class0 {
+    boolean	member0
+    integer	member1
+    integer	member2
+    boolean	member3
+
+    f0(arg0 : integer, arg1 : integer) -> none {
+        integer i0, i1
+        
+        if member0 {
+            if true {
+                print 254
+            }
+            
+        } else {
+            print 225 * 181 < 209
+            i0 = -44
+            while i0 < -12 {
+                 i0 = i0 * 2
+            
+                print member2
+            }
+        }
+        
+        i1 = 0
+        while 0 < i1 {
+             i1 = i1 / 4
+        
+            print member0 and true
+        }
+
+    }
+
+    f1(arg0 : boolean, arg1 : integer, arg2 : boolean, arg3 : integer) -> integer {
+        integer local0
+        integer i0
+        
+        print local0 - 84 * 16
+        if false and member3 {
+            f0(68, member2)
+            f0(local0, member2)
+        } else {
+            i0 = 16
+            while i0 <= 100 {
+                 i0 = i0 + 6
+            
+                print 101
+                print 159
+                f0(61, member2)
+            }
+            print member0
+        }
+        
+        f0(-60, arg1)
+        local0 = 43 + 78
+        f0(236, member1)
+        return 123
+
+    }
+
+    f2(arg0 : integer, arg1 : integer, arg2 : boolean, arg3 : boolean, arg4 : integer) -> boolean {
+        integer local0
+        boolean local1
+        boolean local2
+        integer local3
+        boolean local4
+        integer i0
+        
+        i0 = 1584
+        while 99 < i0 {
+             i0 = i0 / 4
+        
+            f0(arg1, local3)
+        }
+        local4 = 220 <= member1 + 163 + 248 * local3
+        return true
+
+    }
+
+    class0(arg0 : boolean, arg1 : integer, arg2 : integer, arg3 : integer) -> none {
+        integer i0, i1, i2
+        
+        i0 = 344
+        while 86 < i0 {
+             i0 = i0 / 4
+        
+            i1 = -85
+            while -149 <= i1 {
+                 i1 = i1 + -8
+            
+                print 252
+            }
+            print 201 <= (240) - member1
+        }
+        i2 = 15360
+        while 60 <= i2 {
+             i2 = i2 / 2
+        
+            print arg1
+            f0(199, 12)
+        }
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        integer local0
+        boolean local1
+        boolean local2
+        integer local3
+        class0 local4
+        
+        local4.member0 = false
+        local4.f0(local4, local4.member1) --! TYPE ERROR THIS LINE !--
+        local4.member1 = local4.member1
+        local1 = local4.member3
+
+    }
+
+
+}
+

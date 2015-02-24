@@ -1,0 +1,126 @@
+class0 {
+    boolean	member0
+    integer	member1
+    boolean	member2
+    integer	member3
+    boolean	member4
+    integer	member5
+
+    f0() -> none {
+        integer local0
+        
+        print 245 <= 13
+
+    }
+
+    f1(arg0 : integer, arg1 : integer, arg2 : integer, arg3 : boolean, arg4 : boolean) -> boolean {
+        
+        f0()
+        return (member0)
+
+    }
+
+    class0(arg0 : boolean, arg1 : boolean) -> none {
+        
+        f0()
+        print member3
+        print 191 equals 76
+        f0()
+
+    }
+
+
+}
+
+class1 extends class0 {
+    boolean	member6
+    class0	member7
+    boolean	member8
+
+    f2(arg0 : boolean, arg1 : integer) -> boolean {
+        integer local0
+        boolean local1
+        integer local2
+        integer local3
+        integer local4
+        
+        local2 = 233
+        member7.f0()
+        print 207
+        local4 = 176
+        return 18 < 241
+
+    }
+
+    f3() -> none {
+        integer local0
+        boolean local1
+        boolean local2
+        class0 local3
+        
+        local3.f0()
+        local3.f0()
+
+    }
+
+    f4(arg0 : boolean, arg1 : integer) -> boolean {
+        boolean local0
+        integer local1
+        boolean local2
+        boolean local3
+        integer local4
+        integer i0
+        
+        i0 = 15728640
+        while 60 < i0 {
+             i0 = i0 / 4
+        
+            member7.f0()
+            print local3
+        }
+        return (member7.member0)
+
+    }
+
+    f5(arg0 : boolean, arg1 : integer) -> none {
+        class0 local0
+        integer local1
+        class0 local2
+        
+        print true
+        local2.member1 = 156
+        local1 = 31 - member5
+        print 133
+
+		return local1 --! TYPE ERROR THIS LINE !--
+
+    }
+
+    class1(arg0 : boolean, arg1 : integer, arg2 : integer) -> none {
+        integer local0
+        
+        member7.f0()
+        print (false)
+        local0 = 102
+        f3()
+        local0 = member7.member1
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        boolean local0
+        class1 local1
+        
+        local1.member8 = false
+
+    }
+
+
+}
+

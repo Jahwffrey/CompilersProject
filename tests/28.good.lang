@@ -1,0 +1,96 @@
+class0 {
+    integer	member0
+
+    f0(arg0 : boolean, arg1 : integer, arg2 : boolean) -> integer {
+        integer local0
+        boolean local1
+        
+        local0 = (arg1)
+        return -local0
+
+    }
+
+    f1(arg0 : integer, arg1 : integer, arg2 : integer, arg3 : boolean) -> boolean {
+        boolean local0
+        integer local1
+        integer local2
+        boolean local3
+        
+        print 198 * 254
+        if 101 equals 206 {
+            local3 = arg3
+        }
+        
+        local3 = arg3
+        local0 = true
+        return true
+
+    }
+
+    class0(arg0 : boolean, arg1 : boolean, arg2 : integer) -> none {
+        integer local0
+        
+        local0 = member0
+        print local0
+
+    }
+
+
+}
+
+class1 {
+    integer	member0
+    boolean	member1
+
+    f0(arg0 : integer) -> boolean {
+        boolean local0
+        integer local1
+        boolean local2
+        class0 local3
+        integer local4
+        integer local5
+        
+        local1 = arg0
+        local4 = 176
+        return local3.f1(124, member0, local5, local0) and local0
+
+    }
+
+    class1(arg0 : integer, arg1 : boolean, arg2 : integer, arg3 : integer, arg4 : boolean) -> none {
+        integer i0
+        
+        print 128 + 206 / 252
+        i0 = 13608
+        while 56 <= i0 {
+             i0 = i0 / 3
+        
+            if member1 {
+                print arg4
+            }
+            
+        }
+        print (arg0 / arg0)
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        boolean local0
+        
+        print -3
+        if local0 {
+            local0 = true
+            local0 = local0
+        }
+        
+
+    }
+
+
+}
+

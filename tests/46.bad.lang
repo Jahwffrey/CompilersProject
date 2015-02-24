@@ -1,0 +1,58 @@
+class0 {
+    integer	member0
+    integer	member1
+    boolean	member2
+    integer	member3
+
+    f0(arg0 : boolean, arg1 : integer) -> integer {
+        integer local0
+        integer local1
+        integer i0
+        
+        print local1 * (47)
+        i0 = -57
+        while -87 < i0 {
+             i0 = i0 + -10
+        
+            local1 = (member0)
+            if arg0 {
+                print member3
+                local0 = 63
+                print arg1 equals local0
+            }
+            
+        }
+        return member0
+
+    }
+
+    class0(arg0 : integer, arg1 : boolean) -> none {
+        integer local0
+        integer local1
+        boolean local2
+        boolean local3
+        
+        local1 = local1 / 150
+        print -local0.x --! TYPE ERROR THIS LINE !--
+        local3 = local0 <= arg0 / local1
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        boolean local0
+        boolean local1
+        integer local2
+        
+        local0 = true
+
+    }
+
+
+}
+

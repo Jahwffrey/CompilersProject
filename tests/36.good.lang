@@ -1,0 +1,258 @@
+class0 {
+    boolean	member0
+    boolean	member1
+    integer	member2
+    boolean	member3
+    boolean	member4
+    integer	member5
+
+    f0() -> integer {
+        integer local0
+        boolean local1
+        boolean local2
+        integer local3
+        integer local4
+        boolean local5
+        integer i0, i1
+        
+        local2 = member4 or local0 < 1
+        i0 = 1600
+        while 100 <= i0 {
+             i0 = i0 / 4
+        
+            local3 = (68)
+        }
+        print 33 <= 7
+        if false and false {
+            if true and false {
+                if false {
+                    local2 = local2
+                    i1 = 1
+                    while 1 < i1 {
+                         i1 = i1 - 0
+                    
+                        local0 = local3 * 251 + local0
+                        if true {
+                            local1 = not (local5)
+                            print 72
+                            local3 = 152
+                        }
+                        
+                    }
+                    local5 = false or true
+                } else {
+                    print local5
+                }
+                
+                local3 = 225 + local0
+            } else {
+                local4 = 125 * 246
+                local3 = 242 * 242
+                local1 = true
+            }
+            
+            local3 = member5
+        } else {
+            local5 = member3 and false
+        }
+        
+        return local0
+
+    }
+
+    class0(arg0 : integer, arg1 : boolean, arg2 : integer) -> none {
+        integer local0
+        integer local1
+        
+        print member0
+        local0 = 93
+        local0 = local0
+
+    }
+
+
+}
+
+class1 {
+    integer	member0
+    integer	member1
+    class0	member2
+    boolean	member3
+    integer	member4
+    integer	member5
+
+    class1(arg0 : boolean) -> none {
+        class0 local0
+        integer local1
+        integer i0, i1, i2
+        
+        if member1 equals local0.member2 {
+            if local0.member3 {
+                local0.member1 = (local0.member1)
+                local1 = local1 * member0
+                i0 = 62
+                while i0 <= 126 {
+                     i0 = i0 * 4
+                
+                    print local0.member3
+                    local0.member2 = 9
+                }
+            } else {
+                local1 = 158
+            }
+            
+            if local0.member0 {
+                print local1
+            }
+            
+            local0.member0 = arg0
+        }
+        
+        i1 = -84
+        while -159 <= i1 {
+             i1 = i1 + -5
+        
+            local0.member2 = local0.f0() * 75
+            if arg0 {
+                local1 = member4
+                local1 = (9)
+            } else {
+                local1 = 114
+                local1 = 55
+                local1 = local0.member5 + 221
+            }
+            
+            print 139
+        }
+        local0.member4 = false
+        if local0.member5 <= local1 {
+            i2 = 13312
+            while 52 <= i2 {
+                 i2 = i2 / 4
+            
+                print local0.member4
+                local1 = member5 - -member0
+                local1 = local0.f0()
+            }
+        } else {
+            print local0.member3
+        }
+        
+        print local1 * 65
+
+    }
+
+
+}
+
+class2 {
+    boolean	member0
+    boolean	member1
+    class0	member2
+    class0	member3
+
+    class2(arg0 : boolean, arg1 : integer) -> none {
+        boolean local0
+        integer local1
+        boolean local2
+        integer local3
+        integer local4
+        
+        local0 = local2
+        local1 = (70)
+
+    }
+
+
+}
+
+class3 extends class1 {
+    class2	member6
+    class0	member7
+    class1	member8
+    class1	member9
+
+    f0() -> boolean {
+        
+        print member0
+        print 98
+        return true
+
+    }
+
+    f1() -> integer {
+        boolean local0
+        class1 local1
+        class2 local2
+        boolean local3
+        integer local4
+        class1 local5
+        integer i0
+        
+        local0 = false
+        i0 = 21760
+        while 85 <= i0 {
+             i0 = i0 / 2
+        
+            local2.member1 = false
+            if true {
+                local0 = local0
+                local0 = local5.member3
+            } else {
+                local3 = false
+                print member3
+            }
+            
+        }
+        local1.member1 = local5.member4
+        return 39
+
+    }
+
+    class3(arg0 : boolean, arg1 : boolean, arg2 : boolean, arg3 : boolean, arg4 : integer) -> none {
+        boolean local0
+        class0 local1
+        integer local2
+        integer local3
+        boolean local4
+        boolean local5
+        
+        local1.member4 = true
+        local5 = local1.member0
+        if true {
+            print 196 equals local2
+        } else {
+            local0 = false
+            print member3
+        }
+        
+        local3 = (local1.member5) + 252
+
+    }
+
+
+}
+
+Main {
+
+
+    main() -> none {
+        integer local0
+        boolean local1
+        
+        if local1 {
+            print local0
+        } else {
+            if local1 {
+                local1 = local1 or false
+                local0 = 170
+            }
+            
+        }
+        
+
+    }
+
+
+}
+
