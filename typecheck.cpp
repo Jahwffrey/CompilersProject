@@ -64,13 +64,14 @@ void typeError(TypeErrorCode code) {
 // Not all functions must have code, many may be left empty.
 
 void TypeCheck::visitProgramNode(ProgramNode* node) {
-  // WRITEME: Replace with code if necessary  	
 	classTable = new ClassTable;
+	currentLocalOffset = 0;
+	currentMemberOffset = 0;
+	currentParameterOffset = 0;
 	node->visit_children(this);
 }
 
 void TypeCheck::visitClassNode(ClassNode* node) {
-  // WRITEME: Replace with code if necessary
   	ClassInfo* newInfo = new ClassInfo;
 	(node->identifier_2!=NULL)?	
 		newInfo->superClassName = node->identifier_2->name :
@@ -81,10 +82,31 @@ void TypeCheck::visitClassNode(ClassNode* node) {
 	currentVariableTable = newInfo->members;
 	newInfo->membersSize = 4;
 	classTable->insert(std::pair<std::string,ClassInfo>(node->identifier_1->name,*newInfo));
+	node->visit_children(this);
 }
 
 void TypeCheck::visitMethodNode(MethodNode* node) {
-  // WRITEME: Replace with code if necessary
+	VariableTable* temp = currentVariableTable;
+	MethodInfo* newMethod = new MethodInfo;
+	newMethod->variables = new VariableTable;
+	currentVariableTable = newMethod->variables;
+	if(dynamic_cast<IntegerTypeNode*>(node->type)!=NULL){
+		newMethod->returnType.baseType = bt_integer;
+	}else if(dynamic_cast<BooleanTypeNode*>(node->type)!=NULL){
+		newMethod->returnType.baseType = bt_boolean;
+	}else if(dynamic_cast<NoneNode*>(node->type)!=NULL){
+		newMethod->returnType.baseType = bt_none;
+	}else if(dynamic_cast<ObjectTypeNode*>(node->type)!=NULL){
+		newMethod->returnType.baseType = bt_object;
+		newMethod->returnType.objectClassName = ((ObjectTypeNode*)node->type)->identifier->name;
+	}else{
+		std::cerr << "Class has no return type somehow.";
+		exit(0);
+	}
+	node->visit_children(this);
+	newMethod->localsSize = 4;
+	currentMethodTable->insert(std::pair<std::string,MethodInfo>(node->identifier->name,*newMethod)); 	
+	currentVariableTable = temp;
 }
 
 void TypeCheck::visitMethodBodyNode(MethodBodyNode* node) {
