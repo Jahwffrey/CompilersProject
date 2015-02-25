@@ -72,7 +72,8 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 }
 
 void TypeCheck::visitClassNode(ClassNode* node) {
-  	ClassInfo* newInfo = new ClassInfo;
+  	currentMemberOffset = 0;
+	ClassInfo* newInfo = new ClassInfo;
 	(node->identifier_2!=NULL)?	
 		newInfo->superClassName = node->identifier_2->name :
 		newInfo->superClassName = "";
@@ -85,23 +86,35 @@ void TypeCheck::visitClassNode(ClassNode* node) {
 	node->visit_children(this);
 }
 
+BaseType checkType(TypeNode* type){
+	if(dynamic_cast<IntegerTypeNode*>(type)!=NULL){
+		return bt_integer;
+	}else if(dynamic_cast<BooleanTypeNode*>(type)!=NULL){
+		return bt_boolean;
+	}else if(dynamic_cast<NoneNode*>(type)!=NULL){
+		return bt_none;
+	}else if(dynamic_cast<ObjectTypeNode*>(type)!=NULL){
+		return bt_object;
+	}else{
+		std::cerr << "There is a type that is not of any type :|";
+		exit(0);
+	}
+}
+
 void TypeCheck::visitMethodNode(MethodNode* node) {
+	currentLocalOffset = -4;
+	currentParameterOffset = 8;
 	VariableTable* temp = currentVariableTable;
 	MethodInfo* newMethod = new MethodInfo;
 	newMethod->variables = new VariableTable;
 	currentVariableTable = newMethod->variables;
-	if(dynamic_cast<IntegerTypeNode*>(node->type)!=NULL){
-		newMethod->returnType.baseType = bt_integer;
-	}else if(dynamic_cast<BooleanTypeNode*>(node->type)!=NULL){
-		newMethod->returnType.baseType = bt_boolean;
-	}else if(dynamic_cast<NoneNode*>(node->type)!=NULL){
-		newMethod->returnType.baseType = bt_none;
-	}else if(dynamic_cast<ObjectTypeNode*>(node->type)!=NULL){
-		newMethod->returnType.baseType = bt_object;
-		newMethod->returnType.objectClassName = ((ObjectTypeNode*)node->type)->identifier->name;
-	}else{
-		std::cerr << "Class has no return type somehow.";
-		exit(0);
+	newMethod->returnType.baseType = checkType(node->type);
+	if(newMethod->returnType.baseType == bt_object) newMethod->returnType.objectClassName = ((ObjectTypeNode*)node->type)->identifier->name;
+	for(int i = 0; i < node->parameter_list->size();i++){
+		std::list<ParameterNode*> temp = *node->parameter_list;
+		CompoundType* newParam = new CompoundType;
+		if(newParam->baseType = checkType(temp[i].type) == bt_object) newParam->objectClassName = temp[i]->identifier->name;
+		currentParameterOffest+=4;
 	}
 	node->visit_children(this);
 	newMethod->localsSize = 4;
