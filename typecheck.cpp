@@ -63,6 +63,9 @@ void typeError(TypeErrorCode code) {
 // complete to build the symbol table and type check the program.
 // Not all functions must have code, many may be left empty.
 
+ClassInfo* currentClass;
+MethodInfo* currentMethod;
+
 void TypeCheck::visitProgramNode(ProgramNode* node) {
 	classTable = new ClassTable;
 	currentLocalOffset = 0;
@@ -74,6 +77,7 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 void TypeCheck::visitClassNode(ClassNode* node) {
   	currentMemberOffset = 0;
 	ClassInfo* newInfo = new ClassInfo;
+	currentClass = newInfo;
 	(node->identifier_2!=NULL)?	
 		newInfo->superClassName = node->identifier_2->name :
 		newInfo->superClassName = "";
@@ -107,6 +111,7 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
 	currentMemberOffset = -1;
 	VariableTable* temp = currentVariableTable;
 	MethodInfo* newMethod = new MethodInfo;
+	currentMethod = newMethod;
 	newMethod->variables = new VariableTable;
 	currentVariableTable = newMethod->variables;
 	newMethod->returnType.baseType = checkType(node->type);
@@ -152,119 +157,139 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
 }
 
 void TypeCheck::visitReturnStatementNode(ReturnStatementNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
+	if(currentMethod->returnType.baseType!=node->expression->basetype) typeError(return_type_mismatch);
 }
 
 void TypeCheck::visitAssignmentNode(AssignmentNode* node) {
-  // WRITEME: Replace with code if necessary
+	//The first identifier should be a class or a member of the current variable table
+	//If the second identifier is not blank, it should be a member of the class of the first identifier or any of its super classes
+	node->visit_children(this);
 }
 
 void TypeCheck::visitCallNode(CallNode* node) {
-  // WRITEME: Replace with code if necessary
+	//Do nothing?
+	node->visit_children(this);
 }
 
 void TypeCheck::visitIfElseNode(IfElseNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitWhileNode(WhileNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitPrintNode(PrintNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitPlusNode(PlusNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitMinusNode(MinusNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitTimesNode(TimesNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitDivideNode(DivideNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitLessNode(LessNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitLessEqualNode(LessEqualNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitEqualNode(EqualNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitAndNode(AndNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitOrNode(OrNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitNotNode(NotNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitNegationNode(NegationNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
-  // WRITEME: Replace with code if necessary
+	//If the second indentifier is blank, the first identifier should be a method in the current class
+	//If it is not, the first identifier should be a class and the second a method in that class.
+	//The expression list are the aparameters.They should have the same type as the parameters for this method
+	node->visit_children(this);
 }
 
 void TypeCheck::visitMemberAccessNode(MemberAccessNode* node) {
-  // WRITEME: Replace with code if necessary
+	//The first identifier should be a class
+	//The second identifier should be a member of that class
+	node->visit_children(this);
 }
 
 void TypeCheck::visitVariableNode(VariableNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
+	node->basetype = node->identifier->basetype;
 }
 
 void TypeCheck::visitIntegerLiteralNode(IntegerLiteralNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitBooleanLiteralNode(BooleanLiteralNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitNewNode(NewNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitIntegerTypeNode(IntegerTypeNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitBooleanTypeNode(BooleanTypeNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitObjectTypeNode(ObjectTypeNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitNoneNode(NoneNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitIdentifierNode(IdentifierNode* node) {
-  // WRITEME: Replace with code if necessary
+	if(currentVariableTable->count(node->name)==0){
+		if(currentClass->members->count(node->name)==0){
+			//I dunno?
+		} else {
+			node->basetype=(*currentClass->members).at(node->name).type.baseType;
+			if(node->basetype == bt_object) node->objectClassName = (*currentClass->members).at(node->name).type.objectClassName;
+		}
+	} else {
+		node->basetype=(*currentVariableTable).at(node->name).type.baseType;
+		if(node->basetype == bt_object) node->objectClassName = (*currentVariableTable).at(node->name).type.objectClassName;	
+	}
 }
 
 void TypeCheck::visitIntegerNode(IntegerNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 
