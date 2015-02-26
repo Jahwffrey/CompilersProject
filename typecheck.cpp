@@ -110,28 +110,38 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
 	currentVariableTable = newMethod->variables;
 	newMethod->returnType.baseType = checkType(node->type);
 	if(newMethod->returnType.baseType == bt_object) newMethod->returnType.objectClassName = ((ObjectTypeNode*)node->type)->identifier->name;
-	for(int i = 0; i < node->parameter_list->size();i++){
-		std::list<ParameterNode*> temp = *node->parameter_list;
-		CompoundType* newParam = new CompoundType;
-		if(newParam->baseType = checkType(temp[i].type) == bt_object) newParam->objectClassName = temp[i]->identifier->name;
-		currentParameterOffest+=4;
-	}
 	node->visit_children(this);
-	newMethod->localsSize = 4;
+	newMethod->localsSize = (currentParameterOffset-8) - (currentLocalOffset+4);
 	currentMethodTable->insert(std::pair<std::string,MethodInfo>(node->identifier->name,*newMethod)); 	
 	currentVariableTable = temp;
 }
 
 void TypeCheck::visitMethodBodyNode(MethodBodyNode* node) {
-  // WRITEME: Replace with code if necessary
+	node->visit_children(this);
 }
 
 void TypeCheck::visitParameterNode(ParameterNode* node) {
-  // WRITEME: Replace with code if necessary
+	CompoundType* newParam = new CompoundType;
+	if((newParam->baseType = checkType(node->type)) == bt_object) newParam->objectClassName = ((ObjectTypeNode*) node->type)->identifier->name;
+	VariableInfo* newVar = new VariableInfo;
+	newVar->type = *newParam;
+	newVar->offset = currentParameterOffset;
+	newVar->size = 4;
+	currentVariableTable->insert(std::pair<std::string,VariableInfo>(node->identifier->name,*newVar));
+	currentParameterOffset+=4;
 }
 
 void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
-  // WRITEME: Replace with code if necessary
+	for(std::list<IdentifierNode*>::iterator it = node->identifier_list->begin(); it!=node->identifier_list->end();it++){
+ 		CompoundType* newParam = new CompoundType;
+		if((newParam->baseType = checkType(node->type)) == bt_object) newParam->objectClassName = ((ObjectTypeNode*) node->type)->identifier->name;
+		VariableInfo* newVar = new VariableInfo;
+		newVar->type = *newParam;
+		newVar->offset = currentLocalOffset;
+		newVar->size = 4;
+		currentVariableTable->insert(std::pair<std::string,VariableInfo>((*it)->name,*newVar));
+		currentLocalOffset-=4;
+	}
 }
 
 void TypeCheck::visitReturnStatementNode(ReturnStatementNode* node) {
