@@ -81,7 +81,7 @@ void TypeCheck::visitClassNode(ClassNode* node) {
 	currentMethodTable = newInfo->methods;
 	newInfo->members = new VariableTable;
 	currentVariableTable = newInfo->members;
-	newInfo->membersSize = 4;
+	newInfo->membersSize = node->declaration_list->size()*4;
 	classTable->insert(std::pair<std::string,ClassInfo>(node->identifier_1->name,*newInfo));
 	node->visit_children(this);
 }
@@ -104,6 +104,7 @@ BaseType checkType(TypeNode* type){
 void TypeCheck::visitMethodNode(MethodNode* node) {
 	currentLocalOffset = -4;
 	currentParameterOffset = 8;
+	currentMemberOffset = -1;
 	VariableTable* temp = currentVariableTable;
 	MethodInfo* newMethod = new MethodInfo;
 	newMethod->variables = new VariableTable;
@@ -111,7 +112,7 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
 	newMethod->returnType.baseType = checkType(node->type);
 	if(newMethod->returnType.baseType == bt_object) newMethod->returnType.objectClassName = ((ObjectTypeNode*)node->type)->identifier->name;
 	node->visit_children(this);
-	newMethod->localsSize = (currentParameterOffset-8) - (currentLocalOffset+4);
+	newMethod->localsSize =  -(currentLocalOffset+4);
 	currentMethodTable->insert(std::pair<std::string,MethodInfo>(node->identifier->name,*newMethod)); 	
 	currentVariableTable = temp;
 }
@@ -121,6 +122,7 @@ void TypeCheck::visitMethodBodyNode(MethodBodyNode* node) {
 }
 
 void TypeCheck::visitParameterNode(ParameterNode* node) {
+	currentParameterOffset+=4;
 	CompoundType* newParam = new CompoundType;
 	if((newParam->baseType = checkType(node->type)) == bt_object) newParam->objectClassName = ((ObjectTypeNode*) node->type)->identifier->name;
 	VariableInfo* newVar = new VariableInfo;
@@ -128,7 +130,6 @@ void TypeCheck::visitParameterNode(ParameterNode* node) {
 	newVar->offset = currentParameterOffset;
 	newVar->size = 4;
 	currentVariableTable->insert(std::pair<std::string,VariableInfo>(node->identifier->name,*newVar));
-	currentParameterOffset+=4;
 }
 
 void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
@@ -137,10 +138,16 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
 		if((newParam->baseType = checkType(node->type)) == bt_object) newParam->objectClassName = ((ObjectTypeNode*) node->type)->identifier->name;
 		VariableInfo* newVar = new VariableInfo;
 		newVar->type = *newParam;
-		newVar->offset = currentLocalOffset;
+		//class members always come before methods, so i will set currentMemberOffset to -1 once get to methods so as to distiguish var types
+		if(currentMemberOffset==-1){
+			newVar->offset = currentLocalOffset;
+			currentLocalOffset-=4;
+		} else {
+			newVar->offset = currentMemberOffset;
+			currentMemberOffset+=4;
+		}
 		newVar->size = 4;
 		currentVariableTable->insert(std::pair<std::string,VariableInfo>((*it)->name,*newVar));
-		currentLocalOffset-=4;
 	}
 }
 
