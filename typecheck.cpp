@@ -334,9 +334,12 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 	//If it is not, the first identifier should be a class and the second a method in that class.
 	//The expression list are the aparameters.They should have the same type as the parameters for this method
 	node->visit_children(this);
+	MethodInfo thisMethod; //Will use this to check parameters
+	//Check that the method exists
 	if(node->identifier_2==NULL){
 		if(currentClass->methods->count(node->identifier_1->name)!=0){
-			CompoundType temp = currentClass->methods->at(node->identifier_1->name).returnType;
+			thisMethod = currentClass->methods->at(node->identifier_1->name);
+			CompoundType temp = thisMethod.returnType;
 			node->basetype = temp.baseType;
 			node->objectClassName = temp.objectClassName;
 		} else {
@@ -344,15 +347,18 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 		}
 	} else if(node->identifier_1->basetype == bt_object){
 		if(classTable->at(node->identifier_1->objectClassName).methods->count(node->identifier_2->name)!=0){
-			CompoundType temp = classTable->at(node->identifier_1->objectClassName).methods->at(node->identifier_2->name).returnType;
+			thisMethod = classTable->at(node->identifier_1->objectClassName).methods->at(node->identifier_2->name);
+			CompoundType temp = thisMethod.returnType;
 			node->basetype = temp.baseType;
 			node->objectClassName = temp.objectClassName;
 		} else {
+			//check that the method might exist in the superclass
 			bool foundmethod = false;
 			std::string supername =  classTable->at(node->identifier_1->objectClassName).superClassName;
 			while(supername!="" && foundmethod == false){
 				if(classTable->at(supername).methods->count(node->identifier_2->name)!=0){
-					CompoundType temp = classTable->at(supername).methods->at(node->identifier_2->name).returnType;
+					thisMethod = classTable->at(supername).methods->at(node->identifier_2->name);
+					CompoundType temp = thisMethod.returnType;
 					node->basetype = temp.baseType;
 					node->objectClassName = temp.objectClassName;
 					foundmethod = true;
@@ -364,7 +370,24 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 	} else {
 		typeError(not_object);
 	}
-
+	//check that the paramerters are correct
+	if(node->expression_list->size() == thisMethod.parameters->size()){
+		std::list<CompoundType>::iterator mIt = thisMethod.parameters->begin();
+		std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
+		while(eIt!=(*node->expression_list).end()){
+			if((*eIt)->basetype!=(*mIt).baseType){
+				typeError(argument_type_mismatch);
+			} else if ((*eIt)->basetype==bt_object){
+				if((*eIt)->objectClassName!=(*mIt).objectClassName){
+					typeError(argument_type_mismatch);
+				}
+			}
+			eIt++;
+			mIt++;
+		}	
+	} else {
+		typeError(argument_number_mismatch);
+	}
 	
 }
 
@@ -401,6 +424,32 @@ void TypeCheck::visitBooleanLiteralNode(BooleanLiteralNode* node) {
 
 void TypeCheck::visitNewNode(NewNode* node) {
 	node->visit_children(this);
+	if(classTable->count(node->identifier->name)!=0){
+		if(node->expression_list->size()==0){
+			node->basetype = bt_object;
+			node->objectClassName = node->identifier->name;
+		} else {
+			if(node->expression_list->size() == classTable->at(node->identifier->name).members->size() && node->expression_list->size()!=0){
+				std::map<std::string,VariableInfo>::iterator mIt = classTable->at(node->identifier->name).members->begin();
+				std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
+				while(eIt!=(*node->expression_list).end()){
+					if((*eIt)->basetype!=(*mIt).second.type.baseType){
+						typeError(argument_type_mismatch);
+					} else if ((*eIt)->basetype==bt_object){
+						if((*eIt)->objectClassName!=(*mIt).second.type.objectClassName){
+							typeError(argument_type_mismatch);
+						}
+					}
+					eIt++;
+					mIt++;
+				}	
+			} else {
+				typeError(argument_number_mismatch);
+			}
+		}
+	} else {
+		typeError(undefined_class);
+	}
 	//Im going to have to iterate over the expression list, checking to make sure arguments are correct. Dont forget to account for giving no params!
 }
 
@@ -424,6 +473,7 @@ void TypeCheck::visitIdentifierNode(IdentifierNode* node) {
 	if(currentVariableTable->count(node->name)==0){
 		if(currentClass->members->count(node->name)==0){
 			//I dunno?
+			//account for inheritance!!
 			node->basetype = bt_none;
 		} else {
 			node->basetype=(*currentClass->members).at(node->name).type.baseType;
