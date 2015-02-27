@@ -165,23 +165,67 @@ void TypeCheck::visitAssignmentNode(AssignmentNode* node) {
 	//The first identifier should be a class or a member of the current variable table
 	//If the second identifier is not blank, it should be a member of the class of the first identifier or any of its super classes
 	node->visit_children(this);
+	if(node->identifier_2==NULL){
+		if(node->identifier_1->basetype == bt_none){
+			typeError(undefined_variable);
+		} else {
+			node->basetype = node->identifier_1->basetype;
+			node->objectClassName = node->identifier_1->objectClassName;
+		}	
+	} else {
+		if(node->identifier_1->basetype==bt_object){
+			if(classTable->at(node->identifier_1->objectClassName).members->count(node->identifier_2->name)!=0){
+				CompoundType temp = classTable->at(node->identifier_1->objectClassName).members->at(node->identifier_2->name).type;
+				node->basetype = temp.baseType;
+				node->objectClassName = temp.objectClassName;
+			} else {
+				bool foundmember = false;
+				std::string supername =  classTable->at(node->identifier_1->objectClassName).superClassName;
+				while(supername!="" && foundmember == false){
+					if(classTable->at(supername).members->count(node->identifier_2->name)!=0){
+						CompoundType temp = classTable->at(supername).members->at(node->identifier_2->name).type;
+						node->basetype = temp.baseType;
+						node->objectClassName = temp.objectClassName;
+						foundmember = true;
+					} else {
+						supername = classTable->at(supername).superClassName;
+					}
+				}
+			}
+		} else {
+			typeError(not_object);
+		}
+	}
+	//Check if equal:
+	if(node->basetype!=node->expression->basetype){
+		typeError(assignment_type_mismatch);
+	}
 }
 
 void TypeCheck::visitCallNode(CallNode* node) {
 	//Do nothing?
 	node->visit_children(this);
+	node->basetype = node->methodcall->basetype;
+	node->objectClassName = node->methodcall->objectClassName;
 }
 
 void TypeCheck::visitIfElseNode(IfElseNode* node) {
 	node->visit_children(this);
+	if(node->expression->basetype!=bt_boolean){
+		typeError(if_predicate_type_mismatch);
+	}
 }
 
 void TypeCheck::visitWhileNode(WhileNode* node) {
 	node->visit_children(this);
+	if(node->expression->basetype!=bt_boolean){
+		typeError(while_predicate_type_mismatch);
+	}
 }
 
 void TypeCheck::visitPrintNode(PrintNode* node) {
 	node->visit_children(this);
+	node->basetype = node->expression->basetype;
 }
 
 void TypeCheck::visitPlusNode(PlusNode* node) {
@@ -303,9 +347,22 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 			CompoundType temp = classTable->at(node->identifier_1->objectClassName).methods->at(node->identifier_2->name).returnType;
 			node->basetype = temp.baseType;
 			node->objectClassName = temp.objectClassName;
+		} else {
+			bool foundmethod = false;
+			std::string supername =  classTable->at(node->identifier_1->objectClassName).superClassName;
+			while(supername!="" && foundmethod == false){
+				if(classTable->at(supername).methods->count(node->identifier_2->name)!=0){
+					CompoundType temp = classTable->at(supername).methods->at(node->identifier_2->name).returnType;
+					node->basetype = temp.baseType;
+					node->objectClassName = temp.objectClassName;
+					foundmethod = true;
+				} else {
+					supername = classTable->at(supername).superClassName;
+				}
+			}
 		}
 	} else {
-		std::cout << "WIERDNESS IN visitMethodCallNode";
+		typeError(not_object);
 	}
 
 	
@@ -322,8 +379,7 @@ void TypeCheck::visitMemberAccessNode(MemberAccessNode* node) {
 			node->objectClassName = temp.objectClassName;
 		}
 	} else {
-		std::cout << "MEMBER ACCESS NODE UNDEFINED CLASS";
-		typeError(undefined_class);
+		typeError(not_object);
 	}
 }
 
@@ -368,6 +424,7 @@ void TypeCheck::visitIdentifierNode(IdentifierNode* node) {
 	if(currentVariableTable->count(node->name)==0){
 		if(currentClass->members->count(node->name)==0){
 			//I dunno?
+			node->basetype = bt_none;
 		} else {
 			node->basetype=(*currentClass->members).at(node->name).type.baseType;
 			if(node->basetype == bt_object) node->objectClassName = (*currentClass->members).at(node->name).type.objectClassName;
