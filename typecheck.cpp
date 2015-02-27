@@ -186,46 +186,103 @@ void TypeCheck::visitPrintNode(PrintNode* node) {
 
 void TypeCheck::visitPlusNode(PlusNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_integer && node->expression_2->basetype==bt_integer){
+		node->basetype = bt_integer;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitMinusNode(MinusNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_integer && node->expression_2->basetype==bt_integer){
+		node->basetype = bt_integer;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitTimesNode(TimesNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_integer && node->expression_2->basetype==bt_integer){
+		node->basetype = bt_integer;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitDivideNode(DivideNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_integer && node->expression_2->basetype==bt_integer){
+		node->basetype = bt_integer;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitLessNode(LessNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_integer && node->expression_2->basetype==bt_integer){
+		node->basetype = bt_boolean;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitLessEqualNode(LessEqualNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_integer && node->expression_2->basetype==bt_integer){
+		node->basetype = bt_boolean;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitEqualNode(EqualNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_boolean && node->expression_2->basetype==bt_boolean){
+		node->basetype = bt_boolean;
+	} else if (node->expression_1->basetype==bt_integer && node->expression_2->basetype==bt_integer){ 
+		node->basetype = bt_boolean;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitAndNode(AndNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_boolean && node->expression_2->basetype==bt_boolean){
+		node->basetype = bt_boolean;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitOrNode(OrNode* node) {
 	node->visit_children(this);
+	if(node->expression_1->basetype==bt_boolean && node->expression_2->basetype==bt_boolean){
+		node->basetype = bt_boolean;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitNotNode(NotNode* node) {
 	node->visit_children(this);
+	if(node->expression->basetype==bt_boolean){
+		node->basetype = bt_boolean;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitNegationNode(NegationNode* node) {
 	node->visit_children(this);
+	if(node->expression->basetype==bt_integer){
+		node->basetype = bt_integer;
+	} else {
+		typeError(expression_type_mismatch);
+	}
 }
 
 void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
@@ -233,12 +290,41 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 	//If it is not, the first identifier should be a class and the second a method in that class.
 	//The expression list are the aparameters.They should have the same type as the parameters for this method
 	node->visit_children(this);
+	if(node->identifier_2==NULL){
+		if(currentClass->methods->count(node->identifier_1->name)!=0){
+			CompoundType temp = currentClass->methods->at(node->identifier_1->name).returnType;
+			node->basetype = temp.baseType;
+			node->objectClassName = temp.objectClassName;
+		} else {
+			typeError(undefined_method);
+		}
+	} else if(node->identifier_1->basetype == bt_object){
+		if(classTable->at(node->identifier_1->objectClassName).methods->count(node->identifier_2->name)!=0){
+			CompoundType temp = classTable->at(node->identifier_1->objectClassName).methods->at(node->identifier_2->name).returnType;
+			node->basetype = temp.baseType;
+			node->objectClassName = temp.objectClassName;
+		}
+	} else {
+		std::cout << "WIERDNESS IN visitMethodCallNode";
+	}
+
+	
 }
 
 void TypeCheck::visitMemberAccessNode(MemberAccessNode* node) {
-	//The first identifier should be a class
+	//The first identifier should be a class instance
 	//The second identifier should be a member of that class
 	node->visit_children(this);
+	if(node->identifier_1->basetype == bt_object){
+		if(classTable->at(node->identifier_1->objectClassName).members->count(node->identifier_2->name)!=0){
+			CompoundType temp = classTable->at(node->identifier_1->objectClassName).members->at(node->identifier_2->name).type;
+			node->basetype = temp.baseType;
+			node->objectClassName = temp.objectClassName;
+		}
+	} else {
+		std::cout << "MEMBER ACCESS NODE UNDEFINED CLASS";
+		typeError(undefined_class);
+	}
 }
 
 void TypeCheck::visitVariableNode(VariableNode* node) {
@@ -248,14 +334,18 @@ void TypeCheck::visitVariableNode(VariableNode* node) {
 
 void TypeCheck::visitIntegerLiteralNode(IntegerLiteralNode* node) {
 	node->visit_children(this);
+	node->basetype = bt_integer;
 }
+
 
 void TypeCheck::visitBooleanLiteralNode(BooleanLiteralNode* node) {
 	node->visit_children(this);
+	node->basetype = bt_boolean;
 }
 
 void TypeCheck::visitNewNode(NewNode* node) {
 	node->visit_children(this);
+	//Im going to have to iterate over the expression list, checking to make sure arguments are correct. Dont forget to account for giving no params!
 }
 
 void TypeCheck::visitIntegerTypeNode(IntegerTypeNode* node) {
