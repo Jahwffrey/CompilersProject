@@ -66,6 +66,27 @@ void typeError(TypeErrorCode code) {
 ClassInfo* currentClass;
 MethodInfo* currentMethod;
 
+VariableInfo findMemberInClass(std::string className,std::string memberName, ClassTable* table){
+	if(table->at(className).members->count(memberName)!=0){
+		return table->at(className).members->at(memberName);
+	} else if (table->at(className).superClassName!="") {
+		return findMemberInClass(table->at(className).superClassName,memberName,table);
+	} else {
+		typeError(undefined_member);
+	}
+}
+
+bool compareClasses(std::string class1,std::string class2,ClassTable* table){
+	if(class1 == class2){
+		return true;
+	} else if (table->at(class1).superClassName!=""){
+		return compareClasses(table->at(class1).superClassName,class2,table);
+	} else {
+		return false;
+	}
+}
+
+
 void TypeCheck::visitProgramNode(ProgramNode* node) {
 	classTable = new ClassTable;
 	currentLocalOffset = 0;
@@ -174,24 +195,9 @@ void TypeCheck::visitAssignmentNode(AssignmentNode* node) {
 		}	
 	} else {
 		if(node->identifier_1->basetype==bt_object){
-			if(classTable->at(node->identifier_1->objectClassName).members->count(node->identifier_2->name)!=0){
-				CompoundType temp = classTable->at(node->identifier_1->objectClassName).members->at(node->identifier_2->name).type;
-				node->basetype = temp.baseType;
-				node->objectClassName = temp.objectClassName;
-			} else {
-				bool foundmember = false;
-				std::string supername =  classTable->at(node->identifier_1->objectClassName).superClassName;
-				while(supername!="" && foundmember == false){
-					if(classTable->at(supername).members->count(node->identifier_2->name)!=0){
-						CompoundType temp = classTable->at(supername).members->at(node->identifier_2->name).type;
-						node->basetype = temp.baseType;
-						node->objectClassName = temp.objectClassName;
-						foundmember = true;
-					} else {
-						supername = classTable->at(supername).superClassName;
-					}
-				}
-			}
+			VariableInfo var = findMemberInClass(node->identifier_1->objectClassName,node->identifier_2->name,classTable);
+			node->basetype = var.type.baseType;
+			node->objectClassName = var.type.objectClassName;
 		} else {
 			typeError(not_object);
 		}
@@ -371,21 +377,25 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 		typeError(not_object);
 	}
 	//check that the paramerters are correct
-	if(node->expression_list->size() == thisMethod.parameters->size()){
-		std::list<CompoundType>::iterator mIt = thisMethod.parameters->begin();
-		std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
-		while(eIt!=(*node->expression_list).end()){
-			if((*eIt)->basetype!=(*mIt).baseType){
-				typeError(argument_type_mismatch);
-			} else if ((*eIt)->basetype==bt_object){
-				if((*eIt)->objectClassName!=(*mIt).objectClassName){
+	if(node->expression_list!=NULL && thisMethod.parameters!=NULL){
+		if(node->expression_list->size() == thisMethod.parameters->size()){
+			std::list<CompoundType>::iterator mIt = thisMethod.parameters->begin();
+			std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
+			while(eIt!=(*node->expression_list).end()){
+				if((*eIt)->basetype!=(*mIt).baseType){
 					typeError(argument_type_mismatch);
+				} else if ((*eIt)->basetype==bt_object){
+					if(!compareClasses((*eIt)->objectClassName,(*mIt).objectClassName,classTable)){
+						typeError(argument_type_mismatch);
+					}
 				}
-			}
-			eIt++;
-			mIt++;
-		}	
-	} else {
+				eIt++;
+				mIt++;
+			}	
+		} else {
+			typeError(argument_number_mismatch);
+		}
+	} else if (thisMethod.parameters!=NULL){
 		typeError(argument_number_mismatch);
 	}
 	
@@ -425,25 +435,29 @@ void TypeCheck::visitBooleanLiteralNode(BooleanLiteralNode* node) {
 void TypeCheck::visitNewNode(NewNode* node) {
 	node->visit_children(this);
 	if(classTable->count(node->identifier->name)!=0){
-		if(node->expression_list->size()==0){
+		if(node->expression_list==NULL){
 			node->basetype = bt_object;
 			node->objectClassName = node->identifier->name;
 		} else {
-			if(node->expression_list->size() == classTable->at(node->identifier->name).members->size() && node->expression_list->size()!=0){
-				std::map<std::string,VariableInfo>::iterator mIt = classTable->at(node->identifier->name).members->begin();
-				std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
-				while(eIt!=(*node->expression_list).end()){
-					if((*eIt)->basetype!=(*mIt).second.type.baseType){
-						typeError(argument_type_mismatch);
-					} else if ((*eIt)->basetype==bt_object){
-						if((*eIt)->objectClassName!=(*mIt).second.type.objectClassName){
+			if(classTable->at(node->identifier->name).members!=NULL){
+				if(node->expression_list->size() == classTable->at(node->identifier->name).members->size()){
+					std::map<std::string,VariableInfo>::iterator mIt = classTable->at(node->identifier->name).members->begin();
+					std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
+					while(eIt!=(*node->expression_list).end()){
+						if((*eIt)->basetype!=(*mIt).second.type.baseType){
 							typeError(argument_type_mismatch);
+						} else if ((*eIt)->basetype==bt_object){
+							if((*eIt)->objectClassName!=(*mIt).second.type.objectClassName){
+								typeError(argument_type_mismatch);
+							}
 						}
-					}
-					eIt++;
-					mIt++;
-				}	
-			} else {
+						eIt++;
+						mIt++;
+					}	
+				} else {
+					typeError(argument_number_mismatch);
+				}
+			} else if (classTable->at(node->identifier->name).members!=NULL){
 				typeError(argument_number_mismatch);
 			}
 		}
