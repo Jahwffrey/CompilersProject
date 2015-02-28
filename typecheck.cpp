@@ -418,7 +418,12 @@ void TypeCheck::visitMemberAccessNode(MemberAccessNode* node) {
 
 void TypeCheck::visitVariableNode(VariableNode* node) {
 	node->visit_children(this);
-	node->basetype = node->identifier->basetype;
+	
+	if((node->basetype = node->identifier->basetype)==bt_none){
+		VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier->name,classTable);
+		node->basetype = temp.type.baseType;
+		node->objectClassName = temp.type.objectClassName;
+	}
 }
 
 void TypeCheck::visitIntegerLiteralNode(IntegerLiteralNode* node) {
@@ -453,7 +458,9 @@ void TypeCheck::visitNewNode(NewNode* node) {
 						}
 						eIt++;
 						mIt++;
-					}	
+					}
+					node->basetype = bt_object;
+					node->objectClassName = node->identifier->name;	
 				} else {
 					typeError(argument_number_mismatch);
 				}
