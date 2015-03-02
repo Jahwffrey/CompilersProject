@@ -349,7 +349,20 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 			node->basetype = temp.baseType;
 			node->objectClassName = temp.objectClassName;
 		} else {
-			typeError(undefined_method);
+			bool foundmethod = false;
+			std::string supername =  currentClass->superClassName;
+			while(supername!="" && foundmethod == false){
+				if(classTable->at(supername).methods->count(node->identifier_1->name)!=0){
+					thisMethod = classTable->at(supername).methods->at(node->identifier_1->name);
+					CompoundType temp = thisMethod.returnType;
+					node->basetype = temp.baseType;
+					node->objectClassName = temp.objectClassName;
+					foundmethod = true;
+				} else {
+					supername = classTable->at(supername).superClassName;
+				}
+			}
+			if(!foundmethod) typeError(undefined_method);	
 		}
 	} else if(node->identifier_1->basetype == bt_object){
 		if(classTable->at(node->identifier_1->objectClassName).methods->count(node->identifier_2->name)!=0){
@@ -410,6 +423,10 @@ void TypeCheck::visitMemberAccessNode(MemberAccessNode* node) {
 			CompoundType temp = classTable->at(node->identifier_1->objectClassName).members->at(node->identifier_2->name).type;
 			node->basetype = temp.baseType;
 			node->objectClassName = temp.objectClassName;
+		} else {
+			VariableInfo temp = findMemberInClass(classTable->at(node->identifier_1->objectClassName).superClassName,node->identifier_2->name,classTable);
+			node->basetype = temp.type.baseType;
+			node->objectClassName = temp.type.objectClassName;
 		}
 	} else {
 		typeError(not_object);
@@ -423,6 +440,8 @@ void TypeCheck::visitVariableNode(VariableNode* node) {
 		VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier->name,classTable);
 		node->basetype = temp.type.baseType;
 		node->objectClassName = temp.type.objectClassName;
+	} else {
+		node->basetype = node->identifier->basetype;
 	}
 }
 
@@ -508,6 +527,7 @@ void TypeCheck::visitIdentifierNode(IdentifierNode* node) {
 
 void TypeCheck::visitIntegerNode(IntegerNode* node) {
 	node->visit_children(this);
+	node->basetype = bt_integer;
 }
 
 
