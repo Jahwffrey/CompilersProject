@@ -463,25 +463,32 @@ void TypeCheck::visitNewNode(NewNode* node) {
 			node->basetype = bt_object;
 			node->objectClassName = node->identifier->name;
 		} else {
-			if(classTable->at(node->identifier->name).members!=NULL){
-				if(node->expression_list->size() == classTable->at(node->identifier->name).members->size()){
-					std::map<std::string,VariableInfo>::iterator mIt = classTable->at(node->identifier->name).members->begin();
-					std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
-					while(eIt!=(*node->expression_list).end()){
-						if((*eIt)->basetype!=(*mIt).second.type.baseType){
-							typeError(argument_type_mismatch);
-						} else if ((*eIt)->basetype==bt_object){
-							if((*eIt)->objectClassName!=(*mIt).second.type.objectClassName){
+			if(classTable->at(node->identifier->name).methods!=NULL && classTable->at(node->identifier->name).members!=NULL){
+				MethodTable* methods = classTable->at(node->identifier->name).methods;
+				if(methods->count(node->identifier->name)!=0 && methods->at(node->identifier->name).parameters!=NULL){
+					if(node->expression_list->size() == classTable->at(node->identifier->name).methods->at(node->identifier->name).parameters->size()){
+						std::list<CompoundType>::iterator mIt = classTable->at(node->identifier->name).methods->at(node->identifier->name).parameters->begin();
+						std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
+						while(eIt!=(*node->expression_list).end()){
+							if((*eIt)->basetype!=(*mIt).baseType){
 								typeError(argument_type_mismatch);
+							} else if ((*eIt)->basetype==bt_object){
+								if(!compareClasses((*eIt)->objectClassName,(*mIt).objectClassName,classTable)){
+									typeError(argument_type_mismatch);
+								}
 							}
+							eIt++;
+							mIt++;
 						}
-						eIt++;
-						mIt++;
+						node->basetype = bt_object;
+						node->objectClassName = node->identifier->name;	
+					} else {
+						//Here is the problem, officer:
+						//Perhaps this is an inheritance problem? Creating a new object with the parameters of the parent?
+						//More accurately is probably that i need to check the number of paramerers to the constructor for the class actually
+						std::cout << node->expression_list->size() <<"|"<<classTable->at(node->identifier->name).members->size();
+						typeError(argument_number_mismatch);
 					}
-					node->basetype = bt_object;
-					node->objectClassName = node->identifier->name;	
-				} else {
-					typeError(argument_number_mismatch);
 				}
 			} else if (classTable->at(node->identifier->name).members!=NULL){
 				typeError(argument_number_mismatch);
