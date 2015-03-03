@@ -95,27 +95,10 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 	node->visit_children(this);
 	//Check for main problems
 	if(classTable->count("Main")!=0){
-		bool okayForMembers = true;
-		if(classTable->at("Main").members!=NULL){
-			if(classTable->at("Main").members->size()!=0){
-				okayForMembers = false;
-			}
-		}
-		if(okayForMembers){
-			if(classTable->at("Main").methods!=NULL){
-				if(classTable->at("Main").methods->count("main")!=0){
-					if(classTable->at("Main").methods->at("main").returnType.baseType!=bt_none || classTable->at("Main").methods->at("main").parameters!=NULL){
-						typeError(main_method_incorrect_signature);
-					}
-					/*if(classTable->at("Main").methods->at("main").parameters==NULL){
-						//all is well
-					} else if(classTable->at("Main").methods->at("main").parameters->size()==0){
-						//all is well
-					} else {
-						typeError(main_method_incorrect_signature);
-					}*/
-				} else {
-					typeError(no_main_method);
+		if(classTable->at("Main").members->size()==0){
+			if(classTable->at("Main").methods->count("main")!=0){
+				if(classTable->at("Main").methods->at("main").returnType!=bt_none || classTable->at("Main").methods->at("main").parameters->size()!=0){
+					typeError(main_method_incorrect_signature);
 				}
 			} else {
 				typeError(no_main_method);
