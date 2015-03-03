@@ -179,7 +179,9 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
 
 void TypeCheck::visitReturnStatementNode(ReturnStatementNode* node) {
 	node->visit_children(this);
-	if(currentMethod->returnType.baseType!=node->expression->basetype) typeError(return_type_mismatch);
+	if(currentMethod->returnType.baseType!=node->expression->basetype){
+		typeError(return_type_mismatch);
+	}
 }
 
 void TypeCheck::visitAssignmentNode(AssignmentNode* node) {
@@ -486,7 +488,6 @@ void TypeCheck::visitNewNode(NewNode* node) {
 						//Here is the problem, officer:
 						//Perhaps this is an inheritance problem? Creating a new object with the parameters of the parent?
 						//More accurately is probably that i need to check the number of paramerers to the constructor for the class actually
-						std::cout << node->expression_list->size() <<"|"<<classTable->at(node->identifier->name).members->size();
 						typeError(argument_number_mismatch);
 					}
 				}
@@ -497,7 +498,8 @@ void TypeCheck::visitNewNode(NewNode* node) {
 	} else {
 		typeError(undefined_class);
 	}
-	//Im going to have to iterate over the expression list, checking to make sure arguments are correct. Dont forget to account for giving no params!
+	node->objectClassName = node->identifier->name;	
+	node->basetype = bt_object;
 }
 
 void TypeCheck::visitIntegerTypeNode(IntegerTypeNode* node) {
