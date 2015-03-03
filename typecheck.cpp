@@ -66,13 +66,21 @@ void typeError(TypeErrorCode code) {
 ClassInfo* currentClass;
 MethodInfo* currentMethod;
 
-VariableInfo findMemberInClass(std::string className,std::string memberName, ClassTable* table){
-	if(table->at(className).members->count(memberName)!=0){
-		return table->at(className).members->at(memberName);
-	} else if (table->at(className).superClassName!="") {
-		return findMemberInClass(table->at(className).superClassName,memberName,table);
+VariableInfo findMemberInClass(std::string className,std::string memberName, ClassTable* table, bool var = false){
+	if(table->count(className)!=0){
+		if(table->at(className).members->count(memberName)!=0){
+			return table->at(className).members->at(memberName);
+		} else if (table->at(className).superClassName!="") {
+			return findMemberInClass(table->at(className).superClassName,memberName,table,var);
+		} else {
+			if(!var){
+				typeError(undefined_member);
+			} else {
+				typeError(undefined_variable);
+			}
+		}
 	} else {
-		typeError(undefined_member);
+		typeError(undefined_class);
 	}
 }
 
@@ -107,13 +115,6 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 					if(classTable->at("Main").methods->at("main").returnType.baseType!=bt_none || classTable->at("Main").methods->at("main").parameters!=NULL){
 						typeError(main_method_incorrect_signature);
 					}
-					/*if(classTable->at("Main").methods->at("main").parameters==NULL){
-						//all is well
-					} else if(classTable->at("Main").methods->at("main").parameters->size()==0){
-						//all is well
-					} else {
-						typeError(main_method_incorrect_signature);
-					}*/
 				} else {
 					typeError(no_main_method);
 				}
@@ -420,6 +421,7 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 					supername = classTable->at(supername).superClassName;
 				}
 			}
+			if(!foundmethod) typeError(undefined_method);
 		}
 	} else {
 		typeError(not_object);
@@ -430,7 +432,7 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 			std::list<CompoundType>::iterator mIt = thisMethod.parameters->begin();
 			std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
 			while(eIt!=(*node->expression_list).end()){
-				if((*eIt)->basetype!=(*mIt).baseType){
+				if((*eIt) == NULL || (*eIt)->basetype!=(*mIt).baseType){
 					typeError(argument_type_mismatch);
 				} else if ((*eIt)->basetype==bt_object){
 					if(!compareClasses((*eIt)->objectClassName,(*mIt).objectClassName,classTable)){
@@ -472,7 +474,7 @@ void TypeCheck::visitVariableNode(VariableNode* node) {
 	node->visit_children(this);
 	
 	if((node->basetype = node->identifier->basetype)==bt_none){
-		VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier->name,classTable);
+		VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier->name,classTable,true);
 		node->basetype = temp.type.baseType;
 		node->objectClassName = temp.type.objectClassName;
 	} else {
