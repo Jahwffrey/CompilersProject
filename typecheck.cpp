@@ -143,6 +143,12 @@ void TypeCheck::visitClassNode(ClassNode* node) {
 	newInfo->membersSize = node->declaration_list->size()*4;
 	classTable->insert(std::pair<std::string,ClassInfo>(node->identifier_1->name,*newInfo));
 	node->visit_children(this);
+	//Check that constructor returns none
+	if(newInfo->methods!=NULL 
+	&& newInfo->methods->count(node->identifier_1->name)!=0 
+	&& newInfo->methods->at(node->identifier_1->name).returnType.baseType!=bt_none){
+		typeError(constructor_returns_type);
+	}
 }
 
 BaseType checkType(TypeNode* type){
