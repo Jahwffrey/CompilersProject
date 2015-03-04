@@ -87,7 +87,7 @@ VariableInfo findMemberInClass(std::string className,std::string memberName, Cla
 bool compareClasses(std::string class1,std::string class2,ClassTable* table){
 	if(class1 == class2){
 		return true;
-	} else if (table->at(class1).superClassName!=""){
+	} else if (class1!="" && table->at(class1).superClassName!=""){
 		return compareClasses(table->at(class1).superClassName,class2,table);
 	} else {
 		return false;
@@ -112,7 +112,7 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 		if(okayForMembers){
 			if(classTable->at("Main").methods!=NULL){
 				if(classTable->at("Main").methods->count("main")!=0){
-					if(classTable->at("Main").methods->at("main").returnType.baseType!=bt_none || classTable->at("Main").methods->at("main").parameters!=NULL){
+					if(classTable->at("Main").methods->at("main").returnType.baseType!=bt_none || classTable->at("Main").methods->at("main").parameters->size()!=0){
 						typeError(main_method_incorrect_signature);
 					}
 				} else {
@@ -167,6 +167,7 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
 	VariableTable* temp = currentVariableTable;
 	MethodInfo* newMethod = new MethodInfo;
 	currentMethod = newMethod;
+	newMethod->parameters = new std::list<CompoundType>;
 	newMethod->variables = new VariableTable;
 	currentVariableTable = newMethod->variables;
 	newMethod->returnType.baseType = checkType(node->type);
@@ -190,6 +191,7 @@ void TypeCheck::visitParameterNode(ParameterNode* node) {
 	newVar->offset = currentParameterOffset;
 	newVar->size = 4;
 	currentVariableTable->insert(std::pair<std::string,VariableInfo>(node->identifier->name,*newVar));
+	currentMethod->parameters->push_back(*newParam);
 }
 
 void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
@@ -268,6 +270,7 @@ void TypeCheck::visitWhileNode(WhileNode* node) {
 void TypeCheck::visitPrintNode(PrintNode* node) {
 	node->visit_children(this);
 	node->basetype = node->expression->basetype;
+	node->objectClassName = node->expression->objectClassName;
 }
 
 void TypeCheck::visitPlusNode(PlusNode* node) {
@@ -427,7 +430,7 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 		typeError(not_object);
 	}
 	//check that the paramerters are correct
-	if(node->expression_list!=NULL && thisMethod.parameters!=NULL){
+	if(node->expression_list!=NULL && thisMethod.parameters->size()!=0){
 		if(node->expression_list->size() == thisMethod.parameters->size()){
 			std::list<CompoundType>::iterator mIt = thisMethod.parameters->begin();
 			std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
@@ -445,7 +448,7 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 		} else {
 			typeError(argument_number_mismatch);
 		}
-	} else if (thisMethod.parameters!=NULL){
+	} else if (thisMethod.parameters->size()!=0){
 		typeError(argument_number_mismatch);
 	}
 	
@@ -479,6 +482,7 @@ void TypeCheck::visitVariableNode(VariableNode* node) {
 		node->objectClassName = temp.type.objectClassName;
 	} else {
 		node->basetype = node->identifier->basetype;
+		node->objectClassName = node->identifier->objectClassName;
 	}
 }
 
@@ -502,7 +506,7 @@ void TypeCheck::visitNewNode(NewNode* node) {
 		} else {
 			if(classTable->at(node->identifier->name).methods!=NULL && classTable->at(node->identifier->name).members!=NULL){
 				MethodTable* methods = classTable->at(node->identifier->name).methods;
-				if(methods->count(node->identifier->name)!=0 && methods->at(node->identifier->name).parameters!=NULL){
+				if(methods->count(node->identifier->name)!=0 && methods->at(node->identifier->name).parameters->size()!=0){
 					if(node->expression_list->size() == classTable->at(node->identifier->name).methods->at(node->identifier->name).parameters->size()){
 						std::list<CompoundType>::iterator mIt = classTable->at(node->identifier->name).methods->at(node->identifier->name).parameters->begin();
 						std::list<ExpressionNode*>::iterator eIt = (*node->expression_list).begin();
