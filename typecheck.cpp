@@ -243,6 +243,14 @@ void TypeCheck::visitAssignmentNode(AssignmentNode* node) {
 			node->objectClassName = node->identifier_1->objectClassName;
 		}	
 	} else {
+		if(node->identifier_1->basetype==bt_none){
+			if(currentClass->superClassName == ""){
+				typeError(undefined_variable);
+			}
+			VariableInfo var = findMemberInClass(currentClass->superClassName,node->identifier_1->name,classTable,false);
+			node->identifier_1->basetype = var.type.baseType;
+			node->identifier_1->objectClassName = var.type.objectClassName;
+		}
 		if(node->identifier_1->basetype==bt_object){
 			VariableInfo var = findMemberInClass(node->identifier_1->objectClassName,node->identifier_2->name,classTable);
 			node->basetype = var.type.baseType;
@@ -414,7 +422,16 @@ void TypeCheck::visitMethodCallNode(MethodCallNode* node) {
 			}
 			if(!foundmethod) typeError(undefined_method);	
 		}
-	} else if(node->identifier_1->basetype == bt_object){
+	} else if(node->identifier_1->basetype == bt_object || node->identifier_1->basetype == bt_none){
+		if(node->identifier_1->basetype == bt_none){
+			if(currentClass->superClassName!=""){
+				VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier_1->name,classTable);
+				node->identifier_1->basetype = temp.type.baseType;
+				node->identifier_1->objectClassName = temp.type.objectClassName;
+			} else {
+				typeError(undefined_variable);
+			}
+		}
 		if(classTable->at(node->identifier_1->objectClassName).methods->count(node->identifier_2->name)!=0){
 			thisMethod = classTable->at(node->identifier_1->objectClassName).methods->at(node->identifier_2->name);
 			CompoundType temp = thisMethod.returnType;
@@ -469,15 +486,24 @@ void TypeCheck::visitMemberAccessNode(MemberAccessNode* node) {
 	//The first identifier should be a class instance
 	//The second identifier should be a member of that class
 	node->visit_children(this);
+	if(node->identifier_1->basetype == bt_none){
+		VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier_1->name,classTable);
+		node->identifier_1->basetype = temp.type.baseType;
+		node->identifier_1->objectClassName = temp.type.objectClassName;
+	}
 	if(node->identifier_1->basetype == bt_object){
 		if(classTable->at(node->identifier_1->objectClassName).members->count(node->identifier_2->name)!=0){
 			CompoundType temp = classTable->at(node->identifier_1->objectClassName).members->at(node->identifier_2->name).type;
 			node->basetype = temp.baseType;
 			node->objectClassName = temp.objectClassName;
 		} else {
-			VariableInfo temp = findMemberInClass(classTable->at(node->identifier_1->objectClassName).superClassName,node->identifier_2->name,classTable);
-			node->basetype = temp.type.baseType;
-			node->objectClassName = temp.type.objectClassName;
+			if(classTable->at(node->identifier_1->objectClassName).superClassName!=""){
+				VariableInfo temp = findMemberInClass(classTable->at(node->identifier_1->objectClassName).superClassName,node->identifier_2->name,classTable);
+				node->basetype = temp.type.baseType;
+				node->objectClassName = temp.type.objectClassName;
+			} else {
+				typeError(undefined_member);
+			}
 		}
 	} else {
 		typeError(not_object);
@@ -488,9 +514,13 @@ void TypeCheck::visitVariableNode(VariableNode* node) {
 	node->visit_children(this);
 	
 	if((node->basetype = node->identifier->basetype)==bt_none){
-		VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier->name,classTable,true);
-		node->basetype = temp.type.baseType;
-		node->objectClassName = temp.type.objectClassName;
+		if(currentClass->superClassName!=""){
+			VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier->name,classTable,true);
+			node->basetype = temp.type.baseType;
+			node->objectClassName = temp.type.objectClassName;
+		} else {
+			typeError(undefined_variable);
+		}
 	} else {
 		node->basetype = node->identifier->basetype;
 		node->objectClassName = node->identifier->objectClassName;
