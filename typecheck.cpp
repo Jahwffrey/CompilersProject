@@ -180,6 +180,7 @@ void TypeCheck::visitMethodNode(MethodNode* node) {
 
 void TypeCheck::visitMethodBodyNode(MethodBodyNode* node) {
 	node->visit_children(this);
+	if(node->returnstatement == NULL && currentMethod->returnType.baseType != bt_none) typeError(return_type_mismatch);
 }
 
 void TypeCheck::visitParameterNode(ParameterNode* node) {
