@@ -197,7 +197,7 @@ void TypeCheck::visitParameterNode(ParameterNode* node) {
 
 void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
 	for(std::list<IdentifierNode*>::iterator it = node->identifier_list->begin(); it!=node->identifier_list->end();it++){
- 		CompoundType* newParam = new CompoundType;
+		CompoundType* newParam = new CompoundType;
 		if((newParam->baseType = checkType(node->type)) == bt_object) newParam->objectClassName = ((ObjectTypeNode*) node->type)->identifier->name;
 		VariableInfo* newVar = new VariableInfo;
 		newVar->type = *newParam;
@@ -211,6 +211,10 @@ void TypeCheck::visitDeclarationNode(DeclarationNode* node) {
 		}
 		newVar->size = 4;
 		currentVariableTable->insert(std::pair<std::string,VariableInfo>((*it)->name,*newVar));
+		node->visit_children(this);
+		if(checkType(node->type) == bt_object && classTable->count(((ObjectTypeNode*) node->type)->objectClassName)==0){
+			typeError(undefined_class);
+		}
 	}
 }
 
@@ -552,6 +556,8 @@ void TypeCheck::visitBooleanTypeNode(BooleanTypeNode* node) {
 
 void TypeCheck::visitObjectTypeNode(ObjectTypeNode* node) {
 	node->visit_children(this);
+	node->basetype = bt_object;
+	node->objectClassName = node->identifier->name;
 }
 
 void TypeCheck::visitNoneNode(NoneNode* node) {
