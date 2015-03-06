@@ -1,17 +1,23 @@
 #include "codegeneration.hpp"
+#include <string>
+#define cout cout<<padstr
 using namespace std;
-
+std::string padstr = "";
 // CodeGenerator Visitor Functions: These are the functions
 // you will complete to generate the x86 assembly code. Not
 // all functions must have code, many may be left empty.
 
+
 void CodeGenerator::visitProgramNode(ProgramNode* node) {
-	
+	cout << "#-- BEGIN THE THING\n";	
 	node->visit_children(this);
 }
 
 void CodeGenerator::visitClassNode(ClassNode* node) {
+	std::string tempstr = padstr;
+	padstr+="   ";
 	node->visit_children(this);
+	padstr = tempstr;
 }
 
 void CodeGenerator::visitMethodNode(MethodNode* node) {
@@ -43,11 +49,14 @@ void CodeGenerator::visitCallNode(CallNode* node) {
 }
 
 void CodeGenerator::visitIfElseNode(IfElseNode* node) {
-	cout << "#-- Ifelsenode";
+	std::string tempstr = padstr;
+	padstr+="   ";
+	cout << "#-- Ifelsenode\n";
 	int tempLabel = nextLabel();
 	int tempLabel2 = nextLabel();
-	//Want to visit children in a specific order. First visit the expression, then t/f is on top of stack. If equal to true, jumpt to the true block. else continue into
-	//the false block and then skip past the true block
+	//Want to visit children in a specific order.
+	//First visit the expression, then t/f is on top of stack. 
+	//If equal to true, jumpt to the true block. else continue into the false block and then skip past the true block
 	node->expression->accept(this);
 	cout << "POP %EAX\n";
 	cout << "CMP %EAX,$1\n";
@@ -67,10 +76,33 @@ void CodeGenerator::visitIfElseNode(IfElseNode* node) {
     		}
 	}
 	cout << "label_" << tempLabel2 << ":\n";
+	padstr = tempstr;
 }
 
 void CodeGenerator::visitWhileNode(WhileNode* node) {
-	node->visit_children(this);
+	std::string tempstr = padstr;
+	padstr+="   ";
+	cout << "#-- Whilenode\n";
+	int tempLabel = nextLabel();
+	int tempLabel2 = nextLabel();
+	//Want to visit children in a specific order.
+	//First visit the expression, then t/f is on top of stack. 
+	//If false, skip everything
+	//At the end, jump back to top and repeat
+	cout << "label_" << tempLabel << ":\n";
+	node->expression->accept(this);
+	cout << "POP %EAX\n";
+	cout << "CMP %EAX,$0\n";
+	cout << "JE label_" << tempLabel2 << "\n";
+	if (node->statement_list) {
+		for(std::list<StatementNode*>::iterator iter = node->statement_list->begin();
+		iter != node->statement_list->end(); iter++) {
+			(*iter)->accept(this);
+    		}
+	}
+	cout << "JMP label_" << tempLabel << "\n";
+	cout << "label_" << tempLabel2 << ":\n";
+	padstr = tempstr;
 }
 
 void CodeGenerator::visitPrintNode(PrintNode* node) {
@@ -100,7 +132,6 @@ void CodeGenerator::visitTimesNode(TimesNode* node) {
 	node->visit_children(this);
 	cout << "POP %EBX\n";
 	cout << "POP %EAX\n";
-	cout << "CDQ\n";
 	cout << "IMUL %EBX\n";
 	cout << "PUSH %EAX\n";
 }
@@ -128,7 +159,7 @@ void CodeGenerator::visitLessNode(LessNode* node) {
 	cout << "JMP label_" << label2 << "\n";
 	cout << "label_" << label1 << ":\n";
 	cout << "PUSH $1\n";
-	cout << "label_" <<label2 << "\n";
+	cout << "label_" <<label2 << ":\n";
 }
 
 void CodeGenerator::visitLessEqualNode(LessEqualNode* node) {
@@ -144,7 +175,7 @@ void CodeGenerator::visitLessEqualNode(LessEqualNode* node) {
 	cout << "JMP label_" << label2 << "\n";
 	cout << "label_" << label1 << ":\n";
 	cout << "PUSH $1\n";
-	cout << "label_" <<label2 << "\n";
+	cout << "label_" <<label2 << ":\n";
 }
 
 void CodeGenerator::visitEqualNode(EqualNode* node) {
@@ -160,7 +191,7 @@ void CodeGenerator::visitEqualNode(EqualNode* node) {
 	cout << "JMP label_" << label2 << "\n";
 	cout << "label_" << label1 << ":\n";
 	cout << "PUSH $1\n";
-	cout << "label_" <<label2 << "\n";
+	cout << "label_" <<label2 << ":\n";
 }
 
 void CodeGenerator::visitAndNode(AndNode* node) {
