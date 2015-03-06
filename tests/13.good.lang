@@ -1,35 +1,26 @@
-class0 {
-    integer	member0
+classA {
 
-    f0(arg0 : integer, arg1 : boolean, arg2 : boolean) -> integer {
-        
-        print false
-        return 124 + 179
+       f0(x : integer) -> integer {
+           return x * x
+       }
 
-    }
+       doAll() -> none {
+       	   integer x, y
+	   x = 1
+	   y = 2
 
-    class0(arg0 : boolean, arg1 : integer, arg2 : integer) -> none {
-        integer local0
-        boolean local1
-        
-        print arg0 and false
-
-    }
-
+           print f0(5)
+	   print f0(6)
+	   print x + y
+       }
 
 }
 
 Main {
 
-
-    main() -> none {
-        boolean local0
-        class0 local1
-        
-        local0 = 217 equals 13
-
-    }
-
+     main() -> none {
+     	    classA a
+	    a.doAll()
+     }
 
 }
-

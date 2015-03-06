@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE
-from os import listdir, path
+from os import listdir, path, remove
+from sys import platform
 from functools import total_ordering
 
 @total_ordering
@@ -31,21 +32,42 @@ def runTests():
 
 	for f in files:
 		infile = open(f, 'r')
+		asm = f + ".s"
+		outfile = open(asm, 'w')
 
 		print("./lang < " + f + ":")
-		p = Popen(["./lang"], stdin=infile, stdout=PIPE, stderr=PIPE)
+		p = Popen(["./lang"], stdin=infile, stdout=outfile, stderr=PIPE)
 		(out, err) = p.communicate()
 
 		try:
-			if (out):
-				print(out.decode("utf-8"))
 			if (err):
 				if (len(err.decode("utf-8").strip().split("\n")) > 1):
 					print("Multiple errors produced.\n")
 				else:
 					print(err.decode("utf-8"))
-			elif (not out):
-				print("No output.\n")
+			else:
+				args = []
+				if (platform == "darwin"):
+					args = ["-Wl,-no_pie"]
+
+				p = Popen(["gcc"] + args + ["-m32", "-o" ,"tests/exec" ,"tester.c", asm], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+				(out, err) = p.communicate()
+
+				compiled = p.returncode
+				if (compiled == 0):
+					p = Popen(["tests/exec"], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+					(out, err) = p.communicate()
+
+					ran = p.returncode
+					if (ran == 0):
+						print("Output:")
+						print(out.decode("utf-8"))
+					else:
+						print("Exited with an error.\n")
+					remove("tests/exec")
+				else:
+					print("Assembling and linking failed.\n")
+
 		
 		except UnicodeDecodeError:
 			print("Invalid characters in output.\n")

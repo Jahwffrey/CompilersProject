@@ -1,42 +1,33 @@
-class0 {
+classA {
+     integer x
+     integer y
 
-
-    f0() -> integer {
-        boolean local0
-        integer local1
-        boolean local2
-        
-        return 132
-
-    }
-
-    f1(arg0 : integer) -> boolean {
-        integer local0
-        
-        return false
-
-    }
-
-    class0(arg0 : integer, arg1 : integer, arg2 : integer) -> none {
-        integer local0
-        
-
-    }
-
-
+     inc() -> none {
+         x = x * 2
+	 y = y + 1
+     }
 }
 
 Main {
 
+     main() -> none {
+     	    classA a
+	    integer i
 
-    main() -> none {
-        integer local0
-        boolean local1
-        
-        local1 = local1
+	    a = new classA
+	    a.x = 2
+	    a.y = 3
 
-    }
+	    print a.x
+	    print a.y
 
+	    i = 0
+	    while i < 5 {
+	        a.inc()
+		print a.x
+		print a.y
+		i = i + 1
+	    }
+     }
 
 }
-

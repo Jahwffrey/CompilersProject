@@ -1,16 +1,25 @@
 Main {
 
+     main() -> none {
+     	    integer i, x
+	    boolean cond
 
-    main() -> none {
-        boolean local0
-        boolean local1
-        
-        print 168
-        print not (false)
-        print 167
+	    i = 0
+	    x = 1
+	    cond = false
 
-    }
+	    while i <= 8 {
+	    	  cond = 0 < i - (i / 2) * 2
+		  i = i + 1
+		  if cond {
+		     x = x * 2
+		  } else {
+		     x = x + 1
+		  }
+		  print x
+	    }
+     	    
 
+     }    
 
 }
-

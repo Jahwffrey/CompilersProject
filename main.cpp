@@ -1,5 +1,6 @@
 #include "ast.hpp"
 #include "typecheck.hpp"
+#include "codegeneration.hpp"
 #include "parser.hpp"
 
 extern int yydebug;
@@ -19,7 +20,11 @@ int main(void) {
         astRoot->accept(typecheck);
         ClassTable* classTable = typecheck->classTable;
         if (classTable) {
-            print(*classTable);
+            // Uncomment the following line to print the class table after it is generated
+            //print(*classTable);
+            CodeGenerator* codegen = new CodeGenerator();
+            codegen->classTable = classTable;
+            astRoot->accept(codegen);
         }
     }
 
