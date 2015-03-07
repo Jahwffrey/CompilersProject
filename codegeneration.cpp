@@ -9,6 +9,7 @@ std::string padstr = "";
 
 
 void CodeGenerator::visitProgramNode(ProgramNode* node) {
+	cout << ".globl Main_main\n";
 	cout << "#-- BEGIN THE THING\n";	
 	node->visit_children(this);
 }
@@ -16,15 +17,35 @@ void CodeGenerator::visitProgramNode(ProgramNode* node) {
 void CodeGenerator::visitClassNode(ClassNode* node) {
 	std::string tempstr = padstr;
 	padstr+="   ";
+	currentClassName = node->identifier_1->name;
 	node->visit_children(this);
 	padstr = tempstr;
 }
 
 void CodeGenerator::visitMethodNode(MethodNode* node) {
+	currentMethodName = node->identifier->name;
+	cout << "#-- Methodnode\n";
+	std::string tempstr = padstr;
+	padstr+="   ";
+	//Label
+	cout << currentClassName << "_" << node->identifier->name <<":\n";
+	///#######PROLOGUE
+	cout << "PUSH %EBP\n";
+	cout << "MOV %ESP,%EBP\n";
+		//Allocate stack space for locals
+	cout << "SUB $" << classTable->at(currentClassName).methods->at(currentMethodName).localsSize <<",%ESP\n";
+	//Save callee saved registers?
+	cout << "PUSH %EBX\n";
 	node->visit_children(this);
+	///#######EPILOGUE
+	//Restore callee saved registers?
+	cout << "POP %EBX\n";
+	cout < "RET\n";
+	padstr = tempstr;
 }
 
 void CodeGenerator::visitMethodBodyNode(MethodBodyNode* node) {
+	cout << "#-- Methodbodynode\n";
 	node->visit_children(this);
 }
 
@@ -37,7 +58,10 @@ void CodeGenerator::visitDeclarationNode(DeclarationNode* node) {
 }
 
 void CodeGenerator::visitReturnStatementNode(ReturnStatementNode* node) {
+	cout << "#-- Returnstatementnode\n";
 	node->visit_children(this);
+	//Assuming that what we want to return is ontop of the stack
+	cout << "POP %EAX\n";
 }
 
 void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
@@ -49,59 +73,57 @@ void CodeGenerator::visitCallNode(CallNode* node) {
 }
 
 void CodeGenerator::visitIfElseNode(IfElseNode* node) {
+	cout << "#-- Ifelsenode\n";
 	std::string tempstr = padstr;
 	padstr+="   ";
-	cout << "#-- Ifelsenode\n";
 	int tempLabel = nextLabel();
-	int tempLabel2 = nextLabel();
 	//Want to visit children in a specific order.
 	//First visit the expression, then t/f is on top of stack. 
 	//If equal to true, jumpt to the true block. else continue into the false block and then skip past the true block
 	node->expression->accept(this);
 	cout << "POP %EAX\n";
 	cout << "CMP %EAX,$1\n";
-	cout << "JE label_" << tempLabel << "\n";
+	cout << "JE trueblock_" << tempLabel << "\n";
 	if (node->statement_list_2) {
 		for(std::list<StatementNode*>::iterator iter = node->statement_list_2->begin();
 		iter != node->statement_list_2->end(); iter++) {
 			(*iter)->accept(this);
     		}
 	}
-	cout << "JMP label_" << tempLabel2 << "\n";
-	cout << "label_" << tempLabel << ":\n";
+	cout << "JMP endofif_" << tempLabel << "\n";
+	cout << "trueblock_" << tempLabel << ":\n";
 	if (node->statement_list_1) {
 		for(std::list<StatementNode*>::iterator iter = node->statement_list_1->begin();
 		iter != node->statement_list_1->end(); iter++) {
 			(*iter)->accept(this);
     		}
 	}
-	cout << "label_" << tempLabel2 << ":\n";
+	cout << "endofif_" << tempLabel << ":\n";
 	padstr = tempstr;
 }
 
 void CodeGenerator::visitWhileNode(WhileNode* node) {
+	cout << "#-- Whilenode\n";
 	std::string tempstr = padstr;
 	padstr+="   ";
-	cout << "#-- Whilenode\n";
 	int tempLabel = nextLabel();
-	int tempLabel2 = nextLabel();
 	//Want to visit children in a specific order.
 	//First visit the expression, then t/f is on top of stack. 
 	//If false, skip everything
 	//At the end, jump back to top and repeat
-	cout << "label_" << tempLabel << ":\n";
+	cout << "beginofwhile_" << tempLabel << ":\n";
 	node->expression->accept(this);
 	cout << "POP %EAX\n";
 	cout << "CMP %EAX,$0\n";
-	cout << "JE label_" << tempLabel2 << "\n";
+	cout << "JE outofwhile_" << tempLabel << "\n";
 	if (node->statement_list) {
 		for(std::list<StatementNode*>::iterator iter = node->statement_list->begin();
 		iter != node->statement_list->end(); iter++) {
 			(*iter)->accept(this);
     		}
 	}
-	cout << "JMP label_" << tempLabel << "\n";
-	cout << "label_" << tempLabel2 << ":\n";
+	cout << "JMP beginofwhile_" << tempLabel << "\n";
+	cout << "outofwhile_" << tempLabel << ":\n";
 	padstr = tempstr;
 }
 
@@ -149,49 +171,46 @@ void CodeGenerator::visitDivideNode(DivideNode* node) {
 void CodeGenerator::visitLessNode(LessNode* node) {
 	cout << "#-- Lessnode\n";
 	node->visit_children(this);
-	int label1 = nextLabel();
-	int label2 = nextLabel();
+	int label = nextLabel();
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
 	cout << "CMP %EAX,%EDX\n";
-	cout << "JL label_" << label1 << "\n";
+	cout << "JL pushtrueless_" << label << "\n";
 	cout << "PUSH $0" << "\n";
-	cout << "JMP label_" << label2 << "\n";
-	cout << "label_" << label1 << ":\n";
+	cout << "JMP afterless_" << label << "\n";
+	cout << "pushtrueless_" << label << ":\n";
 	cout << "PUSH $1\n";
-	cout << "label_" <<label2 << ":\n";
+	cout << "afterless_" <<label << ":\n";
 }
 
 void CodeGenerator::visitLessEqualNode(LessEqualNode* node) {
 	cout << "#-- Lessequalnode\n";
 	node->visit_children(this);
-	int label1 = nextLabel();
-	int label2 = nextLabel();
+	int label = nextLabel();
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
 	cout << "CMP %EAX,%EDX\n";
-	cout << "JEL label_" << label1 << "\n";
+	cout << "JEL pushtruelesseq_" << label << "\n";
 	cout << "PUSH $0\n";
-	cout << "JMP label_" << label2 << "\n";
-	cout << "label_" << label1 << ":\n";
+	cout << "JMP afterlesseq_" << label << "\n";
+	cout << "pushtruelesseq_" << label << ":\n";
 	cout << "PUSH $1\n";
-	cout << "label_" <<label2 << ":\n";
+	cout << "afterlesseq_" <<label << ":\n";
 }
 
 void CodeGenerator::visitEqualNode(EqualNode* node) {
 	cout << "#-- Equalnode\n";
 	node->visit_children(this);
-	int label1 = nextLabel();
-	int label2 = nextLabel();
+	int label = nextLabel();
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
 	cout << "CMP %EAX,%EDX\n";
-	cout << "JZ label_" << label1 << "\n";
+	cout << "JZ pushtrueeq_" << label << "\n";
 	cout << "PUSH $0" << "\n";
-	cout << "JMP label_" << label2 << "\n";
-	cout << "label_" << label1 << ":\n";
+	cout << "JMP aftereqblock_" << label << "\n";
+	cout << "pushtrueeq_" << label << ":\n";
 	cout << "PUSH $1\n";
-	cout << "label_" <<label2 << ":\n";
+	cout << "aftereqblock_" <<label << ":\n";
 }
 
 void CodeGenerator::visitAndNode(AndNode* node) {
@@ -228,7 +247,37 @@ void CodeGenerator::visitNegationNode(NegationNode* node) {
 }
 
 void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
-	node->visit_children(this);
+	cout << "#-- Methodcall\n";
+	std::string tempstr = padstr;
+	padstr+="   ";
+	///##########PRE-CALL
+	//Save caller-saved registers
+	cout << "PUSH %EAX\n";
+	cout << "PUSH %ECX\n";
+	cout << "PUSH %EDX\n";
+	//push args in reverse	
+	if (node->expression_list) {
+		for(std::list<ExpressionNode*>::reverse_iterator iter = node->expression_list->rbegin();
+		iter != node->expression_list->rend(); iter++) {
+			(*iter)->accept(this);
+    		}
+	}
+	//Jump to fxn
+	if(node->identifier_2 == NULL){
+		cout << "CALL " << currentClassName << "_" << node->identifier_1->name << "\n";
+	} else {
+		cout << "CALL "<<node->identifier_1->objectClassName << "_" << node->identifier_2->name << "\n";
+	}
+	///##########POST-RETURN
+	//caster caller-saved registers
+	cout << "POP %EDX\n";
+	cout << "POP %ECX\n";
+	cout << "POP %EBX\n";
+	//Push return value to stack
+	cout << "PUSH %EAX\n";
+		//Finish restore, EBX has been lost
+	cout << "MOV %EBX,%EAX\n";
+	padstr = tempstr;
 }
 
 void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
