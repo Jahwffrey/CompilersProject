@@ -36,11 +36,15 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
 	cout << "SUB $" << classTable->at(currentClassName).methods->at(currentMethodName).localsSize <<",%ESP\n";
 	//Save callee saved registers?
 	cout << "PUSH %EBX\n";
+	cout << "PUSH %ESI\n";
+	cout << "PUSH %EDI\n";
 	node->visit_children(this);
 	///#######EPILOGUE
 	//Restore callee saved registers?
+	cout << "POP %EDI\n";
+	cout << "POP %ESI\n";
 	cout << "POP %EBX\n";
-	cout < "RET\n";
+	cout << "RET\n";
 	padstr = tempstr;
 }
 
@@ -272,11 +276,10 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 	//caster caller-saved registers
 	cout << "POP %EDX\n";
 	cout << "POP %ECX\n";
-	cout << "POP %EBX\n";
-	//Push return value to stack
-	cout << "PUSH %EAX\n";
-		//Finish restore, EBX has been lost
-	cout << "MOV %EBX,%EAX\n";
+	//Switch top of stack (return value) EAX
+	cout << "XOR %ESP,%EAX\n";
+	cout << "XOR %EAX,%ESP\n";
+	cout << "XOR %ESP,%EAX\n";
 	padstr = tempstr;
 }
 

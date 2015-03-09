@@ -59,6 +59,8 @@ void typeError(TypeErrorCode code) {
   exit(1);
 }
 
+int inheritOffset;
+
 // TypeCheck Visitor Functions: These are the functions you will
 // complete to build the symbol table and type check the program.
 // Not all functions must have code, many may be left empty.
@@ -129,6 +131,22 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 	}
 }
 
+void insertParentMembers(ClassInfo thisClass,std::string currentParentName,VariableTable* varTable,ClassTable* table){
+	//Recurse if not at top parent
+	if(table->at(currentParentName).superClassName!="") insertParentMembers(thisClass,table->at(currentParentName).superClassName,varTable,table);
+	if(table->at(currentParentName).members->size()!=0){
+		std::map<std::string, VariableInfo>::iterator it = table->at(currentParentName).members->begin();	
+		while(it != table->at(currentParentName).members->end()){
+			if(varTable->count(it->first)==0){
+				inheritOffset-=4;
+				varTable->insert(std::pair<std::string,VariableInfo>(it->first,it->second));
+				varTable->at(it->first).offset = inheritOffset;
+			}
+			it++;
+		}
+	}
+}
+
 void TypeCheck::visitClassNode(ClassNode* node) {
   	currentMemberOffset = 0;
 	ClassInfo* newInfo = new ClassInfo;
@@ -143,6 +161,14 @@ void TypeCheck::visitClassNode(ClassNode* node) {
 	newInfo->membersSize = node->declaration_list->size()*4;
 	classTable->insert(std::pair<std::string,ClassInfo>(node->identifier_1->name,*newInfo));
 	node->visit_children(this);
+	//Modify symbol table to include parent members
+	if(node->identifier_1->name!="Main"){
+		inheritOffset = 0;
+		VariableTable* betterVarTable = new VariableTable;
+		insertParentMembers(classTable->at(node->identifier_1->name),node->identifier_1->name,betterVarTable,classTable);
+		classTable->at(node->identifier_1->name).membersSize = classTable->at(node->identifier_1->name).members->size()*4;
+		classTable->at(node->identifier_1->name).members = betterVarTable;
+	}
 	//Check that constructor returns none
 	if(newInfo->methods!=NULL 
 	&& newInfo->methods->count(node->identifier_1->name)!=0 
