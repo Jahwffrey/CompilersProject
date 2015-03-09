@@ -9,6 +9,9 @@ std::string padstr = "";
 
 
 void CodeGenerator::visitProgramNode(ProgramNode* node) {
+	cout << ".data\n";
+	cout << "printstr: .asciz \"%d\\n\"\n";
+	cout << ".text\n";
 	cout << ".globl Main_main\n";
 	cout << "#-- BEGIN THE THING\n";	
 	node->visit_children(this);
@@ -69,6 +72,7 @@ void CodeGenerator::visitReturnStatementNode(ReturnStatementNode* node) {
 }
 
 void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
+	cout << "#-- Assignmentnode\n";
 	node->visit_children(this);
 }
 
@@ -287,8 +291,31 @@ void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
 	node->visit_children(this);
 }
 
+VariableInfo findVariable(std::string varName){
+	//NOT CHECKING FOR PARAMETERS!?
+	
+}
+
 void CodeGenerator::visitVariableNode(VariableNode* node) {
+	cout << "#-- Variablenode\n";
+	//First check for parameter
+	//Then check for locals
+	//Then check for members
 	node->visit_children(this);
+	//Params:
+	if(false){
+
+	}else if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier->name)!=0){
+	//Locals:
+		int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier->name).offset;
+		cout << "PUSH "<< var << "(%EBP)\n";
+	} else {
+	//Members:
+		int var = classTable->at(currentClassName).members->at(node->identifier->name).offset;
+		//This isnt right. I need to derefernce the this pointer!	
+		//cout << "PUSH "<< var.offset << "(%EBP)\n";
+	}
+	
 }
 
 void CodeGenerator::visitIntegerLiteralNode(IntegerLiteralNode* node) {
