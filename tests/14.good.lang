@@ -2,7 +2,8 @@ classA {
 
        f0(x : integer, y : boolean) -> integer {
        	    integer val
-
+		
+		print y
        	    if y {
 	       val = x * x
 	    } else {

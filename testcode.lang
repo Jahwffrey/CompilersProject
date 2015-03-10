@@ -1,0 +1,15 @@
+classA{
+	f0(x:integer) -> none {
+	}
+	
+	f1() -> none {
+		f0(5)
+		f0(6)
+	}
+}
+Main{
+	main() -> none {
+		classA a
+		a.f1()
+	}
+}

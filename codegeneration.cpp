@@ -201,7 +201,7 @@ void CodeGenerator::visitTimesNode(TimesNode* node) {
 	node->visit_children(this);
 	cout << "POP %EBX\n";
 	cout << "POP %EAX\n";
-	cout << "IMUL %EBX\n";
+	cout << "IMUL %EBX,%EAX\n";
 	cout << "PUSH %EAX\n";
 }
 
@@ -221,7 +221,7 @@ void CodeGenerator::visitLessNode(LessNode* node) {
 	int label = nextLabel();
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
-	cout << "CMP %EAX,%EDX\n";
+	cout << "CMP %EDX,%EAX\n";
 	cout << "JL pushtrueless_" << label << "\n";
 	cout << "PUSH $0" << "\n";
 	cout << "JMP afterless_" << label << "\n";
@@ -236,7 +236,7 @@ void CodeGenerator::visitLessEqualNode(LessEqualNode* node) {
 	int label = nextLabel();
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
-	cout << "CMP %EAX,%EDX\n";
+	cout << "CMP %EDX,%EAX\n";
 	cout << "JLE pushtruelesseq_" << label << "\n";
 	cout << "PUSH $0\n";
 	cout << "JMP afterlesseq_" << label << "\n";
@@ -312,7 +312,7 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 	//Jump to fxn
 	if(node->identifier_2 == NULL){
 		//Push self pointer
-		cout << "PUSH 8(%EBX)\n";
+		cout << "PUSH 8(%EBP)\n";
 		std::string callClass = currentClassName;
 		while(classTable->at(callClass).methods->count(node->identifier_1->name)==0){
 			callClass = classTable->at(callClass).superClassName;
@@ -337,13 +337,18 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 		cout << "CALL " << callClass  << "_" << node->identifier_2->name << "\n";
 	}
 	///##########POST-RETURN
-	//caster caller-saved registers
+	//Deallocate params
+	cout << "ADD $4,%ESP\n";
+	if(node->expression_list!=NULL){
+		cout << "ADD $" << node->expression_list->size()*4 << ",%ESP\n";
+	}
+	//restore caller-saved registers
 	cout << "POP %EDX\n";
 	cout << "POP %ECX\n";
 	//Switch top of stack (return value) EAX
-	cout << "XOR %ESP,%EAX\n";
-	cout << "XOR %EAX,%ESP\n";
-	cout << "XOR %ESP,%EAX\n";
+	cout << "POP %EBX\n";
+	cout << "PUSH %EAX\n";
+	cout << "MOV %EBX,%EAX\n";
 	padstr = tempstr;
 }
 
