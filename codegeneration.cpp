@@ -82,9 +82,28 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 	cout << "# -- Assignmentnode\n";
 	node->visit_children(this);
 	if(node->identifier_2==NULL){
-		//Uses self pointer!
+		if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier_1->name)!=0){
+		//Locals:
+			int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).offset;
+			cout << "POP "<< var << "(%EBP)\n";
+		} else {
+			//Members:
+			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			//Uses self pointer!
+		}
 	} else {
-		//Uses self pointer!				
+		if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier_1->name)!=0){
+		//Locals to the class:
+			int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).offset;
+			std::string className = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).type.objectClassName;
+			cout << "MOV "<< var << "(%EBP),%EAX\n";
+			int classesVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+			cout << "POP " << classesVar << "(%EAX)\n";
+		} else {
+			//Members:
+			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			//Uses self pointer!
+		}
 	}
 }
 
