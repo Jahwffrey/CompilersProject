@@ -263,7 +263,12 @@ void TypeCheck::visitAssignmentNode(AssignmentNode* node) {
 	node->visit_children(this);
 	if(node->identifier_2==NULL){
 		if(node->identifier_1->basetype == bt_none){
-			typeError(undefined_variable);
+			if(currentClass->superClassName == ""){
+				typeError(undefined_variable);
+			}
+			VariableInfo temp = findMemberInClass(currentClass->superClassName,node->identifier_1->name,classTable,true);
+			node->basetype = temp.type.baseType;
+			node->objectClassName = temp.type.objectClassName;
 		} else {
 			node->basetype = node->identifier_1->basetype;
 			node->objectClassName = node->identifier_1->objectClassName;
