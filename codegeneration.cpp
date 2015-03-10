@@ -381,8 +381,31 @@ void CodeGenerator::visitNewNode(NewNode* node) {
 	cout << "ADD $4,%ESP\n";
 	cout << "PUSH %EAX\n";
 
-	//if it has a constructor, call it, expecting that the params are ontop of the stack
-	//Uses self pointer?	
+	if(classTable->at(node->identifier->name).methods->count(node->identifier->name)!=0){
+	
+		//Save caller-saved registers
+		cout << "PUSH %EAX\n";
+		cout << "PUSH %ECX\n";
+		cout << "PUSH %EDX\n";
+		//push args in reverse	
+		if (node->expression_list) {
+			for(std::list<ExpressionNode*>::reverse_iterator iter = node->expression_list->rbegin();
+			iter != node->expression_list->rend(); iter++) {
+				(*iter)->accept(this);
+    			}
+		}
+
+		cout << "CALL " << node->identifier->name << "_" << node->identifier->name << "\n";
+	
+		//restore caller-saved registers
+		cout << "POP %EDX\n";
+		cout << "POP %ECX\n";
+		//Switch top of stack (return value) EAX
+		cout << "XOR %ESP,%EAX\n";
+		cout << "XOR %EAX,%ESP\n";
+		cout << "XOR %ESP,%EAX\n";
+
+	}
 }
 
 void CodeGenerator::visitIntegerTypeNode(IntegerTypeNode* node) {
