@@ -397,6 +397,7 @@ void CodeGenerator::visitIntegerLiteralNode(IntegerLiteralNode* node) {
 
 void CodeGenerator::visitBooleanLiteralNode(BooleanLiteralNode* node) {
 	node->visit_children(this);
+	cout << "PUSH $" << node->integer->value << "\n";
 }
 
 void CodeGenerator::visitNewNode(NewNode* node) {
@@ -437,11 +438,10 @@ void CodeGenerator::visitNewNode(NewNode* node) {
 		cout << "ADD $4,%ESP\n";
 		cout << "POP %EDX\n";
 		cout << "POP %ECX\n";
-		//Switch top of stack (return value) EAX
-		cout << "XOR %ESP,%EAX\n";
-		cout << "XOR %EAX,%ESP\n";
-		cout << "XOR %ESP,%EAX\n";
-
+		//Switch %EAX with top of stack
+		cout << "POP %EBX\n";
+		cout << "PUSH %EAX\n";
+		cout << "MOV %EBX,%EAX\n";	
 	}
 }
 

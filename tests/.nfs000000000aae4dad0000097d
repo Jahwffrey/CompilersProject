@@ -1,0 +1,144 @@
+.data
+printstr: .asciz "%d\n"
+.text
+.globl Main_main
+# -- BEGIN THE THING
+   # -- Methodnode
+      classA_f0:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $4,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Ifelsenode
+         # -- Variablenode
+         PUSH 16(%EBP)
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_0
+         # -- Assignmentnode
+         # -- Dividenode
+         # -- Variablenode
+         PUSH 12(%EBP)
+         PUSH $2
+         POP %EBX
+         POP %EAX
+         CDQ
+         IDIV %EBX
+         PUSH %EAX
+         POP -4(%EBP)
+         JMP endofif_0
+         trueblock_0:
+         # -- Assignmentnode
+         # -- Timesnode
+         # -- Variablenode
+         PUSH 12(%EBP)
+         # -- Variablenode
+         PUSH 12(%EBP)
+         POP %EBX
+         POP %EAX
+         IMUL %EBX,%EAX
+         PUSH %EAX
+         POP -4(%EBP)
+         endofif_0:
+      # -- Returnstatementnode
+      # -- Variablenode
+      PUSH -4(%EBP)
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $4,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      classA_doAll:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $0,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Printnode
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         PUSH $1
+         PUSH $5
+         PUSH 8(%EBP)
+         CALL classA_f0
+         ADD $4,%ESP
+         ADD $8,%ESP
+         POP %EDX
+         POP %ECX
+         POP %EBX
+         PUSH %EAX
+         MOV %EBX,%EAX
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Printnode
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         PUSH $0
+         PUSH $6
+         PUSH 8(%EBP)
+         CALL classA_f0
+         ADD $4,%ESP
+         ADD $8,%ESP
+         POP %EDX
+         POP %ECX
+         POP %EBX
+         PUSH %EAX
+         MOV %EBX,%EAX
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      MOV %EBP,%ESP
+      SUB $0,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      Main_main:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $4,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         PUSH -4(%EBP)
+         CALL classA_doAll
+         ADD $4,%ESP
+         POP %EDX
+         POP %ECX
+         POP %EBX
+         PUSH %EAX
+         MOV %EBX,%EAX
+      MOV %EBP,%ESP
+      SUB $4,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
