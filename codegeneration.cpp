@@ -87,7 +87,9 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 			cout << "POP "<< var << "(%EBP)\n";
 		} else {
 			//Members:
-			//Uses self pointer!
+			cout << "MOV 8(%EBP),%EAX\n";
+			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			cout << "POP " << var << "(%EAX)\n";
 		}
 	} else {
 		if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier_1->name)!=0){
@@ -99,7 +101,12 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 			cout << "POP " << classesVar << "(%EAX)\n";
 		} else {
 			//Members:
-			//Uses self pointer!
+			cout << "MOV 8(%EBP),%EAX\n";
+			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			cout << "MOV " << var << "(%EAX),%EBX\n";
+			std::string className = classTable->at(currentClassName).members->at(node->identifier_1->name).type.objectClassName;
+			int memberMemberVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+			cout << "POP "<< memberMemberVar << "(%EBX)\n";
 		}
 	}
 }
@@ -305,13 +312,24 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 	//Jump to fxn
 	if(node->identifier_2 == NULL){
 		//Push self pointer
+		cout << "PUSH 8(%EBX)\n";
 		std::string callClass = currentClassName;
 		while(classTable->at(callClass).methods->count(node->identifier_1->name)==0){
 			callClass = classTable->at(callClass).superClassName;
 		}
 		cout << "CALL " << callClass << "_" << node->identifier_1->name << "\n";
 	} else {
-		//Push self pointer
+		///////Push self pointer
+		if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier_1->name)!=0){
+			//Locals:
+			int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).offset;
+			cout << "PUSH "<< var << "(%EBP)\n";
+		} else {
+			//Members:
+			cout << "MOV 8(%EBP),%EAX\n";
+			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			cout << "PUSH " << var << "(%EAX)\n";
+		}
 		std::string callClass = node->identifier_1->objectClassName;
 		while(classTable->at(callClass).methods->count(node->identifier_2->name)==0){
 			callClass = classTable->at(callClass).superClassName;
@@ -341,7 +359,12 @@ void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
 		cout << "PUSH " << classesVar << "(%EAX)\n";
 	} else {
 	//Members:
-		//Uses self pointer	
+		cout << "MOV 8(%EBP),%EAX\n";
+		int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+		cout << "MOV " << var << "(%EAX),%EBX\n";
+		std::string className = classTable->at(currentClassName).members->at(node->identifier_1->name).type.objectClassName;
+		int memberMemberVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+		cout << "PUSH "<< memberMemberVar << "(%EBX)\n";	
 	}
 }
 
@@ -355,7 +378,9 @@ void CodeGenerator::visitVariableNode(VariableNode* node) {
 		cout << "PUSH "<< var << "(%EBP)\n";
 	} else {
 	//Members:
-		//Uses self pointer
+		cout << "MOV 8(%EBP),%EAX\n";
+		int var = classTable->at(currentClassName).members->at(node->identifier->name).offset;
+		cout << "PUSH "<< var << "(%EAX)\n";		
 	}
 	
 }
@@ -380,6 +405,9 @@ void CodeGenerator::visitNewNode(NewNode* node) {
 	cout << "CALL malloc\n";
 	cout << "ADD $4,%ESP\n";
 	cout << "PUSH %EAX\n";
+	
+	//Save self in C, NOW MUST NEVER USE C IN EXPRESSIONS
+	cout << "MOV %EAX,%ECX\n";
 
 	if(classTable->at(node->identifier->name).methods->count(node->identifier->name)!=0){
 	
@@ -395,9 +423,13 @@ void CodeGenerator::visitNewNode(NewNode* node) {
     			}
 		}
 
+		//Push self pointer, saved in ECX
+		cout << "PUSH %ECX\n";
+
 		cout << "CALL " << node->identifier->name << "_" << node->identifier->name << "\n";
 	
 		//restore caller-saved registers
+		cout << "ADD $4,%ESP\n";
 		cout << "POP %EDX\n";
 		cout << "POP %ECX\n";
 		//Switch top of stack (return value) EAX

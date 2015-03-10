@@ -1,0 +1,4437 @@
+.data
+printstr: .asciz "%d\n"
+.text
+.globl Main_main
+# -- BEGIN THE THING
+   # -- Methodnode
+      class0_f0:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $24,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Minusnode
+      PUSH $99
+      PUSH $237
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      POP -24(%EBP)
+      # -- Assignmentnode
+      PUSH $122
+      POP -20(%EBP)
+      # -- Assignmentnode
+      # -- Negationnode
+      PUSH $190
+      NEG %ESP
+      POP -8(%EBP)
+      # -- Assignmentnode
+      # -- Timesnode
+      PUSH $228
+      PUSH $44
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Andnode
+      # -- Equalnode
+      PUSH $192
+      PUSH $148
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JZ pushtrueeq_0
+      PUSH $0
+      JMP aftereqblock_0
+      pushtrueeq_0:
+      PUSH $1
+      aftereqblock_0:
+      POP %EDX
+      POP %EAX
+      AND %EDX,%EAX
+      PUSH %EAX
+      POP -16(%EBP)
+      # -- Assignmentnode
+      POP -12(%EBP)
+      # -- Ifelsenode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_1
+         JMP endofif_1
+         trueblock_1:
+         # -- Assignmentnode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         POP -16(%EBP)
+         # -- Printnode
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         endofif_1:
+      # -- Assignmentnode
+      PUSH $135
+      POP -8(%EBP)
+      # -- Returnstatementnode
+      # -- Variablenode
+      PUSH 12(%EBP)
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $24,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class0_f1:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $20,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      PUSH $169
+      POP -8(%EBP)
+      # -- Assignmentnode
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH 12(%EBP)
+      POP -8(%EBP)
+      # -- Assignmentnode
+      # -- Negationnode
+      PUSH $63
+      NEG %ESP
+      POP -12(%EBP)
+      # -- Whilenode
+         beginofwhile_2:
+         # -- Lessnode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         PUSH $112
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JL pushtrueless_3
+         PUSH $0
+         JMP afterless_3
+         pushtrueless_3:
+         PUSH $1
+         afterless_3:
+         POP %EAX
+         CMP $0,%EAX
+         JE outofwhile_2
+         # -- Assignmentnode
+         # -- Addnode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         PUSH $7
+         POP %EDX
+         POP %EAX
+         ADD %EDX,%EAX
+         PUSH %EAX
+         POP -12(%EBP)
+         # -- Assignmentnode
+         PUSH $41
+         POP -16(%EBP)
+         # -- Whilenode
+            beginofwhile_4:
+            # -- Lessequalnode
+            # -- Variablenode
+            PUSH -16(%EBP)
+            PUSH $6602
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JLE pushtruelesseq_5
+            PUSH $0
+            JMP afterlesseq_5
+            pushtruelesseq_5:
+            PUSH $1
+            afterlesseq_5:
+            POP %EAX
+            CMP $0,%EAX
+            JE outofwhile_4
+            # -- Assignmentnode
+            # -- Timesnode
+            # -- Variablenode
+            PUSH -16(%EBP)
+            PUSH $3
+            POP %EBX
+            POP %EAX
+            IMUL %EBX
+            PUSH %EAX
+            POP -16(%EBP)
+            # -- Assignmentnode
+            # -- Negationnode
+            PUSH $9
+            NEG %ESP
+            POP -20(%EBP)
+            # -- Whilenode
+               beginofwhile_6:
+               # -- Lessnode
+               # -- Negationnode
+               PUSH $99
+               NEG %ESP
+               # -- Variablenode
+               PUSH -20(%EBP)
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JL pushtrueless_7
+               PUSH $0
+               JMP afterless_7
+               pushtrueless_7:
+               PUSH $1
+               afterless_7:
+               POP %EAX
+               CMP $0,%EAX
+               JE outofwhile_6
+               # -- Assignmentnode
+               # -- Addnode
+               # -- Variablenode
+               PUSH -20(%EBP)
+               # -- Negationnode
+               PUSH $10
+               NEG %ESP
+               POP %EDX
+               POP %EAX
+               ADD %EDX,%EAX
+               PUSH %EAX
+               POP -20(%EBP)
+               # -- Printnode
+               # -- Variablenode
+               PUSH 20(%EBP)
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               # -- Assignmentnode
+               PUSH $198
+               POP -8(%EBP)
+               JMP beginofwhile_6
+               outofwhile_6:
+            # -- Ifelsenode
+               POP %EAX
+               CMP $1,%EAX
+               JE trueblock_8
+               JMP endofif_8
+               trueblock_8:
+               # -- Printnode
+               # -- Minusnode
+               PUSH $54
+               # -- Variablenode
+               PUSH -8(%EBP)
+               POP %EDX
+               POP %EAX
+               SUB %EDX,%EAX
+               PUSH %EAX
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               endofif_8:
+            JMP beginofwhile_4
+            outofwhile_4:
+         # -- Printnode
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         # -- Printnode
+         # -- Variablenode
+         PUSH 16(%EBP)
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         JMP beginofwhile_2
+         outofwhile_2:
+      # -- Assignmentnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -12(%EAX)
+      POP -8(%EBP)
+      MOV %EBP,%ESP
+      SUB $20,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class0_f2:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $24,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      PUSH $125
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $2
+      POP -4(%EBP)
+      # -- Assignmentnode
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Negationnode
+      PUSH $251
+      NEG %ESP
+      POP -12(%EBP)
+      # -- Printnode
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Ifelsenode
+         # -- Andnode
+         # -- Lessequalnode
+         # -- Variablenode
+         PUSH 20(%EBP)
+         PUSH $1
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JLE pushtruelesseq_10
+         PUSH $0
+         JMP afterlesseq_10
+         pushtruelesseq_10:
+         PUSH $1
+         afterlesseq_10:
+         POP %EDX
+         POP %EAX
+         AND %EDX,%EAX
+         PUSH %EAX
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_9
+         JMP endofif_9
+         trueblock_9:
+         # -- Assignmentnode
+         PUSH $219
+         POP -8(%EBP)
+         # -- Assignmentnode
+         PUSH $2560
+         POP -20(%EBP)
+         # -- Whilenode
+            beginofwhile_11:
+            # -- Lessnode
+            PUSH $80
+            # -- Variablenode
+            PUSH -20(%EBP)
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JL pushtrueless_12
+            PUSH $0
+            JMP afterless_12
+            pushtrueless_12:
+            PUSH $1
+            afterless_12:
+            POP %EAX
+            CMP $0,%EAX
+            JE outofwhile_11
+            # -- Assignmentnode
+            # -- Dividenode
+            # -- Variablenode
+            PUSH -20(%EBP)
+            PUSH $2
+            POP %EBX
+            POP %EAX
+            CDQ
+            IDIV %EBX
+            PUSH %EAX
+            POP -20(%EBP)
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               PUSH $21
+               # -- Variablenode
+               PUSH 20(%EBP)
+               PUSH 8(%EBX)
+               CALL class0_f1
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            # -- Printnode
+            # -- Addnode
+            # -- Variablenode
+            PUSH 12(%EBP)
+            # -- Variablenode
+            PUSH -8(%EBP)
+            POP %EDX
+            POP %EAX
+            ADD %EDX,%EAX
+            PUSH %EAX
+            PUSH $printstr
+            CALL printf
+            ADD $4,%ESP
+            # -- Assignmentnode
+            # -- Negationnode
+            PUSH $68
+            NEG %ESP
+            POP -24(%EBP)
+            # -- Whilenode
+               beginofwhile_13:
+               # -- Lessnode
+               # -- Variablenode
+               PUSH -24(%EBP)
+               PUSH $60
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JL pushtrueless_14
+               PUSH $0
+               JMP afterless_14
+               pushtrueless_14:
+               PUSH $1
+               afterless_14:
+               POP %EAX
+               CMP $0,%EAX
+               JE outofwhile_13
+               # -- Assignmentnode
+               # -- Timesnode
+               # -- Variablenode
+               PUSH -24(%EBP)
+               PUSH $2
+               POP %EBX
+               POP %EAX
+               IMUL %EBX
+               PUSH %EAX
+               POP -24(%EBP)
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  # -- Variablenode
+                  PUSH -16(%EBP)
+                  # -- Variablenode
+                  PUSH -4(%EBP)
+                  PUSH $144
+                  PUSH 8(%EBX)
+                  CALL class0_f1
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               JMP beginofwhile_13
+               outofwhile_13:
+            JMP beginofwhile_11
+            outofwhile_11:
+         endofif_9:
+      # -- Assignmentnode
+      # -- Dividenode
+      # -- Variablenode
+      PUSH 12(%EBP)
+      PUSH $74
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      POP -8(%EBP)
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         # -- Timesnode
+         PUSH $184
+         # -- Variablenode
+         PUSH -4(%EBP)
+         POP %EBX
+         POP %EAX
+         IMUL %EBX
+         PUSH %EAX
+         # -- Variablenode
+         PUSH -4(%EBP)
+         PUSH 8(%EBX)
+         CALL class0_f1
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Returnstatementnode
+      # -- Addnode
+      PUSH $132
+      # -- Negationnode
+      PUSH $11
+      NEG %ESP
+      POP %EDX
+      POP %EAX
+      ADD %EDX,%EAX
+      PUSH %EAX
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $24,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class0_f3:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $36,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      PUSH $130
+      POP -4(%EBP)
+      # -- Ifelsenode
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -4(%EAX)
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_15
+         # -- Printnode
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -12(%EAX)
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         # -- Ifelsenode
+            POP %EAX
+            CMP $1,%EAX
+            JE trueblock_16
+            JMP endofif_16
+            trueblock_16:
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               # -- Variablenode
+               PUSH -4(%EBP)
+               PUSH $169
+               PUSH 8(%EBX)
+               CALL class0_f1
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            # -- Assignmentnode
+            PUSH $22
+            POP -16(%EBP)
+            # -- Whilenode
+               beginofwhile_17:
+               # -- Lessequalnode
+               # -- Variablenode
+               PUSH -16(%EBP)
+               PUSH $122
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JLE pushtruelesseq_18
+               PUSH $0
+               JMP afterlesseq_18
+               pushtruelesseq_18:
+               PUSH $1
+               afterlesseq_18:
+               POP %EAX
+               CMP $0,%EAX
+               JE outofwhile_17
+               # -- Assignmentnode
+               # -- Minusnode
+               # -- Variablenode
+               PUSH -16(%EBP)
+               # -- Negationnode
+               PUSH $4
+               NEG %ESP
+               POP %EDX
+               POP %EAX
+               SUB %EDX,%EAX
+               PUSH %EAX
+               POP -16(%EBP)
+               # -- Assignmentnode
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  # -- Minusnode
+                  PUSH $249
+                  # -- Variablenode
+                  PUSH 12(%EBP)
+                  POP %EDX
+                  POP %EAX
+                  SUB %EDX,%EAX
+                  PUSH %EAX
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -12(%EAX)
+                  PUSH 8(%EBX)
+                  CALL class0_f2
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               POP -4(%EBP)
+               JMP beginofwhile_17
+               outofwhile_17:
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               PUSH $185
+               # -- Minusnode
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -12(%EAX)
+               PUSH $104
+               POP %EDX
+               POP %EAX
+               SUB %EDX,%EAX
+               PUSH %EAX
+               PUSH 8(%EBX)
+               CALL class0_f1
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            endofif_16:
+         # -- Assignmentnode
+         PUSH $84992
+         POP -20(%EBP)
+         # -- Whilenode
+            beginofwhile_19:
+            # -- Lessnode
+            PUSH $83
+            # -- Variablenode
+            PUSH -20(%EBP)
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JL pushtrueless_20
+            PUSH $0
+            JMP afterless_20
+            pushtrueless_20:
+            PUSH $1
+            afterless_20:
+            POP %EAX
+            CMP $0,%EAX
+            JE outofwhile_19
+            # -- Assignmentnode
+            # -- Dividenode
+            # -- Variablenode
+            PUSH -20(%EBP)
+            PUSH $2
+            POP %EBX
+            POP %EAX
+            CDQ
+            IDIV %EBX
+            PUSH %EAX
+            POP -20(%EBP)
+            # -- Ifelsenode
+               POP %EAX
+               CMP $1,%EAX
+               JE trueblock_21
+               # -- Ifelsenode
+                  # -- Lessequalnode
+                  # -- Variablenode
+                  PUSH -4(%EBP)
+                  # -- Timesnode
+                  PUSH $112
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -12(%EAX)
+                  POP %EBX
+                  POP %EAX
+                  IMUL %EBX
+                  PUSH %EAX
+                  POP %EDX
+                  POP %EAX
+                  CMP %EAX,%EDX
+                  JLE pushtruelesseq_23
+                  PUSH $0
+                  JMP afterlesseq_23
+                  pushtruelesseq_23:
+                  PUSH $1
+                  afterlesseq_23:
+                  POP %EAX
+                  CMP $1,%EAX
+                  JE trueblock_22
+                  JMP endofif_22
+                  trueblock_22:
+                  # -- Assignmentnode
+                  PUSH $151
+                  POP -4(%EBP)
+                  endofif_22:
+               # -- Assignmentnode
+               PUSH $49
+               POP -4(%EBP)
+               # -- Assignmentnode
+               # -- Negationnode
+               PUSH $60
+               NEG %ESP
+               POP -24(%EBP)
+               # -- Whilenode
+                  beginofwhile_24:
+                  # -- Lessnode
+                  # -- Variablenode
+                  PUSH -24(%EBP)
+                  PUSH $30
+                  POP %EDX
+                  POP %EAX
+                  CMP %EAX,%EDX
+                  JL pushtrueless_25
+                  PUSH $0
+                  JMP afterless_25
+                  pushtrueless_25:
+                  PUSH $1
+                  afterless_25:
+                  POP %EAX
+                  CMP $0,%EAX
+                  JE outofwhile_24
+                  # -- Assignmentnode
+                  # -- Addnode
+                  # -- Variablenode
+                  PUSH -24(%EBP)
+                  PUSH $9
+                  POP %EDX
+                  POP %EAX
+                  ADD %EDX,%EAX
+                  PUSH %EAX
+                  POP -24(%EBP)
+                  # -- Ifelsenode
+                     POP %EAX
+                     CMP $1,%EAX
+                     JE trueblock_26
+                     # -- Assignmentnode
+                     # -- Negationnode
+                     PUSH $94
+                     NEG %ESP
+                     POP -32(%EBP)
+                     # -- Whilenode
+                        beginofwhile_27:
+                        # -- Lessequalnode
+                        # -- Variablenode
+                        PUSH -32(%EBP)
+                        # -- Negationnode
+                        PUSH $50
+                        NEG %ESP
+                        POP %EDX
+                        POP %EAX
+                        CMP %EAX,%EDX
+                        JLE pushtruelesseq_28
+                        PUSH $0
+                        JMP afterlesseq_28
+                        pushtruelesseq_28:
+                        PUSH $1
+                        afterlesseq_28:
+                        POP %EAX
+                        CMP $0,%EAX
+                        JE outofwhile_27
+                        # -- Assignmentnode
+                        # -- Addnode
+                        # -- Variablenode
+                        PUSH -32(%EBP)
+                        PUSH $4
+                        POP %EDX
+                        POP %EAX
+                        ADD %EDX,%EAX
+                        PUSH %EAX
+                        POP -32(%EBP)
+                        # -- Assignmentnode
+                        PUSH $1472
+                        POP -36(%EBP)
+                        # -- Whilenode
+                           beginofwhile_29:
+                           # -- Lessnode
+                           PUSH $46
+                           # -- Variablenode
+                           PUSH -36(%EBP)
+                           POP %EDX
+                           POP %EAX
+                           CMP %EAX,%EDX
+                           JL pushtrueless_30
+                           PUSH $0
+                           JMP afterless_30
+                           pushtrueless_30:
+                           PUSH $1
+                           afterless_30:
+                           POP %EAX
+                           CMP $0,%EAX
+                           JE outofwhile_29
+                           # -- Assignmentnode
+                           # -- Dividenode
+                           # -- Variablenode
+                           PUSH -36(%EBP)
+                           PUSH $2
+                           POP %EBX
+                           POP %EAX
+                           CDQ
+                           IDIV %EBX
+                           PUSH %EAX
+                           POP -36(%EBP)
+                           # -- Printnode
+                           PUSH $printstr
+                           CALL printf
+                           ADD $4,%ESP
+                           # -- Ifelsenode
+                              # -- Variablenode
+                              MOV 8(%EBP),%EAX
+                              PUSH -4(%EAX)
+                              POP %EAX
+                              CMP $1,%EAX
+                              JE trueblock_31
+                              # -- Methodcall
+                                 PUSH %EAX
+                                 PUSH %ECX
+                                 PUSH %EDX
+                                 # -- Variablenode
+                                 MOV 8(%EBP),%EAX
+                                 PUSH -4(%EAX)
+                                 # -- Timesnode
+                                 PUSH $201
+                                 PUSH $32
+                                 POP %EBX
+                                 POP %EAX
+                                 IMUL %EBX
+                                 PUSH %EAX
+                                 # -- Negationnode
+                                 PUSH $219
+                                 NEG %ESP
+                                 PUSH 8(%EBX)
+                                 CALL class0_f1
+                                 POP %EDX
+                                 POP %ECX
+                                 XOR %ESP,%EAX
+                                 XOR %EAX,%ESP
+                                 XOR %ESP,%EAX
+                              # -- Methodcall
+                                 PUSH %EAX
+                                 PUSH %ECX
+                                 PUSH %EDX
+                                 # -- Timesnode
+                                 # -- Variablenode
+                                 MOV 8(%EBP),%EAX
+                                 PUSH -12(%EAX)
+                                 PUSH $162
+                                 POP %EBX
+                                 POP %EAX
+                                 IMUL %EBX
+                                 PUSH %EAX
+                                 # -- Addnode
+                                 # -- Methodcall
+                                    PUSH %EAX
+                                    PUSH %ECX
+                                    PUSH %EDX
+                                    PUSH $105
+                                    PUSH $168
+                                    PUSH 8(%EBX)
+                                    CALL class0_f2
+                                    POP %EDX
+                                    POP %ECX
+                                    XOR %ESP,%EAX
+                                    XOR %EAX,%ESP
+                                    XOR %ESP,%EAX
+                                 PUSH $121
+                                 POP %EDX
+                                 POP %EAX
+                                 ADD %EDX,%EAX
+                                 PUSH %EAX
+                                 PUSH 8(%EBX)
+                                 CALL class0_f1
+                                 POP %EDX
+                                 POP %ECX
+                                 XOR %ESP,%EAX
+                                 XOR %EAX,%ESP
+                                 XOR %ESP,%EAX
+                              # -- Assignmentnode
+                              PUSH $132
+                              POP -4(%EBP)
+                              JMP endofif_31
+                              trueblock_31:
+                              # -- Methodcall
+                                 PUSH %EAX
+                                 PUSH %ECX
+                                 PUSH %EDX
+                                 PUSH $33
+                                 # -- Variablenode
+                                 PUSH 12(%EBP)
+                                 PUSH 8(%EBX)
+                                 CALL class0_f1
+                                 POP %EDX
+                                 POP %ECX
+                                 XOR %ESP,%EAX
+                                 XOR %EAX,%ESP
+                                 XOR %ESP,%EAX
+                              endofif_31:
+                           # -- Assignmentnode
+                           # -- Negationnode
+                           PUSH $28
+                           NEG %ESP
+                           POP -4(%EBP)
+                           JMP beginofwhile_29
+                           outofwhile_29:
+                        JMP beginofwhile_27
+                        outofwhile_27:
+                     # -- Assignmentnode
+                     # -- Timesnode
+                     PUSH $250
+                     # -- Variablenode
+                     MOV 8(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     POP %EBX
+                     POP %EAX
+                     IMUL %EBX
+                     PUSH %EAX
+                     POP -4(%EBP)
+                     # -- Methodcall
+                        PUSH %EAX
+                        PUSH %ECX
+                        PUSH %EDX
+                        # -- Variablenode
+                        MOV 8(%EBP),%EAX
+                        PUSH -4(%EAX)
+                        PUSH $52
+                        # -- Minusnode
+                        # -- Variablenode
+                        MOV 8(%EBP),%EAX
+                        PUSH -12(%EAX)
+                        # -- Variablenode
+                        PUSH 12(%EBP)
+                        POP %EDX
+                        POP %EAX
+                        SUB %EDX,%EAX
+                        PUSH %EAX
+                        PUSH 8(%EBX)
+                        CALL class0_f1
+                        POP %EDX
+                        POP %ECX
+                        XOR %ESP,%EAX
+                        XOR %EAX,%ESP
+                        XOR %ESP,%EAX
+                     JMP endofif_26
+                     trueblock_26:
+                     # -- Ifelsenode
+                        # -- Notnode
+                        POP %EAX
+                        XOR $1,%EAX
+                        PUSH %EAX
+                        POP %EAX
+                        CMP $1,%EAX
+                        JE trueblock_32
+                        JMP endofif_32
+                        trueblock_32:
+                        # -- Assignmentnode
+                        PUSH $88
+                        POP -28(%EBP)
+                        # -- Whilenode
+                           beginofwhile_33:
+                           # -- Lessequalnode
+                           PUSH $11
+                           # -- Variablenode
+                           PUSH -28(%EBP)
+                           POP %EDX
+                           POP %EAX
+                           CMP %EAX,%EDX
+                           JLE pushtruelesseq_34
+                           PUSH $0
+                           JMP afterlesseq_34
+                           pushtruelesseq_34:
+                           PUSH $1
+                           afterlesseq_34:
+                           POP %EAX
+                           CMP $0,%EAX
+                           JE outofwhile_33
+                           # -- Assignmentnode
+                           # -- Dividenode
+                           # -- Variablenode
+                           PUSH -28(%EBP)
+                           PUSH $2
+                           POP %EBX
+                           POP %EAX
+                           CDQ
+                           IDIV %EBX
+                           PUSH %EAX
+                           POP -28(%EBP)
+                           # -- Methodcall
+                              PUSH %EAX
+                              PUSH %ECX
+                              PUSH %EDX
+                              # -- Andnode
+                              POP %EDX
+                              POP %EAX
+                              AND %EDX,%EAX
+                              PUSH %EAX
+                              PUSH $77
+                              # -- Methodcall
+                                 PUSH %EAX
+                                 PUSH %ECX
+                                 PUSH %EDX
+                                 # -- Addnode
+                                 # -- Timesnode
+                                 PUSH $20
+                                 # -- Variablenode
+                                 MOV 8(%EBP),%EAX
+                                 PUSH -12(%EAX)
+                                 POP %EBX
+                                 POP %EAX
+                                 IMUL %EBX
+                                 PUSH %EAX
+                                 PUSH $197
+                                 POP %EDX
+                                 POP %EAX
+                                 ADD %EDX,%EAX
+                                 PUSH %EAX
+                                 # -- Variablenode
+                                 MOV 8(%EBP),%EAX
+                                 PUSH -4(%EAX)
+                                 # -- Variablenode
+                                 MOV 8(%EBP),%EAX
+                                 PUSH -8(%EAX)
+                                 PUSH 8(%EBX)
+                                 CALL class0_f2
+                                 POP %EDX
+                                 POP %ECX
+                                 XOR %ESP,%EAX
+                                 XOR %EAX,%ESP
+                                 XOR %ESP,%EAX
+                              PUSH 8(%EBX)
+                              CALL class0_f1
+                              POP %EDX
+                              POP %ECX
+                              XOR %ESP,%EAX
+                              XOR %EAX,%ESP
+                              XOR %ESP,%EAX
+                           # -- Assignmentnode
+                           # -- Methodcall
+                              PUSH %EAX
+                              PUSH %ECX
+                              PUSH %EDX
+                              PUSH $252
+                              PUSH $56
+                              PUSH 8(%EBX)
+                              CALL class0_f2
+                              POP %EDX
+                              POP %ECX
+                              XOR %ESP,%EAX
+                              XOR %EAX,%ESP
+                              XOR %ESP,%EAX
+                           POP -4(%EBP)
+                           JMP beginofwhile_33
+                           outofwhile_33:
+                        endofif_32:
+                     # -- Ifelsenode
+                        # -- Variablenode
+                        MOV 8(%EBP),%EAX
+                        PUSH -4(%EAX)
+                        POP %EAX
+                        CMP $1,%EAX
+                        JE trueblock_35
+                        JMP endofif_35
+                        trueblock_35:
+                        # -- Ifelsenode
+                           POP %EAX
+                           CMP $1,%EAX
+                           JE trueblock_36
+                           JMP endofif_36
+                           trueblock_36:
+                           # -- Assignmentnode
+                           # -- Timesnode
+                           # -- Variablenode
+                           PUSH -4(%EBP)
+                           PUSH $178
+                           POP %EBX
+                           POP %EAX
+                           IMUL %EBX
+                           PUSH %EAX
+                           POP -4(%EBP)
+                           # -- Printnode
+                           PUSH $printstr
+                           CALL printf
+                           ADD $4,%ESP
+                           # -- Methodcall
+                              PUSH %EAX
+                              PUSH %ECX
+                              PUSH %EDX
+                              # -- Notnode
+                              POP %EAX
+                              XOR $1,%EAX
+                              PUSH %EAX
+                              # -- Variablenode
+                              PUSH -4(%EBP)
+                              # -- Variablenode
+                              MOV 8(%EBP),%EAX
+                              PUSH -8(%EAX)
+                              PUSH 8(%EBX)
+                              CALL class0_f1
+                              POP %EDX
+                              POP %ECX
+                              XOR %ESP,%EAX
+                              XOR %EAX,%ESP
+                              XOR %ESP,%EAX
+                           endofif_36:
+                        # -- Assignmentnode
+                        # -- Variablenode
+                        MOV 8(%EBP),%EAX
+                        PUSH -12(%EAX)
+                        POP -4(%EBP)
+                        # -- Methodcall
+                           PUSH %EAX
+                           PUSH %ECX
+                           PUSH %EDX
+                           # -- Variablenode
+                           MOV 8(%EBP),%EAX
+                           PUSH -4(%EAX)
+                           PUSH $58
+                           PUSH $117
+                           PUSH 8(%EBX)
+                           CALL class0_f1
+                           POP %EDX
+                           POP %ECX
+                           XOR %ESP,%EAX
+                           XOR %EAX,%ESP
+                           XOR %ESP,%EAX
+                        endofif_35:
+                     endofif_26:
+                  JMP beginofwhile_24
+                  outofwhile_24:
+               JMP endofif_21
+               trueblock_21:
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  PUSH $77
+                  PUSH $214
+                  PUSH 8(%EBX)
+                  CALL class0_f1
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               # -- Assignmentnode
+               PUSH $126
+               POP -4(%EBP)
+               # -- Printnode
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               endofif_21:
+            JMP beginofwhile_19
+            outofwhile_19:
+         JMP endofif_15
+         trueblock_15:
+         # -- Assignmentnode
+         # -- Negationnode
+         PUSH $10
+         NEG %ESP
+         POP -8(%EBP)
+         # -- Whilenode
+            beginofwhile_37:
+            # -- Lessnode
+            # -- Negationnode
+            PUSH $55
+            NEG %ESP
+            # -- Variablenode
+            PUSH -8(%EBP)
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JL pushtrueless_38
+            PUSH $0
+            JMP afterless_38
+            pushtrueless_38:
+            PUSH $1
+            afterless_38:
+            POP %EAX
+            CMP $0,%EAX
+            JE outofwhile_37
+            # -- Assignmentnode
+            # -- Minusnode
+            # -- Variablenode
+            PUSH -8(%EBP)
+            PUSH $5
+            POP %EDX
+            POP %EAX
+            SUB %EDX,%EAX
+            PUSH %EAX
+            POP -8(%EBP)
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               # -- Notnode
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  # -- Timesnode
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -8(%EAX)
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -8(%EAX)
+                  POP %EBX
+                  POP %EAX
+                  IMUL %EBX
+                  PUSH %EAX
+                  # -- Methodcall
+                     PUSH %EAX
+                     PUSH %ECX
+                     PUSH %EDX
+                     # -- Methodcall
+                        PUSH %EAX
+                        PUSH %ECX
+                        PUSH %EDX
+                        PUSH $153
+                        PUSH $75
+                        PUSH 8(%EBX)
+                        CALL class0_f2
+                        POP %EDX
+                        POP %ECX
+                        XOR %ESP,%EAX
+                        XOR %EAX,%ESP
+                        XOR %ESP,%EAX
+                     # -- Equalnode
+                     # -- Variablenode
+                     MOV 8(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     PUSH $115
+                     POP %EDX
+                     POP %EAX
+                     CMP %EAX,%EDX
+                     JZ pushtrueeq_39
+                     PUSH $0
+                     JMP aftereqblock_39
+                     pushtrueeq_39:
+                     PUSH $1
+                     aftereqblock_39:
+                     # -- Variablenode
+                     MOV 8(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     PUSH 8(%EBX)
+                     CALL class0_f2
+                     POP %EDX
+                     POP %ECX
+                     XOR %ESP,%EAX
+                     XOR %EAX,%ESP
+                     XOR %ESP,%EAX
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -4(%EAX)
+                  PUSH 8(%EBX)
+                  CALL class0_f0
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               POP %EAX
+               XOR $1,%EAX
+               PUSH %EAX
+               PUSH $112
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -8(%EAX)
+               PUSH 8(%EBX)
+               CALL class0_f1
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            # -- Assignmentnode
+            PUSH $58
+            POP -12(%EBP)
+            # -- Whilenode
+               beginofwhile_40:
+               # -- Lessequalnode
+               # -- Variablenode
+               PUSH -12(%EBP)
+               PUSH $90
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JLE pushtruelesseq_41
+               PUSH $0
+               JMP afterlesseq_41
+               pushtruelesseq_41:
+               PUSH $1
+               afterlesseq_41:
+               POP %EAX
+               CMP $0,%EAX
+               JE outofwhile_40
+               # -- Assignmentnode
+               # -- Minusnode
+               # -- Variablenode
+               PUSH -12(%EBP)
+               # -- Negationnode
+               PUSH $4
+               NEG %ESP
+               POP %EDX
+               POP %EAX
+               SUB %EDX,%EAX
+               PUSH %EAX
+               POP -12(%EBP)
+               # -- Printnode
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -8(%EAX)
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               JMP beginofwhile_40
+               outofwhile_40:
+            JMP beginofwhile_37
+            outofwhile_37:
+         # -- Methodcall
+            PUSH %EAX
+            PUSH %ECX
+            PUSH %EDX
+            # -- Notnode
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -4(%EAX)
+            POP %EAX
+            XOR $1,%EAX
+            PUSH %EAX
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -8(%EAX)
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               # -- Variablenode
+               PUSH 12(%EBP)
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               PUSH $178
+               PUSH 8(%EBX)
+               CALL class0_f2
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            PUSH 8(%EBX)
+            CALL class0_f1
+            POP %EDX
+            POP %ECX
+            XOR %ESP,%EAX
+            XOR %EAX,%ESP
+            XOR %ESP,%EAX
+         # -- Assignmentnode
+         PUSH $3
+         POP -4(%EBP)
+         endofif_15:
+      # -- Assignmentnode
+      # -- Minusnode
+      # -- Addnode
+      # -- Variablenode
+      PUSH 12(%EBP)
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -12(%EAX)
+      POP %EDX
+      POP %EAX
+      ADD %EDX,%EAX
+      PUSH %EAX
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -12(%EAX)
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      POP -4(%EBP)
+      # -- Assignmentnode
+      PUSH $59
+      POP -4(%EBP)
+      # -- Printnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -4(%EAX)
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Returnstatementnode
+      # -- Andnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -4(%EAX)
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -4(%EAX)
+      POP %EDX
+      POP %EAX
+      AND %EDX,%EAX
+      PUSH %EAX
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $36,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class0_class0:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $28,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Minusnode
+      PUSH $173
+      # -- Timesnode
+      PUSH $12
+      PUSH $176
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      MOV 8(%EBP),%EAX
+      POP -8(%EAX)
+      # -- Assignmentnode
+      # -- Lessequalnode
+      PUSH $232
+      PUSH $190
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JLE pushtruelesseq_42
+      PUSH $0
+      JMP afterlesseq_42
+      pushtruelesseq_42:
+      PUSH $1
+      afterlesseq_42:
+      MOV 8(%EBP),%EAX
+      POP -4(%EAX)
+      # -- Assignmentnode
+      PUSH $153
+      MOV 8(%EBP),%EAX
+      POP -12(%EAX)
+      # -- Assignmentnode
+      PUSH $8
+      POP -20(%EBP)
+      # -- Assignmentnode
+      # -- Negationnode
+      PUSH $187
+      NEG %ESP
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $44
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Andnode
+      POP %EDX
+      POP %EAX
+      AND %EDX,%EAX
+      PUSH %EAX
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Lessequalnode
+      PUSH $52
+      PUSH $148
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JLE pushtruelesseq_43
+      PUSH $0
+      JMP afterlesseq_43
+      pushtruelesseq_43:
+      PUSH $1
+      afterlesseq_43:
+      POP -12(%EBP)
+      # -- Ifelsenode
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_44
+         JMP endofif_44
+         trueblock_44:
+         # -- Assignmentnode
+         # -- Negationnode
+         PUSH $56
+         NEG %ESP
+         POP -24(%EBP)
+         # -- Whilenode
+            beginofwhile_45:
+            # -- Lessequalnode
+            # -- Variablenode
+            PUSH -24(%EBP)
+            # -- Negationnode
+            PUSH $47
+            NEG %ESP
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JLE pushtruelesseq_46
+            PUSH $0
+            JMP afterlesseq_46
+            pushtruelesseq_46:
+            PUSH $1
+            afterlesseq_46:
+            POP %EAX
+            CMP $0,%EAX
+            JE outofwhile_45
+            # -- Assignmentnode
+            # -- Timesnode
+            # -- Variablenode
+            PUSH -24(%EBP)
+            PUSH $3
+            POP %EBX
+            POP %EAX
+            IMUL %EBX
+            PUSH %EAX
+            POP -24(%EBP)
+            # -- Ifelsenode
+               # -- Andnode
+               # -- Variablenode
+               PUSH -16(%EBP)
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               POP %EDX
+               POP %EAX
+               AND %EDX,%EAX
+               PUSH %EAX
+               POP %EAX
+               CMP $1,%EAX
+               JE trueblock_47
+               JMP endofif_47
+               trueblock_47:
+               # -- Assignmentnode
+               # -- Lessnode
+               # -- Variablenode
+               PUSH -8(%EBP)
+               PUSH $99
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JL pushtrueless_48
+               PUSH $0
+               JMP afterless_48
+               pushtrueless_48:
+               PUSH $1
+               afterless_48:
+               POP -12(%EBP)
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  # -- Ornode
+                  # -- Lessequalnode
+                  PUSH $162
+                  PUSH $46
+                  POP %EDX
+                  POP %EAX
+                  CMP %EAX,%EDX
+                  JLE pushtruelesseq_49
+                  PUSH $0
+                  JMP afterlesseq_49
+                  pushtruelesseq_49:
+                  PUSH $1
+                  afterlesseq_49:
+                  POP %EDX
+                  POP %EAX
+                  OR %EDX,%EAX
+                  PUSH %EAX
+                  # -- Variablenode
+                  PUSH -4(%EBP)
+                  # -- Variablenode
+                  PUSH 20(%EBP)
+                  PUSH 8(%EBX)
+                  CALL class0_f1
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               # -- Printnode
+               # -- Variablenode
+               PUSH -4(%EBP)
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               endofif_47:
+            # -- Assignmentnode
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -8(%EAX)
+            POP -8(%EBP)
+            # -- Printnode
+            # -- Addnode
+            PUSH $129
+            # -- Dividenode
+            PUSH $144
+            # -- Variablenode
+            PUSH 20(%EBP)
+            POP %EBX
+            POP %EAX
+            CDQ
+            IDIV %EBX
+            PUSH %EAX
+            POP %EDX
+            POP %EAX
+            ADD %EDX,%EAX
+            PUSH %EAX
+            PUSH $printstr
+            CALL printf
+            ADD $4,%ESP
+            JMP beginofwhile_45
+            outofwhile_45:
+         # -- Ifelsenode
+            # -- Equalnode
+            # -- Variablenode
+            PUSH -4(%EBP)
+            # -- Minusnode
+            # -- Variablenode
+            PUSH -4(%EBP)
+            PUSH $205
+            POP %EDX
+            POP %EAX
+            SUB %EDX,%EAX
+            PUSH %EAX
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JZ pushtrueeq_51
+            PUSH $0
+            JMP aftereqblock_51
+            pushtrueeq_51:
+            PUSH $1
+            aftereqblock_51:
+            POP %EAX
+            CMP $1,%EAX
+            JE trueblock_50
+            JMP endofif_50
+            trueblock_50:
+            # -- Assignmentnode
+            PUSH $73
+            POP -20(%EBP)
+            endofif_50:
+         endofif_44:
+      # -- Ifelsenode
+         # -- Equalnode
+         PUSH $7
+         PUSH $154
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JZ pushtrueeq_53
+         PUSH $0
+         JMP aftereqblock_53
+         pushtrueeq_53:
+         PUSH $1
+         aftereqblock_53:
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_52
+         # -- Assignmentnode
+         # -- Lessnode
+         # -- Variablenode
+         PUSH -4(%EBP)
+         PUSH $113
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JL pushtrueless_54
+         PUSH $0
+         JMP afterless_54
+         pushtrueless_54:
+         PUSH $1
+         afterless_54:
+         POP -12(%EBP)
+         JMP endofif_52
+         trueblock_52:
+         # -- Assignmentnode
+         PUSH $12
+         POP -28(%EBP)
+         # -- Whilenode
+            beginofwhile_55:
+            # -- Lessequalnode
+            # -- Negationnode
+            PUSH $24
+            NEG %ESP
+            # -- Variablenode
+            PUSH -28(%EBP)
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JLE pushtruelesseq_56
+            PUSH $0
+            JMP afterlesseq_56
+            pushtruelesseq_56:
+            PUSH $1
+            afterlesseq_56:
+            POP %EAX
+            CMP $0,%EAX
+            JE outofwhile_55
+            # -- Assignmentnode
+            # -- Addnode
+            # -- Variablenode
+            PUSH -28(%EBP)
+            # -- Negationnode
+            PUSH $4
+            NEG %ESP
+            POP %EDX
+            POP %EAX
+            ADD %EDX,%EAX
+            PUSH %EAX
+            POP -28(%EBP)
+            # -- Ifelsenode
+               # -- Andnode
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               # -- Lessequalnode
+               PUSH $246
+               PUSH $153
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JLE pushtruelesseq_58
+               PUSH $0
+               JMP afterlesseq_58
+               pushtruelesseq_58:
+               PUSH $1
+               afterlesseq_58:
+               POP %EDX
+               POP %EAX
+               AND %EDX,%EAX
+               PUSH %EAX
+               POP %EAX
+               CMP $1,%EAX
+               JE trueblock_57
+               # -- Printnode
+               # -- Variablenode
+               PUSH 16(%EBP)
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               # -- Printnode
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               # -- Ifelsenode
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -4(%EAX)
+                  POP %EAX
+                  CMP $1,%EAX
+                  JE trueblock_59
+                  JMP endofif_59
+                  trueblock_59:
+                  # -- Methodcall
+                     PUSH %EAX
+                     PUSH %ECX
+                     PUSH %EDX
+                     # -- Variablenode
+                     PUSH -12(%EBP)
+                     # -- Variablenode
+                     PUSH 28(%EBP)
+                     # -- Addnode
+                     # -- Dividenode
+                     PUSH $130
+                     # -- Variablenode
+                     PUSH 20(%EBP)
+                     POP %EBX
+                     POP %EAX
+                     CDQ
+                     IDIV %EBX
+                     PUSH %EAX
+                     PUSH $120
+                     POP %EDX
+                     POP %EAX
+                     ADD %EDX,%EAX
+                     PUSH %EAX
+                     PUSH 8(%EBX)
+                     CALL class0_f1
+                     POP %EDX
+                     POP %ECX
+                     XOR %ESP,%EAX
+                     XOR %EAX,%ESP
+                     XOR %ESP,%EAX
+                  # -- Assignmentnode
+                  PUSH $235
+                  POP -4(%EBP)
+                  endofif_59:
+               JMP endofif_57
+               trueblock_57:
+               # -- Assignmentnode
+               # -- Variablenode
+               PUSH -16(%EBP)
+               POP -16(%EBP)
+               endofif_57:
+            JMP beginofwhile_55
+            outofwhile_55:
+         # -- Printnode
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -4(%EAX)
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         endofif_52:
+      MOV %EBP,%ESP
+      SUB $28,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class1_f0:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $24,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Addnode
+      # -- Negationnode
+      PUSH $74
+      NEG %ESP
+      PUSH $183
+      POP %EDX
+      POP %EAX
+      ADD %EDX,%EAX
+      PUSH %EAX
+      POP -24(%EBP)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Notnode
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      PUSH $250
+      # -- Minusnode
+      PUSH $196
+      PUSH $149
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      PUSH $17
+      PUSH $12
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      PUSH $17
+      # -- Minusnode
+      PUSH $196
+      PUSH $149
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      PUSH $250
+      # -- Notnode
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      PUSH %ECX
+      CALL class0_class0
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -20(%EBP)
+      # -- Assignmentnode
+      PUSH $45
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $111
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Lessnode
+      PUSH $166
+      PUSH $187
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JL pushtrueless_60
+      PUSH $0
+      JMP afterless_60
+      pushtrueless_60:
+      PUSH $1
+      afterless_60:
+      # -- Notnode
+      # -- Notnode
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      # -- Negationnode
+      PUSH $26
+      NEG %ESP
+      # -- Negationnode
+      PUSH $242
+      NEG %ESP
+      PUSH $234
+      PUSH $12
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      PUSH $234
+      # -- Negationnode
+      PUSH $242
+      NEG %ESP
+      # -- Negationnode
+      PUSH $26
+      NEG %ESP
+      # -- Notnode
+      # -- Notnode
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      # -- Lessnode
+      PUSH $166
+      PUSH $187
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JL pushtrueless_61
+      PUSH $0
+      JMP afterless_61
+      pushtrueless_61:
+      PUSH $1
+      afterless_61:
+      PUSH %ECX
+      CALL class0_class0
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -16(%EBP)
+      # -- Assignmentnode
+      PUSH $78
+      POP -12(%EBP)
+      # -- Ifelsenode
+         MOV -20(%EBP),%EAX
+         PUSH -4(%EAX)
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_62
+         JMP endofif_62
+         trueblock_62:
+         # -- Assignmentnode
+         # -- Variablenode
+         PUSH -4(%EBP)
+         POP -4(%EBP)
+         endofif_62:
+      # -- Ifelsenode
+         # -- Equalnode
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -8(%EAX)
+         # -- Variablenode
+         PUSH -4(%EBP)
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JZ pushtrueeq_64
+         PUSH $0
+         JMP aftereqblock_64
+         pushtrueeq_64:
+         PUSH $1
+         aftereqblock_64:
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_63
+         JMP endofif_63
+         trueblock_63:
+         # -- Printnode
+         PUSH $45
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         # -- Printnode
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         # -- Ifelsenode
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -12(%EAX)
+            POP %EAX
+            CMP $1,%EAX
+            JE trueblock_65
+            JMP endofif_65
+            trueblock_65:
+            # -- Assignmentnode
+            # -- Variablenode
+            PUSH -4(%EBP)
+            POP -24(%EBP)
+            endofif_65:
+         endofif_63:
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         PUSH $47
+         # -- Timesnode
+         PUSH $150
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -16(%EAX)
+         POP %EBX
+         POP %EAX
+         IMUL %EBX
+         PUSH %EAX
+         PUSH -20(%EBP)
+         CALL class0_f1
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         MOV -20(%EBP),%EAX
+         PUSH -4(%EAX)
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -8(%EAX)
+         # -- Dividenode
+         PUSH $254
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -8(%EAX)
+         POP %EBX
+         POP %EAX
+         CDQ
+         IDIV %EBX
+         PUSH %EAX
+         PUSH -20(%EBP)
+         CALL class0_f1
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -20(%EAX)
+         # -- Negationnode
+         MOV -20(%EBP),%EAX
+         PUSH -8(%EAX)
+         NEG %ESP
+         PUSH -20(%EBP)
+         CALL class0_f1
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Returnstatementnode
+      # -- Variablenode
+      PUSH -24(%EBP)
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $24,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class1_f1:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $16,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Newnode
+      PUSH $248
+      PUSH $234
+      PUSH $13
+      PUSH $12
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      PUSH $13
+      PUSH $234
+      PUSH $248
+      PUSH %ECX
+      CALL class0_class0
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $11
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Timesnode
+      # -- Timesnode
+      # -- Negationnode
+      PUSH $114
+      NEG %ESP
+      PUSH $117
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      PUSH $225
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Addnode
+      PUSH $70
+      PUSH $249
+      POP %EDX
+      POP %EAX
+      ADD %EDX,%EAX
+      PUSH %EAX
+      POP -12(%EBP)
+      # -- Printnode
+      PUSH $6
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Printnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -12(%EAX)
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Assignmentnode
+      PUSH $82
+      MOV -8(%EBP),%EAX
+      POP -12(%EAX)
+      # -- Printnode
+      # -- Dividenode
+      PUSH $110
+      # -- Variablenode
+      PUSH -16(%EBP)
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Printnode
+      # -- Timesnode
+      PUSH $226
+      PUSH $216
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Returnstatementnode
+      PUSH $101
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $16,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class1_f2:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $20,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      PUSH $169
+      POP -8(%EBP)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Dividenode
+      PUSH $248
+      PUSH $208
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      # -- Timesnode
+      # -- Negationnode
+      PUSH $123
+      NEG %ESP
+      # -- Negationnode
+      PUSH $197
+      NEG %ESP
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      PUSH $47
+      PUSH $12
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      PUSH $47
+      # -- Timesnode
+      # -- Negationnode
+      PUSH $123
+      NEG %ESP
+      # -- Negationnode
+      PUSH $197
+      NEG %ESP
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      # -- Dividenode
+      PUSH $248
+      PUSH $208
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      PUSH %ECX
+      CALL class0_class0
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -4(%EBP)
+      # -- Assignmentnode
+      PUSH $165
+      POP -16(%EBP)
+      # -- Assignmentnode
+      POP -12(%EBP)
+      # -- Ifelsenode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_66
+         # -- Assignmentnode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         MOV -4(%EBP),%EAX
+         POP -4(%EAX)
+         JMP endofif_66
+         trueblock_66:
+         # -- Methodcall
+            PUSH %EAX
+            PUSH %ECX
+            PUSH %EDX
+            MOV -4(%EBP),%EAX
+            PUSH -4(%EAX)
+            # -- Addnode
+            PUSH $26
+            PUSH $20
+            POP %EDX
+            POP %EAX
+            ADD %EDX,%EAX
+            PUSH %EAX
+            PUSH $114
+            PUSH -4(%EBP)
+            CALL class0_f1
+            POP %EDX
+            POP %ECX
+            XOR %ESP,%EAX
+            XOR %EAX,%ESP
+            XOR %ESP,%EAX
+         # -- Methodcall
+            PUSH %EAX
+            PUSH %ECX
+            PUSH %EDX
+            MOV -4(%EBP),%EAX
+            PUSH -4(%EAX)
+            PUSH $157
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -8(%EAX)
+            PUSH -4(%EBP)
+            CALL class0_f1
+            POP %EDX
+            POP %ECX
+            XOR %ESP,%EAX
+            XOR %EAX,%ESP
+            XOR %ESP,%EAX
+         endofif_66:
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH -16(%EBP)
+      POP -8(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH -16(%EBP)
+      MOV -4(%EBP),%EAX
+      POP -8(%EAX)
+      # -- Assignmentnode
+      PUSH $14
+      POP -20(%EBP)
+      # -- Whilenode
+         beginofwhile_67:
+         # -- Lessnode
+         # -- Variablenode
+         PUSH -20(%EBP)
+         PUSH $24
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JL pushtrueless_68
+         PUSH $0
+         JMP afterless_68
+         pushtrueless_68:
+         PUSH $1
+         afterless_68:
+         POP %EAX
+         CMP $0,%EAX
+         JE outofwhile_67
+         # -- Assignmentnode
+         # -- Minusnode
+         # -- Variablenode
+         PUSH -20(%EBP)
+         # -- Negationnode
+         PUSH $1
+         NEG %ESP
+         POP %EDX
+         POP %EAX
+         SUB %EDX,%EAX
+         PUSH %EAX
+         POP -20(%EBP)
+         # -- Assignmentnode
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -20(%EAX)
+         POP -16(%EBP)
+         # -- Printnode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         JMP beginofwhile_67
+         outofwhile_67:
+      MOV %EBP,%ESP
+      SUB $20,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class1_f3:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $4,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      PUSH $3969
+      POP -4(%EBP)
+      # -- Whilenode
+         beginofwhile_69:
+         # -- Lessnode
+         PUSH $49
+         # -- Variablenode
+         PUSH -4(%EBP)
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JL pushtrueless_70
+         PUSH $0
+         JMP afterless_70
+         pushtrueless_70:
+         PUSH $1
+         afterless_70:
+         POP %EAX
+         CMP $0,%EAX
+         JE outofwhile_69
+         # -- Assignmentnode
+         # -- Dividenode
+         # -- Variablenode
+         PUSH -4(%EBP)
+         PUSH $3
+         POP %EBX
+         POP %EAX
+         CDQ
+         IDIV %EBX
+         PUSH %EAX
+         POP -4(%EBP)
+         # -- Ifelsenode
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -16(%EAX)
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               CALL class0_f3
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            POP %EAX
+            CMP $1,%EAX
+            JE trueblock_71
+            JMP endofif_71
+            trueblock_71:
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               PUSH 8(%EBX)
+               CALL class1_f2
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            endofif_71:
+         # -- Methodcall
+            PUSH %EAX
+            PUSH %ECX
+            PUSH %EDX
+            MOV 8(%EBP),%EAX
+            MOV -4(%EAX),%EBX
+            PUSH -12(%EBX)
+            # -- Addnode
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -8(%EAX)
+            PUSH $11
+            POP %EDX
+            POP %EAX
+            ADD %EDX,%EAX
+            PUSH %EAX
+            MOV 8(%EBP),%EAX
+            PUSH -4(%EAX)
+            CALL class0_f1
+            POP %EDX
+            POP %ECX
+            XOR %ESP,%EAX
+            XOR %EAX,%ESP
+            XOR %ESP,%EAX
+         # -- Methodcall
+            PUSH %EAX
+            PUSH %ECX
+            PUSH %EDX
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               PUSH 8(%EBX)
+               CALL class1_f0
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               # -- Addnode
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -16(%EAX)
+               PUSH $53
+               POP %EDX
+               POP %EAX
+               ADD %EDX,%EAX
+               PUSH %EAX
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -12(%EAX)
+               # -- Addnode
+               PUSH $236
+               PUSH $104
+               POP %EDX
+               POP %EAX
+               ADD %EDX,%EAX
+               PUSH %EAX
+               MOV 8(%EBP),%EAX
+               PUSH -4(%EAX)
+               CALL class0_f2
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            MOV 8(%EBP),%EAX
+            PUSH -4(%EAX)
+            CALL class0_f1
+            POP %EDX
+            POP %ECX
+            XOR %ESP,%EAX
+            XOR %EAX,%ESP
+            XOR %ESP,%EAX
+         JMP beginofwhile_69
+         outofwhile_69:
+      # -- Returnstatementnode
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $4,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class1_f4:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $4,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         MOV 12(%EBP),%EAX
+         PUSH -12(%EAX)
+         PUSH 8(%EBX)
+         CALL class1_f3
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      POP -4(%EBP)
+      # -- Returnstatementnode
+      MOV 12(%EBP),%EAX
+      PUSH -8(%EAX)
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $4,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class1_class1:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $12,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      PUSH $242
+      MOV 8(%EBP),%EAX
+      POP -20(%EAX)
+      # -- Assignmentnode
+      PUSH $157
+      MOV 8(%EBP),%EAX
+      POP -8(%EAX)
+      # -- Assignmentnode
+      # -- Newnode
+      PUSH $84
+      # -- Negationnode
+      PUSH $68
+      NEG %ESP
+      PUSH $164
+      PUSH $12
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      PUSH $164
+      # -- Negationnode
+      PUSH $68
+      NEG %ESP
+      PUSH $84
+      PUSH %ECX
+      CALL class0_class0
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      MOV 8(%EBP),%EAX
+      POP -4(%EAX)
+      # -- Assignmentnode
+      # -- Timesnode
+      # -- Dividenode
+      PUSH $103
+      PUSH $0
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      PUSH $60
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      MOV 8(%EBP),%EAX
+      POP -16(%EAX)
+      # -- Assignmentnode
+      MOV 8(%EBP),%EAX
+      POP -12(%EAX)
+      # -- Assignmentnode
+      # -- Equalnode
+      PUSH $55
+      PUSH $215
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JZ pushtrueeq_72
+      PUSH $0
+      JMP aftereqblock_72
+      pushtrueeq_72:
+      PUSH $1
+      aftereqblock_72:
+      POP -8(%EBP)
+      # -- Assignmentnode
+      POP -4(%EBP)
+      # -- Assignmentnode
+      PUSH $157
+      POP -12(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -12(%EAX)
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $220
+      POP -12(%EBP)
+      # -- Printnode
+      PUSH $169
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      MOV %EBP,%ESP
+      SUB $12,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class2_f5:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $20,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      POP -20(%EBP)
+      # -- Assignmentnode
+      # -- Dividenode
+      PUSH $252
+      PUSH $120
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      POP -8(%EBP)
+      # -- Assignmentnode
+      POP -4(%EBP)
+      # -- Assignmentnode
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Andnode
+      POP %EDX
+      POP %EAX
+      AND %EDX,%EAX
+      PUSH %EAX
+      POP -12(%EBP)
+      # -- Assignmentnode
+      # -- Lessequalnode
+      PUSH $28
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -20(%EAX)
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JLE pushtruelesseq_73
+      PUSH $0
+      JMP afterlesseq_73
+      pushtruelesseq_73:
+      PUSH $1
+      afterlesseq_73:
+      POP -4(%EBP)
+      # -- Returnstatementnode
+      # -- Negationnode
+      # -- Variablenode
+      PUSH -8(%EBP)
+      NEG %ESP
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $20,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class2_f6:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $12,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Lessnode
+      PUSH $9
+      PUSH $63
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JL pushtrueless_74
+      PUSH $0
+      JMP afterless_74
+      pushtrueless_74:
+      PUSH $1
+      afterless_74:
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $19
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH -8(%EBP)
+      POP -8(%EBP)
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         # -- Andnode
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -12(%EAX)
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -12(%EAX)
+         POP %EDX
+         POP %EAX
+         AND %EDX,%EAX
+         PUSH %EAX
+         # -- Variablenode
+         MOV 8(%EBP),%EAX
+         PUSH -20(%EAX)
+         PUSH $173
+         PUSH 16(%EBP)
+         CALL class0_f1
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Assignmentnode
+      PUSH $19683
+      POP -12(%EBP)
+      # -- Whilenode
+         beginofwhile_75:
+         # -- Lessnode
+         PUSH $3
+         # -- Variablenode
+         PUSH -12(%EBP)
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JL pushtrueless_76
+         PUSH $0
+         JMP afterless_76
+         pushtrueless_76:
+         PUSH $1
+         afterless_76:
+         POP %EAX
+         CMP $0,%EAX
+         JE outofwhile_75
+         # -- Assignmentnode
+         # -- Dividenode
+         # -- Variablenode
+         PUSH -12(%EBP)
+         PUSH $3
+         POP %EBX
+         POP %EAX
+         CDQ
+         IDIV %EBX
+         PUSH %EAX
+         POP -12(%EBP)
+         # -- Assignmentnode
+         MOV 16(%EBP),%EAX
+         PUSH -4(%EAX)
+         POP -8(%EBP)
+         JMP beginofwhile_75
+         outofwhile_75:
+      # -- Assignmentnode
+      PUSH $51
+      POP -4(%EBP)
+      # -- Returnstatementnode
+      PUSH $31
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $12,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class2_f7:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $4,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      POP -4(%EBP)
+      # -- Assignmentnode
+      POP -4(%EBP)
+      MOV %EBP,%ESP
+      SUB $4,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class2_f8:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $20,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      POP -20(%EBP)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Andnode
+      POP %EDX
+      POP %EAX
+      AND %EDX,%EAX
+      PUSH %EAX
+      # -- Ornode
+      POP %EDX
+      POP %EAX
+      OR %EDX,%EAX
+      PUSH %EAX
+      PUSH $222
+      PUSH $9
+      PUSH $168
+      PUSH $12
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      PUSH $168
+      PUSH $9
+      PUSH $222
+      # -- Ornode
+      POP %EDX
+      POP %EAX
+      OR %EDX,%EAX
+      PUSH %EAX
+      # -- Andnode
+      POP %EDX
+      POP %EAX
+      AND %EDX,%EAX
+      PUSH %EAX
+      PUSH %ECX
+      CALL class0_class0
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -8(%EBP)
+      # -- Assignmentnode
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Equalnode
+      PUSH $154
+      # -- Minusnode
+      PUSH $230
+      PUSH $123
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JZ pushtrueeq_77
+      PUSH $0
+      JMP aftereqblock_77
+      pushtrueeq_77:
+      PUSH $1
+      aftereqblock_77:
+      POP -16(%EBP)
+      # -- Assignmentnode
+      PUSH $196
+      POP -12(%EBP)
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         PUSH $133
+         MOV -8(%EBP),%EAX
+         PUSH -8(%EAX)
+         # -- Newnode
+         # -- Negationnode
+         PUSH $176
+         NEG %ESP
+         PUSH $20
+         CALL malloc
+         ADD $4,%ESP
+         PUSH %EAX
+         MOV %EAX,%ECX
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         # -- Negationnode
+         PUSH $176
+         NEG %ESP
+         PUSH %ECX
+         CALL class1_class1
+         ADD $4,%ESP
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+         PUSH 8(%EBX)
+         CALL class2_f7
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Returnstatementnode
+      # -- Variablenode
+      PUSH 12(%EBP)
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $20,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class2_f9:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $20,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Notnode
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      POP -4(%EBP)
+      # -- Ifelsenode
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_78
+         JMP endofif_78
+         trueblock_78:
+         # -- Methodcall
+            PUSH %EAX
+            PUSH %ECX
+            PUSH %EDX
+            PUSH $6
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -20(%EAX)
+            # -- Variablenode
+            PUSH 16(%EBP)
+            PUSH 8(%EBX)
+            CALL class2_f7
+            POP %EDX
+            POP %ECX
+            XOR %ESP,%EAX
+            XOR %EAX,%ESP
+            XOR %ESP,%EAX
+         # -- Ifelsenode
+            # -- Lessequalnode
+            # -- Negationnode
+            PUSH $244
+            NEG %ESP
+            # -- Variablenode
+            MOV 8(%EBP),%EAX
+            PUSH -20(%EAX)
+            POP %EDX
+            POP %EAX
+            CMP %EAX,%EDX
+            JLE pushtruelesseq_80
+            PUSH $0
+            JMP afterlesseq_80
+            pushtruelesseq_80:
+            PUSH $1
+            afterlesseq_80:
+            POP %EAX
+            CMP $1,%EAX
+            JE trueblock_79
+            # -- Assignmentnode
+            PUSH $35
+            POP -20(%EBP)
+            # -- Whilenode
+               beginofwhile_81:
+               # -- Lessnode
+               # -- Variablenode
+               PUSH -20(%EBP)
+               PUSH $547
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JL pushtrueless_82
+               PUSH $0
+               JMP afterless_82
+               pushtrueless_82:
+               PUSH $1
+               afterless_82:
+               POP %EAX
+               CMP $0,%EAX
+               JE outofwhile_81
+               # -- Assignmentnode
+               # -- Timesnode
+               # -- Variablenode
+               PUSH -20(%EBP)
+               PUSH $2
+               POP %EBX
+               POP %EAX
+               IMUL %EBX
+               PUSH %EAX
+               POP -20(%EBP)
+               # -- Printnode
+               # -- Addnode
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  PUSH 16(%EBP)
+                  CALL class1_f1
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               PUSH $115
+               POP %EDX
+               POP %EAX
+               ADD %EDX,%EAX
+               PUSH %EAX
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  PUSH $151
+                  # -- Methodcall
+                     PUSH %EAX
+                     PUSH %ECX
+                     PUSH %EDX
+                     # -- Variablenode
+                     PUSH 28(%EBP)
+                     # -- Variablenode
+                     PUSH 16(%EBP)
+                     # -- Newnode
+                     MOV 16(%EBP),%EAX
+                     PUSH -12(%EAX)
+                     # -- Methodcall
+                        PUSH %EAX
+                        PUSH %ECX
+                        PUSH %EDX
+                        PUSH 16(%EBP)
+                        CALL class1_f1
+                        POP %EDX
+                        POP %ECX
+                        XOR %ESP,%EAX
+                        XOR %EAX,%ESP
+                        XOR %ESP,%EAX
+                     PUSH $12
+                     # -- Negationnode
+                     MOV 16(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     NEG %ESP
+                     PUSH $12
+                     CALL malloc
+                     ADD $4,%ESP
+                     PUSH %EAX
+                     MOV %EAX,%ECX
+                     PUSH %EAX
+                     PUSH %ECX
+                     PUSH %EDX
+                     # -- Negationnode
+                     MOV 16(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     NEG %ESP
+                     PUSH $12
+                     # -- Methodcall
+                        PUSH %EAX
+                        PUSH %ECX
+                        PUSH %EDX
+                        PUSH 16(%EBP)
+                        CALL class1_f1
+                        POP %EDX
+                        POP %ECX
+                        XOR %ESP,%EAX
+                        XOR %EAX,%ESP
+                        XOR %ESP,%EAX
+                     MOV 16(%EBP),%EAX
+                     PUSH -12(%EAX)
+                     PUSH %ECX
+                     CALL class0_class0
+                     ADD $4,%ESP
+                     POP %EDX
+                     POP %ECX
+                     XOR %ESP,%EAX
+                     XOR %EAX,%ESP
+                     XOR %ESP,%EAX
+                     # -- Ornode
+                     POP %EDX
+                     POP %EAX
+                     OR %EDX,%EAX
+                     PUSH %EAX
+                     PUSH 8(%EBX)
+                     CALL class2_f6
+                     POP %EDX
+                     POP %ECX
+                     XOR %ESP,%EAX
+                     XOR %EAX,%ESP
+                     XOR %ESP,%EAX
+                  # -- Variablenode
+                  PUSH 16(%EBP)
+                  PUSH 8(%EBX)
+                  CALL class2_f7
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               JMP beginofwhile_81
+               outofwhile_81:
+            # -- Assignmentnode
+            # -- Methodcall
+               PUSH %EAX
+               PUSH %ECX
+               PUSH %EDX
+               PUSH $180
+               PUSH 16(%EBP)
+               CALL class1_f3
+               POP %EDX
+               POP %ECX
+               XOR %ESP,%EAX
+               XOR %EAX,%ESP
+               XOR %ESP,%EAX
+            POP -4(%EBP)
+            # -- Assignmentnode
+            POP -4(%EBP)
+            JMP endofif_79
+            trueblock_79:
+            # -- Assignmentnode
+            POP -4(%EBP)
+            # -- Ifelsenode
+               # -- Lessequalnode
+               # -- Variablenode
+               MOV 8(%EBP),%EAX
+               PUSH -20(%EAX)
+               PUSH $33
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JLE pushtruelesseq_84
+               PUSH $0
+               JMP afterlesseq_84
+               pushtruelesseq_84:
+               PUSH $1
+               afterlesseq_84:
+               POP %EAX
+               CMP $1,%EAX
+               JE trueblock_83
+               # -- Assignmentnode
+               # -- Negationnode
+               PUSH $52
+               NEG %ESP
+               POP -16(%EBP)
+               # -- Whilenode
+                  beginofwhile_85:
+                  # -- Lessnode
+                  # -- Negationnode
+                  PUSH $127
+                  NEG %ESP
+                  # -- Variablenode
+                  PUSH -16(%EBP)
+                  POP %EDX
+                  POP %EAX
+                  CMP %EAX,%EDX
+                  JL pushtrueless_86
+                  PUSH $0
+                  JMP afterless_86
+                  pushtrueless_86:
+                  PUSH $1
+                  afterless_86:
+                  POP %EAX
+                  CMP $0,%EAX
+                  JE outofwhile_85
+                  # -- Assignmentnode
+                  # -- Addnode
+                  # -- Variablenode
+                  PUSH -16(%EBP)
+                  # -- Negationnode
+                  PUSH $3
+                  NEG %ESP
+                  POP %EDX
+                  POP %EAX
+                  ADD %EDX,%EAX
+                  PUSH %EAX
+                  POP -16(%EBP)
+                  # -- Assignmentnode
+                  POP -4(%EBP)
+                  # -- Methodcall
+                     PUSH %EAX
+                     PUSH %ECX
+                     PUSH %EDX
+                     PUSH 16(%EBP)
+                     CALL class1_f2
+                     POP %EDX
+                     POP %ECX
+                     XOR %ESP,%EAX
+                     XOR %EAX,%ESP
+                     XOR %ESP,%EAX
+                  # -- Methodcall
+                     PUSH %EAX
+                     PUSH %ECX
+                     PUSH %EDX
+                     # -- Addnode
+                     PUSH $239
+                     # -- Variablenode
+                     PUSH 28(%EBP)
+                     POP %EDX
+                     POP %EAX
+                     ADD %EDX,%EAX
+                     PUSH %EAX
+                     MOV 16(%EBP),%EAX
+                     PUSH -20(%EAX)
+                     # -- Variablenode
+                     PUSH 16(%EBP)
+                     PUSH 8(%EBX)
+                     CALL class2_f7
+                     POP %EDX
+                     POP %ECX
+                     XOR %ESP,%EAX
+                     XOR %EAX,%ESP
+                     XOR %ESP,%EAX
+                  JMP beginofwhile_85
+                  outofwhile_85:
+               # -- Assignmentnode
+               # -- Equalnode
+               # -- Variablenode
+               PUSH 28(%EBP)
+               MOV 16(%EBP),%EAX
+               PUSH -20(%EAX)
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JZ pushtrueeq_87
+               PUSH $0
+               JMP aftereqblock_87
+               pushtrueeq_87:
+               PUSH $1
+               aftereqblock_87:
+               POP -4(%EBP)
+               # -- Printnode
+               PUSH $206
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               JMP endofif_83
+               trueblock_83:
+               # -- Ifelsenode
+                  # -- Methodcall
+                     PUSH %EAX
+                     PUSH %ECX
+                     PUSH %EDX
+                     MOV 16(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     # -- Addnode
+                     # -- Negationnode
+                     MOV 16(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     NEG %ESP
+                     PUSH $177
+                     POP %EDX
+                     POP %EAX
+                     ADD %EDX,%EAX
+                     PUSH %EAX
+                     # -- Variablenode
+                     PUSH 20(%EBP)
+                     # -- Lessnode
+                     PUSH $187
+                     MOV 16(%EBP),%EAX
+                     PUSH -8(%EAX)
+                     POP %EDX
+                     POP %EAX
+                     CMP %EAX,%EDX
+                     JL pushtrueless_89
+                     PUSH $0
+                     JMP afterless_89
+                     pushtrueless_89:
+                     PUSH $1
+                     afterless_89:
+                     PUSH 8(%EBX)
+                     CALL class2_f8
+                     POP %EDX
+                     POP %ECX
+                     XOR %ESP,%EAX
+                     XOR %EAX,%ESP
+                     XOR %ESP,%EAX
+                  POP %EAX
+                  CMP $1,%EAX
+                  JE trueblock_88
+                  # -- Assignmentnode
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -12(%EAX)
+                  POP -4(%EBP)
+                  # -- Assignmentnode
+                  # -- Negationnode
+                  PUSH $68
+                  NEG %ESP
+                  POP -12(%EBP)
+                  # -- Whilenode
+                     beginofwhile_90:
+                     # -- Lessnode
+                     # -- Variablenode
+                     PUSH -12(%EBP)
+                     # -- Negationnode
+                     PUSH $65
+                     NEG %ESP
+                     POP %EDX
+                     POP %EAX
+                     CMP %EAX,%EDX
+                     JL pushtrueless_91
+                     PUSH $0
+                     JMP afterless_91
+                     pushtrueless_91:
+                     PUSH $1
+                     afterless_91:
+                     POP %EAX
+                     CMP $0,%EAX
+                     JE outofwhile_90
+                     # -- Assignmentnode
+                     # -- Timesnode
+                     # -- Variablenode
+                     PUSH -12(%EBP)
+                     PUSH $3
+                     POP %EBX
+                     POP %EAX
+                     IMUL %EBX
+                     PUSH %EAX
+                     POP -12(%EBP)
+                     # -- Ifelsenode
+                        POP %EAX
+                        CMP $1,%EAX
+                        JE trueblock_92
+                        JMP endofif_92
+                        trueblock_92:
+                        # -- Methodcall
+                           PUSH %EAX
+                           PUSH %ECX
+                           PUSH %EDX
+                           PUSH 16(%EBP)
+                           CALL class1_f2
+                           POP %EDX
+                           POP %ECX
+                           XOR %ESP,%EAX
+                           XOR %EAX,%ESP
+                           XOR %ESP,%EAX
+                        # -- Printnode
+                        PUSH $printstr
+                        CALL printf
+                        ADD $4,%ESP
+                        # -- Methodcall
+                           PUSH %EAX
+                           PUSH %ECX
+                           PUSH %EDX
+                           PUSH 16(%EBP)
+                           CALL class1_f2
+                           POP %EDX
+                           POP %ECX
+                           XOR %ESP,%EAX
+                           XOR %EAX,%ESP
+                           XOR %ESP,%EAX
+                        endofif_92:
+                     # -- Printnode
+                     MOV 16(%EBP),%EAX
+                     PUSH -12(%EAX)
+                     PUSH $printstr
+                     CALL printf
+                     ADD $4,%ESP
+                     # -- Methodcall
+                        PUSH %EAX
+                        PUSH %ECX
+                        PUSH %EDX
+                        MOV 16(%EBP),%EAX
+                        PUSH -16(%EAX)
+                        # -- Ornode
+                        # -- Lessequalnode
+                        MOV 16(%EBP),%EAX
+                        PUSH -16(%EAX)
+                        PUSH $133
+                        POP %EDX
+                        POP %EAX
+                        CMP %EAX,%EDX
+                        JLE pushtruelesseq_93
+                        PUSH $0
+                        JMP afterlesseq_93
+                        pushtruelesseq_93:
+                        PUSH $1
+                        afterlesseq_93:
+                        POP %EDX
+                        POP %EAX
+                        OR %EDX,%EAX
+                        PUSH %EAX
+                        # -- Variablenode
+                        PUSH 28(%EBP)
+                        # -- Variablenode
+                        PUSH 16(%EBP)
+                        PUSH 8(%EBX)
+                        CALL class2_f7
+                        POP %EDX
+                        POP %ECX
+                        XOR %ESP,%EAX
+                        XOR %EAX,%ESP
+                        XOR %ESP,%EAX
+                     JMP beginofwhile_90
+                     outofwhile_90:
+                  JMP endofif_88
+                  trueblock_88:
+                  # -- Ifelsenode
+                     POP %EAX
+                     CMP $1,%EAX
+                     JE trueblock_94
+                     JMP endofif_94
+                     trueblock_94:
+                     # -- Methodcall
+                        PUSH %EAX
+                        PUSH %ECX
+                        PUSH %EDX
+                        PUSH 16(%EBP)
+                        CALL class1_f2
+                        POP %EDX
+                        POP %ECX
+                        XOR %ESP,%EAX
+                        XOR %EAX,%ESP
+                        XOR %ESP,%EAX
+                     endofif_94:
+                  # -- Assignmentnode
+                  POP -4(%EBP)
+                  # -- Assignmentnode
+                  PUSH $85
+                  POP -8(%EBP)
+                  # -- Whilenode
+                     beginofwhile_95:
+                     # -- Lessnode
+                     # -- Negationnode
+                     PUSH $83
+                     NEG %ESP
+                     # -- Variablenode
+                     PUSH -8(%EBP)
+                     POP %EDX
+                     POP %EAX
+                     CMP %EAX,%EDX
+                     JL pushtrueless_96
+                     PUSH $0
+                     JMP afterless_96
+                     pushtrueless_96:
+                     PUSH $1
+                     afterless_96:
+                     POP %EAX
+                     CMP $0,%EAX
+                     JE outofwhile_95
+                     # -- Assignmentnode
+                     # -- Addnode
+                     # -- Variablenode
+                     PUSH -8(%EBP)
+                     # -- Negationnode
+                     PUSH $8
+                     NEG %ESP
+                     POP %EDX
+                     POP %EAX
+                     ADD %EDX,%EAX
+                     PUSH %EAX
+                     POP -8(%EBP)
+                     # -- Assignmentnode
+                     POP -4(%EBP)
+                     # -- Assignmentnode
+                     # -- Variablenode
+                     PUSH 24(%EBP)
+                     POP -4(%EBP)
+                     # -- Assignmentnode
+                     # -- Variablenode
+                     PUSH -4(%EBP)
+                     POP -4(%EBP)
+                     JMP beginofwhile_95
+                     outofwhile_95:
+                  endofif_88:
+               # -- Methodcall
+                  PUSH %EAX
+                  PUSH %ECX
+                  PUSH %EDX
+                  # -- Minusnode
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -8(%EAX)
+                  # -- Variablenode
+                  MOV 8(%EBP),%EAX
+                  PUSH -8(%EAX)
+                  POP %EDX
+                  POP %EAX
+                  SUB %EDX,%EAX
+                  PUSH %EAX
+                  MOV 16(%EBP),%EAX
+                  PUSH -8(%EAX)
+                  # -- Variablenode
+                  PUSH 16(%EBP)
+                  PUSH 8(%EBX)
+                  CALL class2_f7
+                  POP %EDX
+                  POP %ECX
+                  XOR %ESP,%EAX
+                  XOR %EAX,%ESP
+                  XOR %ESP,%EAX
+               # -- Assignmentnode
+               POP -4(%EBP)
+               endofif_83:
+            # -- Printnode
+            # -- Variablenode
+            PUSH 24(%EBP)
+            PUSH $printstr
+            CALL printf
+            ADD $4,%ESP
+            endofif_79:
+         endofif_78:
+      # -- Printnode
+      # -- Notnode
+      # -- Variablenode
+      PUSH 20(%EBP)
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      MOV %EBP,%ESP
+      SUB $20,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class2_class2:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $20,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         # -- Timesnode
+         # -- Dividenode
+         # -- Dividenode
+         PUSH $215
+         PUSH $162
+         POP %EBX
+         POP %EAX
+         CDQ
+         IDIV %EBX
+         PUSH %EAX
+         PUSH $171
+         POP %EBX
+         POP %EAX
+         CDQ
+         IDIV %EBX
+         PUSH %EAX
+         PUSH $143
+         POP %EBX
+         POP %EAX
+         IMUL %EBX
+         PUSH %EAX
+         PUSH 8(%EBX)
+         CALL class1_class1
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Assignmentnode
+      # -- Negationnode
+      PUSH $188
+      NEG %ESP
+      POP -20(%EBP)
+      # -- Assignmentnode
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $241
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Dividenode
+      # -- Timesnode
+      PUSH $186
+      PUSH $137
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      # -- Negationnode
+      PUSH $80
+      NEG %ESP
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      PUSH $20
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      # -- Dividenode
+      # -- Timesnode
+      PUSH $186
+      PUSH $137
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      # -- Negationnode
+      PUSH $80
+      NEG %ESP
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      PUSH %ECX
+      CALL class1_class1
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -16(%EBP)
+      # -- Assignmentnode
+      POP -12(%EBP)
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         # -- Variablenode
+         PUSH -4(%EBP)
+         # -- Variablenode
+         PUSH 12(%EBP)
+         PUSH $235
+         # -- Newnode
+         # -- Timesnode
+         PUSH $180
+         MOV -16(%EBP),%EAX
+         PUSH -8(%EAX)
+         POP %EBX
+         POP %EAX
+         IMUL %EBX
+         PUSH %EAX
+         PUSH $20
+         CALL malloc
+         ADD $4,%ESP
+         PUSH %EAX
+         MOV %EAX,%ECX
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         # -- Timesnode
+         PUSH $180
+         MOV -16(%EBP),%EAX
+         PUSH -8(%EAX)
+         POP %EBX
+         POP %EAX
+         IMUL %EBX
+         PUSH %EAX
+         PUSH %ECX
+         CALL class1_class1
+         ADD $4,%ESP
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+         PUSH 8(%EBX)
+         CALL class2_f7
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Printnode
+      PUSH $163
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      MOV %EBP,%ESP
+      SUB $20,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class3_f5:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $12,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Notnode
+      POP %EAX
+      XOR $1,%EAX
+      PUSH %EAX
+      POP -8(%EBP)
+      # -- Assignmentnode
+      POP -4(%EBP)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Timesnode
+      PUSH $175
+      PUSH $1
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      PUSH $20
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      # -- Timesnode
+      PUSH $175
+      PUSH $1
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      PUSH %ECX
+      CALL class1_class1
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -12(%EBP)
+      # -- Printnode
+      # -- Variablenode
+      PUSH -4(%EBP)
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Assignmentnode
+      # -- Andnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -32(%EAX)
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -32(%EAX)
+      POP %EDX
+      POP %EAX
+      AND %EDX,%EAX
+      PUSH %EAX
+      POP -8(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -32(%EAX)
+      POP -4(%EBP)
+      # -- Printnode
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Returnstatementnode
+      # -- Variablenode
+      MOV 8(%EBP),%EAX
+      PUSH -4(%EAX)
+      POP %EAX
+      MOV %EBP,%ESP
+      SUB $12,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      class3_class3:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $20,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Methodcall
+         PUSH %EAX
+         PUSH %ECX
+         PUSH %EDX
+         PUSH $181
+         PUSH 8(%EBX)
+         CALL class1_class1
+         POP %EDX
+         POP %ECX
+         XOR %ESP,%EAX
+         XOR %EAX,%ESP
+         XOR %ESP,%EAX
+      # -- Assignmentnode
+      PUSH $53
+      MOV 8(%EBP),%EAX
+      POP -24(%EAX)
+      # -- Assignmentnode
+      MOV 8(%EBP),%EAX
+      POP -32(%EAX)
+      # -- Assignmentnode
+      # -- Newnode
+      PUSH $58
+      # -- Negationnode
+      PUSH $231
+      NEG %ESP
+      # -- Minusnode
+      PUSH $22
+      # -- Negationnode
+      PUSH $1
+      NEG %ESP
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      PUSH $12
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      # -- Minusnode
+      PUSH $22
+      # -- Negationnode
+      PUSH $1
+      NEG %ESP
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      # -- Negationnode
+      PUSH $231
+      NEG %ESP
+      PUSH $58
+      PUSH %ECX
+      CALL class0_class0
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      MOV 8(%EBP),%EAX
+      POP -28(%EAX)
+      # -- Assignmentnode
+      # -- Minusnode
+      # -- Timesnode
+      PUSH $73
+      PUSH $101
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      PUSH $55
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      MOV 8(%EBP),%EAX
+      POP -36(%EAX)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Ornode
+      POP %EDX
+      POP %EAX
+      OR %EDX,%EAX
+      PUSH %EAX
+      PUSH $0
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      # -- Ornode
+      POP %EDX
+      POP %EAX
+      OR %EDX,%EAX
+      PUSH %EAX
+      PUSH %ECX
+      CALL class2_class2
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -20(%EBP)
+      # -- Assignmentnode
+      # -- Newnode
+      # -- Dividenode
+      PUSH $40
+      PUSH $218
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      PUSH $20
+      CALL malloc
+      ADD $4,%ESP
+      PUSH %EAX
+      MOV %EAX,%ECX
+      PUSH %EAX
+      PUSH %ECX
+      PUSH %EDX
+      # -- Dividenode
+      PUSH $40
+      PUSH $218
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      PUSH %ECX
+      CALL class1_class1
+      ADD $4,%ESP
+      POP %EDX
+      POP %ECX
+      XOR %ESP,%EAX
+      XOR %EAX,%ESP
+      XOR %ESP,%EAX
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $42
+      POP -4(%EBP)
+      # -- Assignmentnode
+      PUSH $83
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Equalnode
+      PUSH $46
+      PUSH $141
+      POP %EDX
+      POP %EAX
+      CMP %EAX,%EDX
+      JZ pushtrueeq_97
+      PUSH $0
+      JMP aftereqblock_97
+      pushtrueeq_97:
+      PUSH $1
+      aftereqblock_97:
+      POP -12(%EBP)
+      # -- Printnode
+      MOV -20(%EBP),%EAX
+      PUSH -20(%EAX)
+      PUSH $printstr
+      CALL printf
+      ADD $4,%ESP
+      # -- Assignmentnode
+      # -- Dividenode
+      # -- Variablenode
+      PUSH -16(%EBP)
+      MOV -20(%EBP),%EAX
+      PUSH -16(%EAX)
+      POP %EBX
+      POP %EAX
+      CDQ
+      IDIV %EBX
+      PUSH %EAX
+      POP -4(%EBP)
+      MOV %EBP,%ESP
+      SUB $20,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
+   # -- Methodnode
+      Main_main:
+      PUSH %EBP
+      MOV %ESP,%EBP
+      SUB $32,%ESP
+      PUSH %EBX
+      PUSH %ESI
+      PUSH %EDI
+      # -- Methodbodynode
+      # -- Assignmentnode
+      # -- Timesnode
+      PUSH $218
+      PUSH $169
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      POP -24(%EBP)
+      # -- Assignmentnode
+      POP -20(%EBP)
+      # -- Assignmentnode
+      POP -8(%EBP)
+      # -- Assignmentnode
+      PUSH $254
+      POP -4(%EBP)
+      # -- Assignmentnode
+      PUSH $115
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Addnode
+      PUSH $240
+      PUSH $228
+      POP %EDX
+      POP %EAX
+      ADD %EDX,%EAX
+      PUSH %EAX
+      POP -12(%EBP)
+      # -- Assignmentnode
+      POP -20(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH -8(%EBP)
+      POP -8(%EBP)
+      # -- Assignmentnode
+      # -- Timesnode
+      PUSH $12
+      PUSH $151
+      POP %EBX
+      POP %EAX
+      IMUL %EBX
+      PUSH %EAX
+      POP -24(%EBP)
+      # -- Ifelsenode
+         # -- Notnode
+         POP %EAX
+         XOR $1,%EAX
+         PUSH %EAX
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_98
+         JMP endofif_98
+         trueblock_98:
+         # -- Assignmentnode
+         # -- Variablenode
+         PUSH -8(%EBP)
+         POP -8(%EBP)
+         # -- Ifelsenode
+            # -- Variablenode
+            PUSH -8(%EBP)
+            POP %EAX
+            CMP $1,%EAX
+            JE trueblock_99
+            JMP endofif_99
+            trueblock_99:
+            # -- Ifelsenode
+               # -- Equalnode
+               PUSH $23
+               PUSH $218
+               POP %EDX
+               POP %EAX
+               CMP %EAX,%EDX
+               JZ pushtrueeq_101
+               PUSH $0
+               JMP aftereqblock_101
+               pushtrueeq_101:
+               PUSH $1
+               aftereqblock_101:
+               POP %EAX
+               CMP $1,%EAX
+               JE trueblock_100
+               JMP endofif_100
+               trueblock_100:
+               # -- Assignmentnode
+               # -- Timesnode
+               PUSH $104
+               PUSH $112
+               POP %EBX
+               POP %EAX
+               IMUL %EBX
+               PUSH %EAX
+               POP -24(%EBP)
+               # -- Printnode
+               # -- Addnode
+               # -- Variablenode
+               PUSH -4(%EBP)
+               # -- Variablenode
+               PUSH -4(%EBP)
+               POP %EDX
+               POP %EAX
+               ADD %EDX,%EAX
+               PUSH %EAX
+               PUSH $printstr
+               CALL printf
+               ADD $4,%ESP
+               endofif_100:
+            endofif_99:
+         # -- Assignmentnode
+         POP -20(%EBP)
+         endofif_98:
+      # -- Ifelsenode
+         # -- Equalnode
+         PUSH $59
+         # -- Variablenode
+         PUSH -12(%EBP)
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JZ pushtrueeq_103
+         PUSH $0
+         JMP aftereqblock_103
+         pushtrueeq_103:
+         PUSH $1
+         aftereqblock_103:
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_102
+         # -- Printnode
+         PUSH $225
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         JMP endofif_102
+         trueblock_102:
+         # -- Printnode
+         PUSH $181
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         endofif_102:
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH -20(%EBP)
+      POP -20(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH -12(%EBP)
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Minusnode
+      PUSH $60
+      PUSH $146
+      POP %EDX
+      POP %EAX
+      SUB %EDX,%EAX
+      PUSH %EAX
+      POP -24(%EBP)
+      # -- Assignmentnode
+      PUSH $26
+      POP -16(%EBP)
+      # -- Assignmentnode
+      # -- Variablenode
+      PUSH -16(%EBP)
+      POP -12(%EBP)
+      # -- Ifelsenode
+         # -- Variablenode
+         PUSH -8(%EBP)
+         POP %EAX
+         CMP $1,%EAX
+         JE trueblock_104
+         JMP endofif_104
+         trueblock_104:
+         # -- Printnode
+         # -- Variablenode
+         PUSH -20(%EBP)
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         # -- Assignmentnode
+         # -- Variablenode
+         PUSH -16(%EBP)
+         POP -24(%EBP)
+         # -- Assignmentnode
+         # -- Minusnode
+         # -- Variablenode
+         PUSH -24(%EBP)
+         # -- Variablenode
+         PUSH -16(%EBP)
+         POP %EDX
+         POP %EAX
+         SUB %EDX,%EAX
+         PUSH %EAX
+         POP -24(%EBP)
+         endofif_104:
+      # -- Assignmentnode
+      # -- Negationnode
+      PUSH $151
+      NEG %ESP
+      POP -16(%EBP)
+      # -- Assignmentnode
+      PUSH $91
+      POP -28(%EBP)
+      # -- Whilenode
+         beginofwhile_105:
+         # -- Lessnode
+         # -- Variablenode
+         PUSH -28(%EBP)
+         PUSH $259
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JL pushtrueless_106
+         PUSH $0
+         JMP afterless_106
+         pushtrueless_106:
+         PUSH $1
+         afterless_106:
+         POP %EAX
+         CMP $0,%EAX
+         JE outofwhile_105
+         # -- Assignmentnode
+         # -- Addnode
+         # -- Variablenode
+         PUSH -28(%EBP)
+         PUSH $7
+         POP %EDX
+         POP %EAX
+         ADD %EDX,%EAX
+         PUSH %EAX
+         POP -28(%EBP)
+         # -- Printnode
+         # -- Variablenode
+         PUSH -20(%EBP)
+         PUSH $printstr
+         CALL printf
+         ADD $4,%ESP
+         JMP beginofwhile_105
+         outofwhile_105:
+      # -- Assignmentnode
+      PUSH $37
+      POP -16(%EBP)
+      # -- Assignmentnode
+      PUSH $31
+      POP -32(%EBP)
+      # -- Whilenode
+         beginofwhile_107:
+         # -- Lessequalnode
+         # -- Variablenode
+         PUSH -32(%EBP)
+         PUSH $83
+         POP %EDX
+         POP %EAX
+         CMP %EAX,%EDX
+         JLE pushtruelesseq_108
+         PUSH $0
+         JMP afterlesseq_108
+         pushtruelesseq_108:
+         PUSH $1
+         afterlesseq_108:
+         POP %EAX
+         CMP $0,%EAX
+         JE outofwhile_107
+         # -- Assignmentnode
+         # -- Minusnode
+         # -- Variablenode
+         PUSH -32(%EBP)
+         # -- Negationnode
+         PUSH $4
+         NEG %ESP
+         POP %EDX
+         POP %EAX
+         SUB %EDX,%EAX
+         PUSH %EAX
+         POP -32(%EBP)
+         # -- Assignmentnode
+         # -- Minusnode
+         # -- Variablenode
+         PUSH -16(%EBP)
+         PUSH $219
+         POP %EDX
+         POP %EAX
+         SUB %EDX,%EAX
+         PUSH %EAX
+         POP -12(%EBP)
+         JMP beginofwhile_107
+         outofwhile_107:
+      MOV %EBP,%ESP
+      SUB $32,%ESP
+      SUB $16,%ESP
+      POP %EDI
+      POP %ESI
+      POP %EBX
+      MOV %EBP,%ESP
+      POP %EBP
+      RET
