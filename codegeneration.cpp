@@ -13,7 +13,7 @@ void CodeGenerator::visitProgramNode(ProgramNode* node) {
 	cout << "printstr: .asciz \"%d\\n\"\n";
 	cout << ".text\n";
 	cout << ".globl Main_main\n";
-	cout << "#-- BEGIN THE THING\n";	
+	cout << "# -- BEGIN THE THING\n";	
 	node->visit_children(this);
 }
 
@@ -27,7 +27,7 @@ void CodeGenerator::visitClassNode(ClassNode* node) {
 
 void CodeGenerator::visitMethodNode(MethodNode* node) {
 	currentMethodName = node->identifier->name;
-	cout << "#-- Methodnode\n";
+	cout << "# -- Methodnode\n";
 	std::string tempstr = padstr;
 	padstr+="   ";
 	//Label
@@ -35,6 +35,7 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
 	///#######PROLOGUE
 	cout << "PUSH %EBP\n";
 	cout << "MOV %ESP,%EBP\n";
+	cout << "PUSH $4\n";//WE WANT THE SELF POINTER
 		//Allocate stack space for locals
 	cout << "SUB $" << classTable->at(currentClassName).methods->at(currentMethodName).localsSize <<",%ESP\n";
 	//Save callee saved registers?
@@ -43,16 +44,22 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
 	cout << "PUSH %EDI\n";
 	node->visit_children(this);
 	///#######EPILOGUE
-	//Restore callee saved registers?
+	//Restore callee saved registers
+	cout << "MOV %EBP,%ESP\n";
+	cout << "SUB $" << classTable->at(currentClassName).methods->at(currentMethodName).localsSize <<",%ESP\n";
+	cout << "SUB $16,%ESP\n";
 	cout << "POP %EDI\n";
 	cout << "POP %ESI\n";
 	cout << "POP %EBX\n";
+		//Deallocate
+	cout << "MOV %EBP,%ESP\n";
+	cout << "POP %EBP\n";
 	cout << "RET\n";
 	padstr = tempstr;
 }
 
 void CodeGenerator::visitMethodBodyNode(MethodBodyNode* node) {
-	cout << "#-- Methodbodynode\n";
+	cout << "# -- Methodbodynode\n";
 	node->visit_children(this);
 }
 
@@ -65,15 +72,20 @@ void CodeGenerator::visitDeclarationNode(DeclarationNode* node) {
 }
 
 void CodeGenerator::visitReturnStatementNode(ReturnStatementNode* node) {
-	cout << "#-- Returnstatementnode\n";
+	cout << "# -- Returnstatementnode\n";
 	node->visit_children(this);
 	//Assuming that what we want to return is ontop of the stack
 	cout << "POP %EAX\n";
 }
 
 void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
-	cout << "#-- Assignmentnode\n";
+	cout << "# -- Assignmentnode\n";
 	node->visit_children(this);
+	if(node->identifier_2==NULL){
+		//Uses self pointer!
+	} else {
+		//Uses self pointer!				
+	}
 }
 
 void CodeGenerator::visitCallNode(CallNode* node) {
@@ -81,7 +93,7 @@ void CodeGenerator::visitCallNode(CallNode* node) {
 }
 
 void CodeGenerator::visitIfElseNode(IfElseNode* node) {
-	cout << "#-- Ifelsenode\n";
+	cout << "# -- Ifelsenode\n";
 	std::string tempstr = padstr;
 	padstr+="   ";
 	int tempLabel = nextLabel();
@@ -111,7 +123,7 @@ void CodeGenerator::visitIfElseNode(IfElseNode* node) {
 }
 
 void CodeGenerator::visitWhileNode(WhileNode* node) {
-	cout << "#-- Whilenode\n";
+	cout << "# -- Whilenode\n";
 	std::string tempstr = padstr;
 	padstr+="   ";
 	int tempLabel = nextLabel();
@@ -136,11 +148,15 @@ void CodeGenerator::visitWhileNode(WhileNode* node) {
 }
 
 void CodeGenerator::visitPrintNode(PrintNode* node) {
+	cout << "# -- Printnode\n";
 	node->visit_children(this);
+	cout << "PUSH $printstr\n";
+	cout << "CALL printf\n";
+	cout << "ADD $4,%ESP\n";
 }
 
 void CodeGenerator::visitPlusNode(PlusNode* node) {
-	cout << "#-- Addnode\n";
+	cout << "# -- Addnode\n";
 	node->visit_children(this);
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
@@ -149,7 +165,7 @@ void CodeGenerator::visitPlusNode(PlusNode* node) {
 }
 
 void CodeGenerator::visitMinusNode(MinusNode* node) {
-	cout << "#-- Minusnode\n";
+	cout << "# -- Minusnode\n";
 	node->visit_children(this);
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
@@ -158,7 +174,7 @@ void CodeGenerator::visitMinusNode(MinusNode* node) {
 }
 
 void CodeGenerator::visitTimesNode(TimesNode* node) {
-	cout << "#-- Timesnode\n";
+	cout << "# -- Timesnode\n";
 	node->visit_children(this);
 	cout << "POP %EBX\n";
 	cout << "POP %EAX\n";
@@ -167,7 +183,7 @@ void CodeGenerator::visitTimesNode(TimesNode* node) {
 }
 
 void CodeGenerator::visitDivideNode(DivideNode* node) {
-	cout << "#-- Dividenode\n";
+	cout << "# -- Dividenode\n";
 	node->visit_children(this);
 	cout << "POP %EBX\n";
 	cout << "POP %EAX\n";
@@ -177,7 +193,7 @@ void CodeGenerator::visitDivideNode(DivideNode* node) {
 }
 
 void CodeGenerator::visitLessNode(LessNode* node) {
-	cout << "#-- Lessnode\n";
+	cout << "# -- Lessnode\n";
 	node->visit_children(this);
 	int label = nextLabel();
 	cout << "POP %EDX\n";
@@ -192,7 +208,7 @@ void CodeGenerator::visitLessNode(LessNode* node) {
 }
 
 void CodeGenerator::visitLessEqualNode(LessEqualNode* node) {
-	cout << "#-- Lessequalnode\n";
+	cout << "# -- Lessequalnode\n";
 	node->visit_children(this);
 	int label = nextLabel();
 	cout << "POP %EDX\n";
@@ -207,7 +223,7 @@ void CodeGenerator::visitLessEqualNode(LessEqualNode* node) {
 }
 
 void CodeGenerator::visitEqualNode(EqualNode* node) {
-	cout << "#-- Equalnode\n";
+	cout << "# -- Equalnode\n";
 	node->visit_children(this);
 	int label = nextLabel();
 	cout << "POP %EDX\n";
@@ -222,7 +238,7 @@ void CodeGenerator::visitEqualNode(EqualNode* node) {
 }
 
 void CodeGenerator::visitAndNode(AndNode* node) {
-	cout << "#-- Andnode\n"; 
+	cout << "# -- Andnode\n"; 
 	node->visit_children(this);
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
@@ -231,7 +247,7 @@ void CodeGenerator::visitAndNode(AndNode* node) {
 }
 
 void CodeGenerator::visitOrNode(OrNode* node) {
-	cout << "#-- Ornode\n";
+	cout << "# -- Ornode\n";
 	node->visit_children(this);
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
@@ -240,7 +256,7 @@ void CodeGenerator::visitOrNode(OrNode* node) {
 }
 
 void CodeGenerator::visitNotNode(NotNode* node) {
-	cout << "#-- Notnode\n";
+	cout << "# -- Notnode\n";
 	node->visit_children(this);
 	//Flip the first bit of a boolean
 	cout << "POP %EAX\n";
@@ -249,13 +265,13 @@ void CodeGenerator::visitNotNode(NotNode* node) {
 }
 
 void CodeGenerator::visitNegationNode(NegationNode* node) {
-	cout << "#-- Negationnode\n";
+	cout << "# -- Negationnode\n";
 	node->visit_children(this);
 	cout << "NEG %ESP\n";
 }
 
 void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
-	cout << "#-- Methodcall\n";
+	cout << "# -- Methodcall\n";
 	std::string tempstr = padstr;
 	padstr+="   ";
 	///##########PRE-CALL
@@ -289,23 +305,14 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 
 void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
 	node->visit_children(this);
-}
-
-VariableInfo findVariable(std::string varName){
-	//NOT CHECKING FOR PARAMETERS!?
-	
+	//Uses self pointer!
 }
 
 void CodeGenerator::visitVariableNode(VariableNode* node) {
-	cout << "#-- Variablenode\n";
-	//First check for parameter
-	//Then check for locals
-	//Then check for members
+	cout << "# -- Variablenode\n";
 	node->visit_children(this);
-	//Params:
-	if(false){
-
-	}else if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier->name)!=0){
+	//Params/Locals:
+	if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier->name)!=0){
 	//Locals:
 		int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier->name).offset;
 		cout << "PUSH "<< var << "(%EBP)\n";
@@ -328,7 +335,19 @@ void CodeGenerator::visitBooleanLiteralNode(BooleanLiteralNode* node) {
 }
 
 void CodeGenerator::visitNewNode(NewNode* node) {
+	cout << "# -- Newnode\n";
+
+	//visit children to get params on stack
 	node->visit_children(this);
+	
+	//create it
+	cout << "PUSH $"<<classTable->at(node->identifier->name).membersSize << "\n";
+	cout << "CALL malloc\n";
+	cout << "ADD $4,%ESP\n";
+	cout << "PUSH %EAX\n";
+
+	//if it has a constructor, call it, expecting that the params are ontop of the stack
+	
 }
 
 void CodeGenerator::visitIntegerTypeNode(IntegerTypeNode* node) {
