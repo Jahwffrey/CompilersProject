@@ -35,7 +35,6 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
 	///#######PROLOGUE
 	cout << "PUSH %EBP\n";
 	cout << "MOV %ESP,%EBP\n";
-	cout << "PUSH $4\n";//WE WANT THE SELF POINTER
 		//Allocate stack space for locals
 	cout << "SUB $" << classTable->at(currentClassName).methods->at(currentMethodName).localsSize <<",%ESP\n";
 	//Save callee saved registers?
@@ -88,7 +87,6 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 			cout << "POP "<< var << "(%EBP)\n";
 		} else {
 			//Members:
-			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
 			//Uses self pointer!
 		}
 	} else {
@@ -101,7 +99,6 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 			cout << "POP " << classesVar << "(%EAX)\n";
 		} else {
 			//Members:
-			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
 			//Uses self pointer!
 		}
 	}
@@ -121,7 +118,7 @@ void CodeGenerator::visitIfElseNode(IfElseNode* node) {
 	//If equal to true, jumpt to the true block. else continue into the false block and then skip past the true block
 	node->expression->accept(this);
 	cout << "POP %EAX\n";
-	cout << "CMP %EAX,$1\n";
+	cout << "CMP $1,%EAX\n";
 	cout << "JE trueblock_" << tempLabel << "\n";
 	if (node->statement_list_2) {
 		for(std::list<StatementNode*>::iterator iter = node->statement_list_2->begin();
@@ -153,7 +150,7 @@ void CodeGenerator::visitWhileNode(WhileNode* node) {
 	cout << "beginofwhile_" << tempLabel << ":\n";
 	node->expression->accept(this);
 	cout << "POP %EAX\n";
-	cout << "CMP %EAX,$0\n";
+	cout << "CMP $0,%EAX\n";
 	cout << "JE outofwhile_" << tempLabel << "\n";
 	if (node->statement_list) {
 		for(std::list<StatementNode*>::iterator iter = node->statement_list->begin();
@@ -233,7 +230,7 @@ void CodeGenerator::visitLessEqualNode(LessEqualNode* node) {
 	cout << "POP %EDX\n";
 	cout << "POP %EAX\n";
 	cout << "CMP %EAX,%EDX\n";
-	cout << "JEL pushtruelesseq_" << label << "\n";
+	cout << "JLE pushtruelesseq_" << label << "\n";
 	cout << "PUSH $0\n";
 	cout << "JMP afterlesseq_" << label << "\n";
 	cout << "pushtruelesseq_" << label << ":\n";
@@ -307,9 +304,19 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 	}
 	//Jump to fxn
 	if(node->identifier_2 == NULL){
-		cout << "CALL " << currentClassName << "_" << node->identifier_1->name << "\n";
+		//Push self pointer
+		std::string callClass = currentClassName;
+		while(classTable->at(callClass).methods->count(node->identifier_1->name)==0){
+			callClass = classTable->at(callClass).superClassName;
+		}
+		cout << "CALL " << callClass << "_" << node->identifier_1->name << "\n";
 	} else {
-		cout << "CALL "<<node->identifier_1->objectClassName << "_" << node->identifier_2->name << "\n";
+		//Push self pointer
+		std::string callClass = node->identifier_1->objectClassName;
+		while(classTable->at(callClass).methods->count(node->identifier_2->name)==0){
+			callClass = classTable->at(callClass).superClassName;
+		}
+		cout << "CALL " << callClass  << "_" << node->identifier_2->name << "\n";
 	}
 	///##########POST-RETURN
 	//caster caller-saved registers
@@ -324,7 +331,18 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 
 void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
 	node->visit_children(this);
-	//Uses self pointer!
+	//Params/Locals:
+	if(classTable->at(currentClassName).methods->at(currentMethodName).variables->count(node->identifier_1->name)!=0){
+	//Locals:
+		int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).offset;
+		cout << "MOV "<< var << "(%EBP),%EAX\n";
+		std::string className = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).type.objectClassName;
+		int classesVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+		cout << "PUSH " << classesVar << "(%EAX)\n";
+	} else {
+	//Members:
+		//Uses self pointer	
+	}
 }
 
 void CodeGenerator::visitVariableNode(VariableNode* node) {
@@ -337,9 +355,7 @@ void CodeGenerator::visitVariableNode(VariableNode* node) {
 		cout << "PUSH "<< var << "(%EBP)\n";
 	} else {
 	//Members:
-		int var = classTable->at(currentClassName).members->at(node->identifier->name).offset;
-		//This isnt right. I need to derefernce the this pointer!	
-		//cout << "PUSH "<< var.offset << "(%EBP)\n";
+		//Uses self pointer
 	}
 	
 }
@@ -366,7 +382,7 @@ void CodeGenerator::visitNewNode(NewNode* node) {
 	cout << "PUSH %EAX\n";
 
 	//if it has a constructor, call it, expecting that the params are ontop of the stack
-	
+	//Uses self pointer?	
 }
 
 void CodeGenerator::visitIntegerTypeNode(IntegerTypeNode* node) {
