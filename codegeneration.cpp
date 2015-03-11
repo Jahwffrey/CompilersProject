@@ -290,7 +290,9 @@ void CodeGenerator::visitNotNode(NotNode* node) {
 void CodeGenerator::visitNegationNode(NegationNode* node) {
 	cout << "# -- Negationnode\n";
 	node->visit_children(this);
-	cout << "NEG %ESP\n";
+	cout << "POP %EAX\n";	
+	cout << "NEG %EAX\n";
+	cout << "PUSH %EAX\n";
 }
 
 void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
@@ -404,7 +406,7 @@ void CodeGenerator::visitNewNode(NewNode* node) {
 	cout << "# -- Newnode\n";
 
 	//visit children to get params on stack
-	node->visit_children(this);
+	//node->visit_children(this);
 	
 	//create it
 	cout << "PUSH $"<<classTable->at(node->identifier->name).membersSize << "\n";
@@ -434,14 +436,14 @@ void CodeGenerator::visitNewNode(NewNode* node) {
 
 		cout << "CALL " << node->identifier->name << "_" << node->identifier->name << "\n";
 	
-		//restore caller-saved registers
+		//restore caller-saved registers, deallocate params
 		cout << "ADD $4,%ESP\n";
+		if(node->expression_list!=NULL){
+			cout << "ADD $" << node->expression_list->size()*4 << ",%ESP\n";
+		}
 		cout << "POP %EDX\n";
 		cout << "POP %ECX\n";
-		//Switch %EAX with top of stack
-		cout << "POP %EBX\n";
-		cout << "PUSH %EAX\n";
-		cout << "MOV %EBX,%EAX\n";	
+		cout << "POP %EAX\n";
 	}
 }
 
