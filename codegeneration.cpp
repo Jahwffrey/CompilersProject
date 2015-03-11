@@ -88,7 +88,7 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 		} else {
 			//Members:
 			cout << "MOV 8(%EBP),%EAX\n";
-			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			int var = -1 * classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
 			cout << "POP " << var << "(%EAX)\n";
 		}
 	} else {
@@ -97,15 +97,15 @@ void CodeGenerator::visitAssignmentNode(AssignmentNode* node) {
 			int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).offset;
 			std::string className = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).type.objectClassName;
 			cout << "MOV "<< var << "(%EBP),%EAX\n";
-			int classesVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+			int classesVar = -1 * classTable->at(className).members->at(node->identifier_2->name).offset;
 			cout << "POP " << classesVar << "(%EAX)\n";
 		} else {
 			//Members:
 			cout << "MOV 8(%EBP),%EAX\n";
-			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			int var = -1 * classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
 			cout << "MOV " << var << "(%EAX),%EBX\n";
 			std::string className = classTable->at(currentClassName).members->at(node->identifier_1->name).type.objectClassName;
-			int memberMemberVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+			int memberMemberVar = -1 * classTable->at(className).members->at(node->identifier_2->name).offset;
 			cout << "POP "<< memberMemberVar << "(%EBX)\n";
 		}
 	}
@@ -329,7 +329,7 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 		} else {
 			//Members:
 			cout << "MOV 8(%EBP),%EAX\n";
-			int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+			int var = -1 * classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
 			cout << "PUSH " << var << "(%EAX)\n";
 		}
 		std::string callClass = node->identifier_1->objectClassName;
@@ -362,15 +362,15 @@ void CodeGenerator::visitMemberAccessNode(MemberAccessNode* node) {
 		int var = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).offset;
 		cout << "MOV "<< var << "(%EBP),%EAX\n";
 		std::string className = classTable->at(currentClassName).methods->at(currentMethodName).variables->at(node->identifier_1->name).type.objectClassName;
-		int classesVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+		int classesVar = -1 * classTable->at(className).members->at(node->identifier_2->name).offset;
 		cout << "PUSH " << classesVar << "(%EAX)\n";
 	} else {
 	//Members:
 		cout << "MOV 8(%EBP),%EAX\n";
-		int var = classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
+		int var = -1 * classTable->at(currentClassName).members->at(node->identifier_1->name).offset;
 		cout << "MOV " << var << "(%EAX),%EBX\n";
 		std::string className = classTable->at(currentClassName).members->at(node->identifier_1->name).type.objectClassName;
-		int memberMemberVar = classTable->at(className).members->at(node->identifier_2->name).offset;
+		int memberMemberVar = -1 * classTable->at(className).members->at(node->identifier_2->name).offset;
 		cout << "PUSH "<< memberMemberVar << "(%EBX)\n";	
 	}
 }
@@ -386,7 +386,7 @@ void CodeGenerator::visitVariableNode(VariableNode* node) {
 	} else {
 	//Members:
 		cout << "MOV 8(%EBP),%EAX\n";
-		int var = classTable->at(currentClassName).members->at(node->identifier->name).offset;
+		int var = -1 * classTable->at(currentClassName).members->at(node->identifier->name).offset;
 		cout << "PUSH "<< var << "(%EAX)\n";		
 	}
 	
