@@ -141,6 +141,9 @@ void insertParentMembers(ClassInfo thisClass,std::string currentParentName,Varia
 				inheritOffset-=4;
 				varTable->insert(std::pair<std::string,VariableInfo>(it->first,it->second));
 				varTable->at(it->first).offset = inheritOffset;
+			} else {
+				inheritOffset-=4;
+				varTable->at(it->first).offset = inheritOffset;
 			}
 			it++;
 		}
@@ -166,7 +169,7 @@ void TypeCheck::visitClassNode(ClassNode* node) {
 		inheritOffset = 0;
 		VariableTable* betterVarTable = new VariableTable;
 		insertParentMembers(classTable->at(node->identifier_1->name),node->identifier_1->name,betterVarTable,classTable);
-		classTable->at(node->identifier_1->name).membersSize = classTable->at(node->identifier_1->name).members->size()*4;
+		classTable->at(node->identifier_1->name).membersSize =(-1) * inheritOffset; //classTable->at(node->identifier_1->name).members->size()*4;
 		classTable->at(node->identifier_1->name).members = betterVarTable;
 	}
 	//Check that constructor returns none

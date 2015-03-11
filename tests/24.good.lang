@@ -14,7 +14,7 @@ classB extends classA {
     integer x
 
     classB(val1 : integer, val2 : integer) -> none {
-        classA(val1)
+	classA(val1)
 	x = val2
     }
 

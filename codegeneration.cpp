@@ -299,6 +299,8 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 	cout << "# -- Methodcall\n";
 	std::string tempstr = padstr;
 	padstr+="   ";
+	cout << "# -- 							" << node->identifier_1->name << "\n";
+	bool wasConstructor = false;
 	///##########PRE-CALL
 	//Save caller-saved registers
 	cout << "PUSH %EAX\n";
@@ -319,6 +321,7 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 		while(classTable->at(callClass).methods->count(node->identifier_1->name)==0){
 			callClass = classTable->at(callClass).superClassName;
 		}
+		if(callClass == node->identifier_1->name) wasConstructor = true;
 		cout << "CALL " << callClass << "_" << node->identifier_1->name << "\n";
 	} else {
 		///////Push self pointer
@@ -348,9 +351,13 @@ void CodeGenerator::visitMethodCallNode(MethodCallNode* node) {
 	cout << "POP %EDX\n";
 	cout << "POP %ECX\n";
 	//Switch top of stack (return value) EAX
-	cout << "POP %EBX\n";
-	cout << "PUSH %EAX\n";
-	cout << "MOV %EBX,%EAX\n";
+	if(!wasConstructor){
+		cout << "POP %EBX\n";
+		cout << "PUSH %EAX\n";
+		cout << "MOV %EBX,%EAX\n";
+	} else {
+		cout << "POP %EAX\n";
+	}
 	padstr = tempstr;
 }
 
