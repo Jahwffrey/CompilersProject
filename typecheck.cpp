@@ -254,6 +254,8 @@ void TypeCheck::visitReturnStatementNode(ReturnStatementNode* node) {
 	node->visit_children(this);
 	if(currentMethod->returnType.baseType!=node->expression->basetype){
 		typeError(return_type_mismatch);
+	} else if (currentMethod->returnType.baseType == bt_object && !compareClasses(node->expression->objectClassName,currentMethod->returnType.objectClassName,classTable)){
+		typeError(return_type_mismatch);
 	}
 }
 
