@@ -209,9 +209,9 @@ Main {
         local4 = new class1(235 * 26, 140, 171 < 15 or false)
         local1 = true
         local0 = (true)
-        local3 = new class0(false, true, 230 / 41 * 61)
-        local2 = 67
-        
+	local3 = new class0(false, true, 230 / 41 * 61) --! This causes it to become 17 !--
+	local2 = 67
+       
         print false
         i0 = 40960
         while 10 < i0 {
@@ -227,9 +227,8 @@ Main {
         } else {
             local0 = true or local0
         }
-        
-        print 212 * local4.member2
-        i1 = -55
+	print 212 * local4.member2 --! Problem is here !--
+	i1 = -55
         while i1 <= -29 {
              i1 = i1 - -2
         
