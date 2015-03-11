@@ -6,7 +6,6 @@ Main {
 	    y = x + 1
 	    x = y + 1
 
-
 	    if y equals 2 {
 	       print 0
 	    } else {
@@ -24,7 +23,7 @@ Main {
 	    } else {
 	       print 5
 	    }
-	   
+	    
 	    if x < 3 or y < 3  {
 	       print 6
 	    } else {

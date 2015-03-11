@@ -149,8 +149,7 @@ class0 {
         member0 = 253
         member3 = -194
         member2 = 34 + 230
-       
- 
+        
         if member1 <= member1 {
             print 178
         }

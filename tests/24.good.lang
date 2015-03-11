@@ -39,8 +39,7 @@ Main {
 	    CastClass c
 
 	    b = new classB(4, 5)
-		print b.x	   
-	 a = c.BtoA(b)
+	    a = c.BtoA(b)
 
 	    print a.x
 	    print b.x

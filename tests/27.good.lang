@@ -206,8 +206,7 @@ Main {
         integer i0, i1
         
         local1 = new class0(true, 12, (139), 114)
-        print local1.member3
-	local0 = 250 - 124
+        local0 = 250 - 124
         local2 = false
         
         local1.member3 = 239
