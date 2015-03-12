@@ -303,7 +303,9 @@ class2 extends class1 {
         }
         
         local4 = member2
+		print 222 
         print member4
+	print 222
     }
 
 
@@ -450,7 +452,9 @@ Main {
         integer local2
         
         local1 = true
+		print 100 
         local0 = new class2(134 + 57 + 85 * 198, 20, 200 equals 249)
+		print 100 
         local2 = 133
         
         local0.f8()

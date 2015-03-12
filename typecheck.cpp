@@ -59,7 +59,6 @@ void typeError(TypeErrorCode code) {
   exit(1);
 }
 
-int inheritOffset;
 
 // TypeCheck Visitor Functions: These are the functions you will
 // complete to build the symbol table and type check the program.
@@ -131,25 +130,6 @@ void TypeCheck::visitProgramNode(ProgramNode* node) {
 	}
 }
 
-void insertParentMembers(ClassInfo thisClass,std::string currentParentName,VariableTable* varTable,ClassTable* table){
-	//Recurse if not at top parent
-	if(table->at(currentParentName).superClassName!="") insertParentMembers(thisClass,table->at(currentParentName).superClassName,varTable,table);
-	if(table->at(currentParentName).members->size()!=0){
-		std::map<std::string, VariableInfo>::iterator it = table->at(currentParentName).members->begin();	
-		while(it != table->at(currentParentName).members->end()){
-			if(varTable->count(it->first)==0){
-				varTable->insert(std::pair<std::string,VariableInfo>(it->first,it->second));
-				varTable->at(it->first).offset = inheritOffset;
-				inheritOffset-=4;
-			} else {
-				varTable->at(it->first).offset = inheritOffset;
-				inheritOffset-=4;
-			}
-			it++;
-		}
-	}
-}
-
 void TypeCheck::visitClassNode(ClassNode* node) {
   	currentMemberOffset = 0;
 	ClassInfo* newInfo = new ClassInfo;
@@ -166,9 +146,31 @@ void TypeCheck::visitClassNode(ClassNode* node) {
 	node->visit_children(this);
 	//Modify symbol table to include parent members
 	if(node->identifier_1->name!="Main"){
-		inheritOffset = 0;
+		int inheritOffset = 0;
 		VariableTable* betterVarTable = new VariableTable;
-		insertParentMembers(classTable->at(node->identifier_1->name),node->identifier_1->name,betterVarTable,classTable);
+		if(newInfo->superClassName!="" && classTable->at(newInfo->superClassName).members!=NULL){
+			std::map<std::string, VariableInfo>::iterator it = classTable->at(newInfo->superClassName).members->begin();	
+			while(it != classTable->at(newInfo->superClassName).members->end()){
+				betterVarTable->insert(std::pair<std::string,VariableInfo>(it->first,it->second));
+				betterVarTable->at(it->first).offset = inheritOffset;
+				inheritOffset -= 4;
+				it++;
+			}
+		}
+		if(newInfo->members!=NULL){
+			std::map<std::string, VariableInfo>::iterator it = newInfo->members->begin();	
+			while(it != newInfo->members->end()){
+				if(betterVarTable->count(it->first)==0){
+					betterVarTable->insert(std::pair<std::string,VariableInfo>(it->first,it->second));
+					betterVarTable->at(it->first).offset = inheritOffset;
+					inheritOffset -= 4;
+				} else {
+					betterVarTable->at(it->first).offset = inheritOffset;
+					inheritOffset -= 4;
+				}
+				it++;
+			}
+		}
 		classTable->at(node->identifier_1->name).membersSize = (-1) * inheritOffset;
 		classTable->at(node->identifier_1->name).members = betterVarTable;
 	}

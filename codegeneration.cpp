@@ -31,7 +31,7 @@ void CodeGenerator::visitMethodNode(MethodNode* node) {
 	std::string tempstr = padstr;
 	padstr+="   ";
 	//Label
-	cout << currentClassName << "_" << node->identifier->name <<":\n";
+	cout << currentClassName << "_" << node->identifier->name <<":     ## @" <<currentClassName << "_" << node->identifier->name <<"\n";
 	///#######PROLOGUE
 	cout << "PUSH %EBP\n";
 	cout << "MOV %ESP,%EBP\n";
@@ -425,7 +425,6 @@ void CodeGenerator::visitNewNode(NewNode* node) {
 	cout << "MOV %EAX,%ECX\n";
 
 	if(classTable->at(node->identifier->name).methods->count(node->identifier->name)!=0){
-	
 		//Save caller-saved registers
 		cout << "PUSH %EAX\n";
 		cout << "PUSH %ECX\n";

@@ -1,15 +1,15 @@
 classA{
-	f0(x:integer) -> none {
-	}
-	
-	f1() -> none {
-		f0(5)
-		f0(6)
-	}
+	integer one
+}
+
+classB extends classA {
+	integer two
+}
+
+classC extends classB {
+	integer three
 }
 Main{
 	main() -> none {
-		classA a
-		a.f1()
 	}
 }
